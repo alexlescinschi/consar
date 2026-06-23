@@ -398,7 +398,7 @@ nav_active: projects
         <div class="sustainability-grid">
             {% for card in block.cards %}
             <div class="sust-card">
-                <div class="sust-icon">{{ card.icon }}</div>
+                <div class="sust-icon">{{ card.icon | safe }}</div>
                 <h4>{{ card.title }}</h4>
                 <p>{{ card.text }}</p>
             </div>
