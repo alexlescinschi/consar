@@ -261,24 +261,56 @@ permalink: /arhitectura/
 
 /* CTA */
 .cta-block {
-    text-align: center;
-    padding: 5rem 2rem;
+    text-align: left;
+    padding: 5rem 3rem;
     border: 1px solid var(--border);
     border-radius: 2px;
+    background: var(--surface);
 }
 .cta-block h2 {
     font-family: var(--font-serif);
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
     font-weight: 400;
     margin-bottom: 1rem;
+    text-align: left;
 }
 .cta-block p {
     font-size: 0.9rem;
     color: var(--text-dim);
-    margin-bottom: 2rem;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 0 2rem;
+    line-height: 1.7;
+}
+
+.cta-block-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 3rem;
+    align-items: center;
+}
+.cta-block-gallery {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.cta-block-scroll { overflow: hidden; }
+.cta-block-track { display: flex; width: max-content; }
+.cta-block-row-left .cta-block-track { animation: cta-block-scroll-left 60s linear infinite; }
+.cta-block-row-right .cta-block-track { animation: cta-block-scroll-right 60s linear infinite; }
+.cta-block-scroll:hover .cta-block-track { animation-play-state: paused; }
+.cta-block-scroll img {
+    width: 180px; height: 130px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+@keyframes cta-block-scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+@keyframes cta-block-scroll-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
 }
 .btn-cta {
     background: var(--accent);
@@ -681,8 +713,13 @@ permalink: /arhitectura/
     .section-sub { font-size: 0.85rem; }
     .pillar { padding: 2.5rem 1.5rem; }
     .pillar h2 { font-size: 1.5rem; }
-    .cta-block { padding: 3rem 1.5rem; }
-    .cta-block h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+    .cta-block { padding: 3rem 1.5rem; text-align: center; }
+    .cta-block h2 { font-size: clamp(1.5rem, 4vw, 2rem); text-align: center; }
+    .cta-block p { text-align: center; max-width: 480px; margin: 0 auto 2rem; }
+    .cta-block-grid { grid-template-columns: 1fr; }
+    .cta-block-gallery { order: 1; }
+    .cta-block-text { order: 2; }
+    .cta-block-scroll img { width: 140px; height: 100px; }
     .radio-group, .checkbox-group { grid-template-columns: 1fr; }
     .sub-details-grid { grid-template-columns: 1fr; margin-left: 0; }
 }
@@ -931,9 +968,35 @@ permalink: /arhitectura/
 
     <!-- VII. CTA + FORMULAR MODAL -->
     <div class="cta-block">
-        <h2>Începe Proiectul Tău</h2>
-        <p>Completează configuratorul nostru de proiect și primești o ofertă personalizată în 48 de ore.</p>
-        <button class="btn-cta" onclick="openModal()">Configurează Proiectul</button>
+        <div class="cta-block-grid">
+            <div class="cta-block-text">
+                <h2>Începe Proiectul Tău</h2>
+                <p>Completează configuratorul nostru de proiect și primești o ofertă personalizată în 48 de ore.</p>
+                <button class="btn-cta" onclick="openModal()">Configurează Proiectul</button>
+            </div>
+            <div class="cta-block-gallery">
+                <div class="cta-block-scroll cta-block-row-left">
+                    <div class="cta-block-track">
+                        <img src="/images/portfolio-01.jpg" alt="" loading="lazy">
+                        <img src="/images/portfolio-02.jpg" alt="" loading="lazy">
+                        <img src="/images/portfolio-03.jpg" alt="" loading="lazy">
+                        <img src="/images/portfolio-01.jpg" alt="" loading="lazy">
+                        <img src="/images/portfolio-02.jpg" alt="" loading="lazy">
+                        <img src="/images/portfolio-03.jpg" alt="" loading="lazy">
+                    </div>
+                </div>
+                <div class="cta-block-scroll cta-block-row-right" style="margin-top: 0.5rem;">
+                    <div class="cta-block-track">
+                        <img src="/images/portfolio-04.jpg" alt="" loading="lazy">
+                        <img src="/images/portfolio-05.jpg" alt="" loading="lazy">
+                        <img src="/images/portfolio-06.jpg" alt="" loading="lazy">
+                        <img src="/images/portfolio-04.jpg" alt="" loading="lazy">
+                        <img src="/images/portfolio-05.jpg" alt="" loading="lazy">
+                        <img src="/images/portfolio-06.jpg" alt="" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
