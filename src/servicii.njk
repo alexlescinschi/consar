@@ -1,7 +1,8 @@
 ---
 layout: base.njk
-title: Servicii de Arhitectură
+title: Arhitectură
 nav_active: services
+permalink: /arhitectura/
 ---
 
 <style>
@@ -40,13 +41,12 @@ nav_active: services
 
 .intro {
     position: relative;
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
-    margin: -8rem -3rem 0;
-    padding: 8rem 3rem 5rem;
+    padding: 6rem 3rem 5rem;
 }
 .intro .intro-content {
     position: relative;
@@ -666,54 +666,52 @@ nav_active: services
     .slideshow-next { right: 1rem; }
     .slideshow-dots { bottom: 1.5rem; right: 1.5rem; }
     .slideshow-counter { bottom: 1.5rem; left: 1.5rem; }
-    .intro { min-height: 80vh; margin: -6rem -1.5rem 0; padding: 8rem 1.5rem 4rem; }
+    .intro { min-height: 80vh; padding: 6rem 1.5rem 4rem; }
 }
 </style>
 
-<div class="container">
-
-    <!-- I. ANTET -->
-    <section class="intro">
-        <div class="slideshow" id="project-slideshow">
-            <div class="slideshow-track" id="slideshow-track">
-                <div class="slideshow-slide active-slide">
-                    <img src="/images/portfolio-01.jpg" alt="Vilă Rezidențială" loading="lazy">
-                </div>
-                <div class="slideshow-slide">
-                    <img src="/images/portfolio-02.jpg" alt="Complex Comercial" loading="lazy">
-                </div>
-                <div class="slideshow-slide">
-                    <img src="/images/portfolio-03.jpg" alt="Ansamblu Rezidențial" loading="lazy">
-                </div>
-                <div class="slideshow-slide">
-                    <img src="/images/portfolio-04.jpg" alt="Restaurare Monument" loading="lazy">
-                </div>
-                <div class="slideshow-slide">
-                    <img src="/images/portfolio-05.jpg" alt="Casă Pasivă" loading="lazy">
-                </div>
-                <div class="slideshow-slide">
-                    <img src="/images/portfolio-06.jpg" alt="Hotel Boutique" loading="lazy">
-                </div>
+<section class="intro">
+    <div class="slideshow" id="project-slideshow">
+        <div class="slideshow-track" id="slideshow-track">
+            <div class="slideshow-slide active-slide">
+                <img src="/images/portfolio-01.jpg" alt="Vilă Rezidențială" loading="lazy">
             </div>
-            <button class="slideshow-controls slideshow-prev" onclick="prevSlide()" aria-label="Slide anterior">&#8592;</button>
-            <button class="slideshow-controls slideshow-next" onclick="nextSlide()" aria-label="Slide următor">&#8594;</button>
-            <div class="slideshow-dots" id="slideshow-dots"></div>
-            <div class="slideshow-counter" id="slideshow-counter">1 / 6</div>
+            <div class="slideshow-slide">
+                <img src="/images/portfolio-02.jpg" alt="Complex Comercial" loading="lazy">
+            </div>
+            <div class="slideshow-slide">
+                <img src="/images/portfolio-03.jpg" alt="Ansamblu Rezidențial" loading="lazy">
+            </div>
+            <div class="slideshow-slide">
+                <img src="/images/portfolio-04.jpg" alt="Restaurare Monument" loading="lazy">
+            </div>
+            <div class="slideshow-slide">
+                <img src="/images/portfolio-05.jpg" alt="Casă Pasivă" loading="lazy">
+            </div>
+            <div class="slideshow-slide">
+                <img src="/images/portfolio-06.jpg" alt="Hotel Boutique" loading="lazy">
+            </div>
         </div>
-        <div class="intro-content">
-            <span class="section-label">Servicii de Arhitectură</span>
-            <h1>De la Idee la<br>Proiectul Tehnic</h1>
-            <p class="section-sub" style="font-size: 1.1rem;">Consultanță, Planificare și Documentare pentru viitoarea ta construcție.</p>
-            <p class="section-sub" style="font-size: 0.9rem;">
-                Un proiect corect și personalizat începe cu o analiză riguroasă. Rolul nostru este să îți traducem nevoile în soluții concrete de compartimentare eficientă, optimizare a luminii naturale și planificare tehnică, oferindu-ți suportul complet în faza de proiectare și obținere a documentației.
-            </p>
-        </div>
-    </section>
+        <button class="slideshow-controls slideshow-prev" onclick="prevSlide()" aria-label="Slide anterior">&#8592;</button>
+        <button class="slideshow-controls slideshow-next" onclick="nextSlide()" aria-label="Slide următor">&#8594;</button>
+        <div class="slideshow-dots" id="slideshow-dots"></div>
+        <div class="slideshow-counter" id="slideshow-counter">1 / 6</div>
+    </div>
+    <div class="intro-content">
+        <span class="section-label">Arhitectură</span>
+        <h1>De la Idee la<br>Proiectul Tehnic</h1>
+        <p class="section-sub" style="font-size: 1.1rem;">Consultanță, Planificare și Documentare pentru viitoarea ta construcție.</p>
+        <p class="section-sub" style="font-size: 0.9rem;">
+            Un proiect corect și personalizat începe cu o analiză riguroasă. Rolul nostru este să îți traducem nevoile în soluții concrete de compartimentare eficientă, optimizare a luminii naturale și planificare tehnică, oferindu-ți suportul complet în faza de proiectare și obținere a documentației.
+        </p>
+    </div>
+</section>
 
+<div class="container">
     <hr class="section-divider">
 
     <!-- II. PILONII DE SERVICII -->
-    <span class="section-label">Pilonii de Servicii</span>
+    <span class="section-label">Pilonii Arhitecturii</span>
     <h2 class="section-title">Ce putem face<br>pentru proiectul tău</h2>
     <p class="section-sub">Trei etape esențiale care transformă o idee într-un proiect tehnic complet, gata de execuție.</p>
 

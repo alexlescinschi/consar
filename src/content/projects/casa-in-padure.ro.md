@@ -106,7 +106,7 @@ blocks:
     title: "Îți dorești un concept adaptat nevoilor tale?"
     description: "Planificarea riguroasă a unui proiect este cheia unei construcții de succes, fără bugete depășite și fără erori pe șantier. Stabilim o consultanță inițială pentru proiectul tău?"
     primary_label: "Programează o Consultanță"
-    primary_url: "/servicii/"
+    primary_url: "/arhitectura/"
     secondary_label: "Vezi alte proiecte"
     secondary_url: "/proiecte/"
 ---

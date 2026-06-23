@@ -107,7 +107,7 @@ blocks:
     title: "Do you want a concept tailored to your needs?"
     description: "Rigorous project planning is the key to a successful construction, without exceeded budgets and without errors on site. Shall we schedule an initial consultation for your project?"
     primary_label: "Schedule a Consultation"
-    primary_url: "/en/servicii/"
+    primary_url: "/en/arhitectura/"
     secondary_label: "See other projects"
     secondary_url: "/en/projects/"
 ---
