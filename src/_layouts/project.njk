@@ -213,7 +213,7 @@ nav_active: projects
 }
 
 .cta-section {
-    text-align: center;
+    text-align: left;
     padding: 5rem 3rem;
     background: var(--surface);
     border: 1px solid var(--border);
@@ -224,18 +224,18 @@ nav_active: projects
     font-size: clamp(1.6rem, 3vw, 2.2rem);
     font-weight: 400;
     margin-bottom: 1rem;
+    text-align: left;
 }
 .cta-section p {
     color: var(--text-dim);
     font-size: 0.9rem;
-    max-width: 480px;
-    margin: 0 auto 2rem;
+    margin: 0 0 2rem;
     line-height: 1.7;
 }
 .cta-buttons {
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 .btn-primary, .btn-secondary {
@@ -307,13 +307,13 @@ nav_active: projects
     .tech-card { grid-template-columns: 1fr; padding: 1.5rem; }
     .gallery-grid { grid-template-columns: 1fr; gap: 0.3rem; }
     .gallery-grid .gallery-item:first-child { grid-column: 1; aspect-ratio: 16/9; }
-    .cta-section { padding: 3rem 1.5rem; }
+    .cta-section { padding: 3rem 1.5rem; text-align: center; }
+    .cta-section h2 { text-align: center; }
+    .cta-section p { text-align: center; max-width: 480px; margin: 0 auto 2rem; }
     .cta-grid { grid-template-columns: 1fr; }
     .cta-gallery { order: 1; }
     .cta-text { order: 2; }
     .cta-gallery-scroll img { width: 140px; height: 100px; }
-    .cta-text h2 { text-align: center; }
-    .cta-text p { text-align: center; }
     .cta-buttons { justify-content: center; }
     .cta-buttons { flex-direction: column; align-items: center; }
     .tabs { flex-direction: column; }
@@ -454,9 +454,9 @@ nav_active: projects
                     {% if block.quote %}
                     <p style="font-family: var(--font-serif); font-size: 1.2rem; font-style: italic; margin-bottom: 2rem;">{{ block.quote }}</p>
                     {% endif %}
-                    <h2 style="text-align: left;">{{ block.title }}</h2>
-                    <p style="text-align: left; margin: 0 0 2rem;">{{ block.description }}</p>
-                    <div class="cta-buttons" style="justify-content: flex-start;">
+                    <h2>{{ block.title }}</h2>
+                    <p>{{ block.description }}</p>
+                    <div class="cta-buttons">
                         <a href="{{ block.primary_url }}" class="btn-primary">{{ block.primary_label }}</a>
                         <a href="{{ block.secondary_url }}" class="btn-secondary">{{ block.secondary_label }}</a>
                     </div>
