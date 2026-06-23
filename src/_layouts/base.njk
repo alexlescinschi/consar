@@ -196,17 +196,13 @@
         }
         .nav-dropdown-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
         .nav-dropdown-card {
             text-decoration: none;
             color: var(--accent);
             transition: var(--transition);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            align-items: center;
         }
         .nav-dropdown-card:hover .nav-dropdown-img img {
             filter: grayscale(40%) contrast(1) brightness(0.7);
@@ -215,6 +211,7 @@
         .nav-dropdown-img {
             aspect-ratio: 4/3;
             overflow: hidden;
+            margin-bottom: 1rem;
         }
         .nav-dropdown-img img {
             width: 100%;
@@ -237,7 +234,6 @@
 
         @media (max-width: 768px) {
             .nav-dropdown-grid { grid-template-columns: 1fr; }
-            .nav-dropdown-card { grid-template-columns: 1fr; }
             .nav-dropdown-inner { padding: 1.5rem; }
             .nav-dropdown { top: 4rem; }
         }
@@ -279,55 +275,43 @@
                     <div class="nav-dropdown-img">
                         <img src="/images/01.jpg" alt="Planifică" loading="lazy">
                     </div>
-                    <div>
-                        <h4>Planifică</h4>
-                        <p>Consultanță, studiu de fezabilitate, analiză teren, stabilire temă de proiectare.</p>
-                    </div>
+                    <h4>Planifică</h4>
+                    <p>Consultanță, studiu de fezabilitate, analiză teren, stabilire temă de proiectare.</p>
                 </a>
                 <a href="/arhitectura/" class="nav-dropdown-card" onclick="closeDropdown()">
                     <div class="nav-dropdown-img">
                         <img src="/images/02.jpg" alt="Arhitectură" loading="lazy">
                     </div>
-                    <div>
-                        <h4>Arhitectură</h4>
-                        <p>Concepte arhitecturale, modificări structurale, extinderi, mansardări.</p>
-                    </div>
+                    <h4>Arhitectură</h4>
+                    <p>Concepte arhitecturale, modificări structurale, extinderi, mansardări.</p>
                 </a>
                 <a href="/arhitectura/" class="nav-dropdown-card" onclick="closeDropdown()">
                     <div class="nav-dropdown-img">
                         <img src="/images/03.jpg" alt="Construcții" loading="lazy">
                     </div>
-                    <div>
-                        <h4>Construcții</h4>
-                        <p>Consolidare fundații, dezvoltare complexă, structuri de rezistență.</p>
-                    </div>
+                    <h4>Construcții</h4>
+                    <p>Consolidare fundații, dezvoltare complexă, structuri de rezistență.</p>
                 </a>
                 <a href="/arhitectura/" class="nav-dropdown-card" onclick="closeDropdown()">
                     <div class="nav-dropdown-img">
                         <img src="/images/04.jpg" alt="Renovări" loading="lazy">
                     </div>
-                    <div>
-                        <h4>Renovări</h4>
-                        <p>Renovare fațade, restaurare acoperișuri, conservare patrimoniu.</p>
-                    </div>
+                    <h4>Renovări</h4>
+                    <p>Renovare fațade, restaurare acoperișuri, conservare patrimoniu.</p>
                 </a>
                 <a href="/arhitectura/" class="nav-dropdown-card" onclick="closeDropdown()">
                     <div class="nav-dropdown-img">
                         <img src="/images/05.jpg" alt="Reparații" loading="lazy">
                     </div>
-                    <div>
-                        <h4>Reparații</h4>
-                        <p>Reparații interioare, lucrări sanitare, mentenanță tehnică.</p>
-                    </div>
+                    <h4>Reparații</h4>
+                    <p>Reparații interioare, lucrări sanitare, mentenanță tehnică.</p>
                 </a>
                 <a href="/arhitectura/" class="nav-dropdown-card" onclick="closeDropdown()">
                     <div class="nav-dropdown-img">
                         <img src="/images/portfolio-01.jpg" alt="Vizualizări" loading="lazy">
                     </div>
-                    <div>
-                        <h4>Vizualizări</h4>
-                        <p>Randări 3D, design peisagistic, animații imobiliare, marketing.</p>
-                    </div>
+                    <h4>Vizualizări</h4>
+                    <p>Randări 3D, design peisagistic, animații imobiliare, marketing.</p>
                 </a>
             </div>
         </div>
