@@ -6,7 +6,6 @@ nav_active: projects
 <style>
 .hero {
     position: relative;
-    margin: -8rem -3rem 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -284,33 +283,34 @@ nav_active: projects
 }
 </style>
 
+{% set hero = blocks[0] %}
+{% if hero and hero.type === 'hero' %}
+<section class="hero">
+    <div class="hero-bg">
+        <img src="{{ hero.image }}" alt="{{ hero.title }}" loading="eager">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-title">
+            <h1>{{ hero.title | replace('\n', '<br>') | safe }}</h1>
+            <p class="subtitle">{{ hero.subtitle }}</p>
+        </div>
+        <dl class="tech-card">
+            {% for field in hero.tech_fields %}
+            <div {% if loop.last and field.label == 'Echipă' %}style="grid-column: 1 / -1;"{% endif %}>
+                <dt>{{ field.label }}</dt>
+                <dd>{{ field.value }}</dd>
+            </div>
+            {% endfor %}
+        </dl>
+    </div>
+</section>
+{% endif %}
+
 <div class="container">
     {% for block in blocks %}
-        {% if block.type === 'hero' %}
-        <section class="hero">
-            <div class="hero-bg">
-                <img src="{{ block.image }}" alt="{{ block.title }}" loading="eager">
-            </div>
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <div class="hero-title">
-                    <h1>{{ block.title | replace('\n', '<br>') | safe }}</h1>
-                    <p class="subtitle">{{ block.subtitle }}</p>
-                </div>
-                <dl class="tech-card">
-                    {% for field in block.tech_fields %}
-                    <div {% if loop.last and field.label == 'Echipă' %}style="grid-column: 1 / -1;"{% endif %}>
-                        <dt>{{ field.label }}</dt>
-                        <dd>{{ field.value }}</dd>
-                    </div>
-                    {% endfor %}
-                </dl>
-            </div>
-        </section>
-
-        <hr class="section-divider">
-
-        {% elif block.type === 'story_2col' %}
+        {% if not loop.first or block.type !== 'hero' %}
+        {% if block.type === 'story_2col' %}
         <span class="section-label">{{ block.label }}</span>
         <h2 class="section-title">{{ block.title | replace('\n', '<br>') | safe }}</h2>
         <div class="story-grid">
@@ -419,6 +419,7 @@ nav_active: projects
                 <a href="{{ block.secondary_url }}" class="btn-secondary">{{ block.secondary_label }}</a>
             </div>
         </div>
+        {% endif %}
         {% endif %}
 
     {% endfor %}
