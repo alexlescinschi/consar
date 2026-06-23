@@ -5,7 +5,7 @@ title: Home
 nav_active: home
 ---
 
-{% set extra_css %}
+<style>
 .hero-matrix {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -112,9 +112,9 @@ nav_active: home
 }
 @media (max-width: 1024px) { .hero-matrix { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 768px) { .hero-matrix { grid-template-columns: 1fr; } }
-{% endset %}
+</style>
 
-{% set page_js %}
+<script>
 document.querySelectorAll('.service-card').forEach(function(card) {
     card.addEventListener('mouseenter', function() {
         cursor.style.width = '80px';
@@ -129,7 +129,7 @@ document.querySelectorAll('.service-card').forEach(function(card) {
         cursor.innerHTML = '';
     });
 });
-{% endset %}
+</script>
 
 <div class="hero-matrix">
     <div class="matrix-cell title-cell">

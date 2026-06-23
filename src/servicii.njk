@@ -4,7 +4,7 @@ title: Servicii de Arhitectură
 nav_active: services
 ---
 
-{% set extra_css %}
+<style>
 .intro {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -484,9 +484,9 @@ nav_active: services
     .projects-table { font-size: 0.7rem; }
     .projects-table th, .projects-table td { padding: 1rem 0.5rem; }
 }
-{% endset %}
+</style>
 
-{% set page_js %}
+<script>
 var currentSlide = 0;
 var totalSlides = document.querySelectorAll('.slideshow-slide').length;
 var track = document.getElementById('slideshow-track');
@@ -607,7 +607,7 @@ var counterObserver = new IntersectionObserver(function(entries) {
 
 var statsRow = document.querySelector('.stats-row');
 if (statsRow) counterObserver.observe(statsRow);
-{% endset %}
+</script>
 
 <div class="container" style="padding-top: 0;">
 

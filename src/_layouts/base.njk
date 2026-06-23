@@ -132,7 +132,7 @@
             .section-divider { margin: 4rem 0; }
         }
 
-        {{ extra_css | safe }}
+    /* pagină-specific */
     </style>
 </head>
 <body>
@@ -207,8 +207,6 @@
             el.style.transition = 'all 1s cubic-bezier(0.16, 1, 0.3, 1)';
             observer.observe(el);
         });
-
-        {{ page_js | safe }}
     </script>
 </body>
 </html>

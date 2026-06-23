@@ -6,7 +6,7 @@ nav_active: blog
 permalink: /en/blog/
 ---
 
-{% set extra_css %}
+<style>
 .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
 .blog-card { border: 1px solid var(--border); overflow: hidden; transition: var(--transition); }
 .blog-card:hover { border-color: rgba(233, 228, 223, 0.2); }
@@ -22,7 +22,7 @@ permalink: /en/blog/
 .blog-card-body .blog-excerpt { font-size: 0.8rem; color: var(--text-dim); line-height: 1.6; }
 @media (max-width: 1024px) { .blog-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 768px) { .blog-grid { grid-template-columns: 1fr; } }
-{% endset %}
+</style>
 
 <div class="container">
     <span class="section-label">Architecture Journal</span>

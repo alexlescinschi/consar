@@ -3,7 +3,7 @@ layout: base.njk
 nav_active: projects
 ---
 
-{% set extra_css %}
+<style>
 .hero {
     position: relative;
     margin: -8rem -3rem 0;
@@ -282,14 +282,14 @@ nav_active: projects
     .tabs { flex-direction: column; }
     .tab-btn { border-right: none; border-bottom: 1px solid var(--border); }
 }
-{% endset %}
+</style>
 
-{% set page_js %}
+<script>
 function switchTab(index) {
     document.querySelectorAll('.tab-btn').forEach(function(b, i) { b.classList.toggle('active', i === index); });
     document.querySelectorAll('.tab-panel').forEach(function(p, i) { p.classList.toggle('active', i === index); });
 }
-{% endset %}
+</script>
 
 <div class="container">
     {% for block in blocks %}

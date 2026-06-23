@@ -4,7 +4,7 @@ title: Blog
 nav_active: blog
 ---
 
-{% set extra_css %}
+<style>
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -53,7 +53,7 @@ nav_active: blog
 @media (max-width: 768px) {
     .blog-grid { grid-template-columns: 1fr; }
 }
-{% endset %}
+</style>
 
 <div class="container">
     <span class="section-label">Jurnal de Arhitectură</span>
