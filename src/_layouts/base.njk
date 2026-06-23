@@ -148,7 +148,17 @@
             <a href="/servicii/" {% if nav_active == 'services' %}class="active"{% endif %}>Servicii</a>
             <a href="/contact/" {% if nav_active == 'contact' %}class="active"{% endif %}>Contact</a>
         </div>
-        <div style="font-size: 0.6rem; opacity: 0.5;">EN / RO</div>
+        <div style="font-size: 0.6rem;">
+            {% if lang == 'en' %}
+            <a href="/" style="color: var(--accent); text-decoration: none; opacity: 0.5;">RO</a>
+            <span style="opacity: 0.3;"> / </span>
+            <span style="opacity: 1;">EN</span>
+            {% else %}
+            <span style="opacity: 1;">RO</span>
+            <span style="opacity: 0.3;"> / </span>
+            <a href="/en/" style="color: var(--accent); text-decoration: none; opacity: 0.5;">EN</a>
+            {% endif %}
+        </div>
     </nav>
 
     <main>

@@ -18,6 +18,10 @@ module.exports = function (eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/content/blog/*.ro.md");
   });
 
+  eleventyConfig.addCollection("blog_en", function (collectionApi) {
+    return collectionApi.getFilteredByGlob("src/content/blog/*.en.md");
+  });
+
   return {
     dir: {
       input: "src",

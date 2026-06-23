@@ -1,0 +1,204 @@
+---
+layout: base.njk
+lang: en
+title: Home
+nav_active: home
+---
+
+{% set extra_css %}
+.hero-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    min-height: 100vh;
+    padding-top: 6rem;
+    border-bottom: 1px solid var(--border);
+}
+.matrix-cell {
+    position: relative;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2.5rem;
+    transition: var(--transition);
+}
+.matrix-cell:nth-child(3), .matrix-cell:nth-child(6) { border-right: none; }
+.title-cell { padding: 4rem 3rem; justify-content: center; min-height: 450px; }
+.title-cell h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.05;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+.title-cell .metadata {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.service-card { min-height: 450px; }
+.service-card .bg-img {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%) contrast(1.1) brightness(0.5);
+    transition: var(--transition);
+    z-index: 1;
+}
+.service-card:hover .bg-img {
+    filter: grayscale(100%) contrast(1.2) brightness(0.7);
+    transform: scale(1.05);
+}
+.service-card .content { position: relative; z-index: 2; }
+.card-num {
+    position: absolute;
+    top: 2.5rem; left: 2.5rem;
+    font-size: 0.7rem;
+    font-family: var(--font-sans);
+    opacity: 0.4;
+    z-index: 2;
+}
+.service-card h2 {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+.sub-services {
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--text-dim);
+    max-width: 280px;
+    height: 0;
+    overflow: hidden;
+    transition: var(--transition);
+    opacity: 0;
+}
+.service-card:hover .sub-services { height: 80px; opacity: 1; margin-top: 1rem; }
+.bottom-shelf {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    border-bottom: 1px solid var(--border);
+}
+.shelf-cell { padding: 4rem 3rem; border-right: 1px solid var(--border); }
+.shelf-cell:last-child { border-right: none; }
+.blog-preview { display: flex; gap: 2rem; align-items: center; }
+.blog-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+.view-btn {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 2rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.view-btn:hover {
+    background: transparent;
+    color: var(--accent);
+    outline: 1px solid var(--accent);
+}
+@media (max-width: 1024px) { .hero-matrix { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 768px) { .hero-matrix { grid-template-columns: 1fr; } }
+{% endset %}
+
+{% set page_js %}
+document.querySelectorAll('.service-card').forEach(function(card) {
+    card.addEventListener('mouseenter', function() {
+        cursor.style.width = '80px';
+        cursor.style.height = '80px';
+        cursor.style.background = 'rgba(233, 228, 223, 0.08)';
+        cursor.innerHTML = '<span style="font-size: 10px; font-weight: 800; color: white;">VIEW</span>';
+    });
+    card.addEventListener('mouseleave', function() {
+        cursor.style.width = '40px';
+        cursor.style.height = '40px';
+        cursor.style.background = 'transparent';
+        cursor.innerHTML = '';
+    });
+});
+{% endset %}
+
+<div class="hero-matrix">
+    <div class="matrix-cell title-cell">
+        <div class="metadata">
+            <span>Est. 2005</span>
+            <span>Interior / Exterior / Structural</span>
+        </div>
+        <h1>Constructing<br>the Substantial.</h1>
+        <p style="max-width: 100%; color: var(--text-dim); line-height: 1.6; font-size: 0.8rem;">
+            A disciplined approach to architectural concept, high-precision engineering, and the poetry of space.
+        </p>
+    </div>
+    <div class="matrix-cell service-card">
+        <div class="card-num">[01]</div>
+        <div class="bg-img" style="background-image: url('/images/01.jpg');"></div>
+        <div class="content">
+            <h2>Architecture</h2>
+            <div class="sub-services">Architectural concepts, wall modifications, extensions, attic conversions, structural integrity.</div>
+        </div>
+    </div>
+    <div class="matrix-cell service-card">
+        <div class="card-num">[02]</div>
+        <div class="bg-img" style="background-image: url('/images/02.jpg');"></div>
+        <div class="content">
+            <h2>Construction</h2>
+            <div class="sub-services">Foundation consolidation, full-scale development, drainage systems, and structural framing.</div>
+        </div>
+    </div>
+    <div class="matrix-cell service-card">
+        <div class="card-num">[03]</div>
+        <div class="bg-img" style="background-image: url('/images/03.jpg');"></div>
+        <div class="content">
+            <h2>Renovations</h2>
+            <div class="sub-services">Facade renovation, roof restoration, terrace and balcony overhaul, heritage preservation.</div>
+        </div>
+    </div>
+    <div class="matrix-cell service-card">
+        <div class="card-num">[04]</div>
+        <div class="bg-img" style="background-image: url('/images/04.jpg');"></div>
+        <div class="content">
+            <h2>Repairs</h2>
+            <div class="sub-services">Interior repairs, sanitary works, paving, fencing, and systematic technical maintenance.</div>
+        </div>
+    </div>
+    <div class="matrix-cell service-card">
+        <div class="card-num">[05]</div>
+        <div class="bg-img" style="background-image: url('/images/05.jpg');"></div>
+        <div class="content">
+            <h2>Visualizations</h2>
+            <div class="sub-services">Interior & exterior 3D rendering, landscape design, real estate animations, product marketing.</div>
+        </div>
+    </div>
+</div>
+
+<div class="bottom-shelf">
+    <div class="shelf-cell">
+        <div class="blog-preview">
+            <div class="blog-dot"></div>
+            <div>
+                <span style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.5;">Latest from Blog</span>
+                <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-top: 0.5rem; font-weight: 400;">The Brutalist Revival in Modern Residential Design</h3>
+            </div>
+        </div>
+        <a href="/en/blog/" class="view-btn" style="display: inline-block; text-decoration: none;">Read Journal</a>
+    </div>
+    <div class="shelf-cell" style="background: var(--accent); color: var(--bg);">
+        <span style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.7;">Contact</span>
+        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin: 1rem 0 2rem 0; font-weight: 400;">Begin your project.</h3>
+        <p style="font-size: 0.85rem; line-height: 1.5; margin-bottom: 2rem;">Contact our lead consultants to discuss technical requirements and architectural vision.</p>
+        <div style="font-weight: 700; border-bottom: 2px solid var(--bg); display: inline-block; padding-bottom: 0.5rem;">hello@consarhouse.ro</div>
+    </div>
+</div>
