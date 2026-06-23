@@ -193,7 +193,12 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2.5rem 3rem;
+            max-height: 550px;
+            overflow-y: auto;
         }
+        .nav-dropdown-inner::-webkit-scrollbar { width: 4px; }
+        .nav-dropdown-inner::-webkit-scrollbar-track { background: transparent; }
+        .nav-dropdown-inner::-webkit-scrollbar-thumb { background: rgba(233,228,223,0.2); border-radius: 2px; }
         .nav-dropdown-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -233,9 +238,15 @@
         }
 
         @media (max-width: 768px) {
-            .nav-dropdown-grid { grid-template-columns: 1fr; }
-            .nav-dropdown-inner { padding: 1.5rem; }
+            .nav-dropdown-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .nav-dropdown-card h4 { font-size: 1rem; }
+            .nav-dropdown-card p { font-size: 0.7rem; }
+            .nav-dropdown-inner { padding: 1.5rem; max-height: 70vh; }
             .nav-dropdown { top: 4rem; }
+            .nav-dropdown-img { aspect-ratio: 3/2; margin-bottom: 0.6rem; }
         }
 
     /* pagină-specific */
