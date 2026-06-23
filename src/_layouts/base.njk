@@ -165,11 +165,12 @@
         {{ content | safe }}
     </main>
 
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
         if (window.location.hash && window.location.hash.indexOf('invite_token') !== -1) {
-            window.location.href = '/admin/' + window.location.hash;
+            window.location.replace('/admin/' + window.location.hash);
         }
+
+        var cursor = document.getElementById('cursor-follower');
         document.addEventListener('mousemove', function(e) {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
