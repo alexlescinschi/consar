@@ -142,6 +142,9 @@
             nav { padding: 1.5rem; }
             .container { padding: 6rem 1.5rem 3rem; }
             .section-divider { margin: 4rem 0; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-col { border-right: none; border-bottom: 1px solid var(--border); }
+            .footer-col:last-child { border-bottom: none; }
         }
 
         .nav-dropdown-trigger {
@@ -261,6 +264,84 @@
             .nav-dropdown-img { aspect-ratio: 3/2; margin-bottom: 0.6rem; }
         }
 
+        /* FOOTER */
+        footer { border-top: 1px solid var(--border); }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .footer-col {
+            padding: 3rem 2.5rem;
+            border-right: 1px solid var(--border);
+        }
+        .footer-col:last-child { border-right: none; }
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .footer-col h4 {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+        .footer-col a {
+            display: block;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 0.35rem 0;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+        .footer-col a:hover { opacity: 1; }
+        .footer-about {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .footer-contact p {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+        }
+        .footer-contact a {
+            display: inline;
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            opacity: 1;
+        }
+        .footer-map {
+            padding: 0;
+            overflow: hidden;
+            min-height: 220px;
+        }
+        .footer-map iframe {
+            width: 100%;
+            height: 220px;
+            border: none;
+            filter: grayscale(100%) contrast(1.1) brightness(0.55);
+            transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .footer-map:hover iframe {
+            filter: grayscale(0%) contrast(1) brightness(0.9);
+        }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2.5rem;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+        }
+
     /* pagină-specific */
     </style>
 </head>
@@ -344,6 +425,40 @@
     <main>
         {{ content | safe }}
     </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">CONSARHOUSE</div>
+                <p class="footer-about">Birou de arhitectură și construcții. Transformăm ideile în proiecte tehnice complete — de la concept la execuție.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Meniu</h4>
+                <a href="/">Acasă</a>
+                <a href="/arhitectura/">Servicii</a>
+                <a href="/proiecte/">Portofoliu</a>
+                <a href="/blog/">Blog</a>
+                <a href="/contact/">Contacte</a>
+            </div>
+            <div class="footer-col footer-contact">
+                <h4>Contacte</h4>
+                <p>Mun. Chișinău<br>str. Burebista, 17<br>Oficiul 410</p>
+                <p style="margin-top: 1rem;">
+                    <a href="tel:+37360543475">+373 60 543 475</a>
+                </p>
+                <p>
+                    <a href="mailto:info@consarhouse.md">info@consarhouse.md</a>
+                </p>
+            </div>
+            <div class="footer-col footer-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.638614504826!2d28.85674131560193!3d47.02775517914997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97c36b5d0e3e1%3A0x8e4e2b6e8e4e2b6e!2sStrada%20Burebista%2017%2C%20Chi%C8%99in%C4%83u!5e0!3m2!1sen!2smd!4v1620000000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2025 CONSARHOUSE. Toate drepturile rezervate.</span>
+            <a href="/arhitectura/">Arhitectură & Construcții</a>
+        </div>
+    </footer>
 
     {% block after_main %}{% endblock %}
 
