@@ -1,0 +1,137 @@
+{% macro render(title, description) %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | CONSARHOUSE</title>
+    <meta name="description" content="{{ description | default('CONSARHOUSE — Arhitectură și Construcții de Substanta') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #3D454D;
+            --surface: #454D55;
+            --accent: #E9E4DF;
+            --text-dim: rgba(233, 228, 223, 0.5);
+            --border: rgba(233, 228, 223, 0.1);
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--accent);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            cursor: crosshair;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.04;
+            background: url('/images/noise.png');
+        }
+
+        #cursor-follower {
+            position: fixed;
+            width: 40px; height: 40px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #cursor-follower::after {
+            content: '';
+            width: 4px; height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 3rem;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+        }
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+        .section-label {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--text-dim);
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+        .section-sub {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 640px;
+        }
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 6rem 0;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 8rem 3rem 4rem; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            nav { padding: 1.5rem; }
+            .container { padding: 6rem 1.5rem 3rem; }
+            .section-divider { margin: 4rem 0; }
+        }
+    </style>
+
+    {{ extra_css | safe }}
+</head>
+{% endmacro %}

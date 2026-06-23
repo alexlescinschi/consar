@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONSARHOUSE | Arhitectură &amp; Construcții</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #3D454D;
+            --surface: #454D55;
+            --accent: #E9E4DF;
+            --text-dim: rgba(233, 228, 223, 0.5);
+            --border: rgba(233, 228, 223, 0.1);
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: crosshair;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--accent);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 3rem;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+        }
+
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+
+        .hero-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            min-height: 100vh;
+            padding-top: 6rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .matrix-cell {
+            position: relative;
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.5rem;
+            transition: var(--transition);
+        }
+
+        .matrix-cell:nth-child(3),
+        .matrix-cell:nth-child(6) {
+            border-right: none;
+        }
+
+
+        .title-cell {
+            padding: 4rem 3rem;
+            justify-content: center;
+            min-height: 450px;
+        }
+
+        .title-cell h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.05;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .title-cell .metadata {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-dim);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+
+        .service-card {
+            min-height: 450px;
+        }
+
+        .service-card .bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%) contrast(1.1) brightness(0.5);
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .service-card:hover .bg-img {
+            filter: grayscale(100%) contrast(1.2) brightness(0.7);
+            transform: scale(1.05);
+        }
+
+        .service-card .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-num {
+            position: absolute;
+            top: 2.5rem;
+            left: 2.5rem;
+            font-size: 0.7rem;
+            font-family: var(--font-sans);
+            opacity: 0.4;
+            z-index: 2;
+        }
+
+        .service-card h2 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .sub-services {
+            font-size: 0.75rem;
+            line-height: 1.6;
+            color: var(--text-dim);
+            max-width: 280px;
+            height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+        .service-card:hover .sub-services {
+            height: 80px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+
+
+        .bottom-shelf {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .shelf-cell {
+            padding: 4rem 3rem;
+            border-right: 1px solid var(--border);
+        }
+
+        .shelf-cell:last-child {
+            border-right: none;
+        }
+
+        .blog-preview {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .blog-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+
+        #cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cursor-follower::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .view-btn {
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .view-btn:hover {
+            background: transparent;
+            color: var(--accent);
+            outline: 1px solid var(--accent);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-matrix {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-matrix {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+
+
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.04;
+            background: url('images/noise.png');
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+    <div id="cursor-follower"></div>
+
+    <nav>
+        <div class="logo">CONSARHOUSE</div>
+        <div class="nav-links">
+            <a href="#">Proiecte</a>
+            <a href="#">Studio</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="lang-toggle" style="font-size: 0.6rem; opacity: 0.5;">EN / RO</div>
+    </nav>
+
+    <main>
+        <div class="hero-matrix">
+
+            <div class="matrix-cell title-cell">
+                <div class="metadata">
+                    <span>Din 2005</span>
+                    <span>Interior / Exterior / Structural</span>
+                </div>
+                <h1>Construim<br>Substanțialul.</h1>
+                <p style="max-width: 100%; color: var(--text-dim); line-height: 1.6; font-size: 0.8rem;">
+                    O abordare disciplinată a conceptului arhitectural, inginerie de înaltă precizie și poezia spațiului.
+                </p>
+            </div>
+
+
+            <div class="matrix-cell service-card">
+                <div class="card-num">[01]</div>
+                <div class="bg-img" style="background-image: url('images/01.jpg');"></div>
+                <div class="content">
+                    <h2>Arhitectură</h2>
+                    <div class="sub-services">
+                        Concepte arhitecturale, modificări structurale, extinderi, mansardări, integritate structurală.
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="matrix-cell service-card">
+                <div class="card-num">[02]</div>
+                <div class="bg-img" style="background-image: url('images/02.jpg');"></div>
+                <div class="content">
+                    <h2>Construcții</h2>
+                    <div class="sub-services">
+                        Consolidare fundații, dezvoltare complexă, sisteme de drenaj, structuri de rezistență.
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="matrix-cell service-card">
+                <div class="card-num">[03]</div>
+                <div class="bg-img" style="background-image: url('images/03.jpg');"></div>
+                <div class="content">
+                    <h2>Renovări</h2>
+                    <div class="sub-services">
+                        Renovare fațade, restaurare acoperișuri, modernizare terase, conservare patrimoniu.
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="matrix-cell service-card">
+                <div class="card-num">[04]</div>
+                <div class="bg-img" style="background-image: url('images/04.jpg');"></div>
+                <div class="content">
+                    <h2>Reparații</h2>
+                    <div class="sub-services">
+                        Reparații interioare, lucrări sanitare, pavaje, împrejmuiri, mentenanță tehnică sistematică.
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="matrix-cell service-card">
+                <div class="card-num">[05]</div>
+                <div class="bg-img" style="background-image: url('images/05.jpg');"></div>
+                <div class="content">
+                    <h2>Vizualizări</h2>
+                    <div class="sub-services">
+                        Randări 3D interior și exterior, design peisagistic, animații imobiliare, marketing de produs.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-shelf">
+            <div class="shelf-cell">
+                <div class="blog-preview">
+                    <div class="blog-dot"></div>
+                    <div>
+                        <span style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.5;">Ultimul articol din Blog</span>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-top: 0.5rem; font-weight: 400;">Renașterea brutalistă în designul rezidențial modern</h3>
+                    </div>
+                </div>
+                <button class="view-btn">Citește Jurnalul</button>
+            </div>
+            <div class="shelf-cell" style="background: var(--accent); color: var(--bg);">
+                <span style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.7;">Contact</span>
+                <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin: 1rem 0 2rem 0; font-weight: 400;">Începe proiectul tău.</h3>
+                <p style="font-size: 0.85rem; line-height: 1.5; margin-bottom: 2rem;">Contactează consultanții noștri principali pentru a discuta cerințele tehnice și viziunea arhitecturală.</p>
+                <div style="font-weight: 700; border-bottom: 2px solid var(--bg); display: inline-block; padding-bottom: 0.5rem;">hello@consarhouse.ro</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const cursor = document.getElementById('cursor-follower');
+        const cards = document.querySelectorAll('.service-card');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                cursor.style.width = '80px';
+                cursor.style.height = '80px';
+                cursor.style.background = 'rgba(233, 228, 223, 0.08)';
+                cursor.innerHTML = '<span style="font-size: 10px; font-weight: 800; color: white;">VIEW</span>';
+            });
+            card.addEventListener('mouseleave', () => {
+                cursor.style.width = '40px';
+                cursor.style.height = '40px';
+                cursor.style.background = 'transparent';
+                cursor.innerHTML = '';
+            });
+        });
+
+
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.matrix-cell').forEach(cell => {
+            cell.style.opacity = '0';
+            cell.style.transform = 'translateY(30px)';
+            cell.style.transition = 'all 1s cubic-bezier(0.16, 1, 0.3, 1)';
+            observer.observe(cell);
+        });
+    </script>
+
+</body>
+</html>

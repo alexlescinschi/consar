@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="{{ lang | default('ro') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | CONSARHOUSE</title>
+    <meta name="description" content="{{ description | default('CONSARHOUSE — Arhitectură și Construcții de Substanță') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #3D454D;
+            --surface: #454D55;
+            --accent: #E9E4DF;
+            --text-dim: rgba(233, 228, 223, 0.5);
+            --border: rgba(233, 228, 223, 0.1);
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--accent);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            cursor: crosshair;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.04;
+            background: url('/images/noise.png');
+        }
+
+        #cursor-follower {
+            position: fixed;
+            width: 40px; height: 40px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #cursor-follower::after {
+            content: '';
+            width: 4px; height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 3rem;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+        }
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+        .section-label {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--text-dim);
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+        .section-sub {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 640px;
+        }
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 6rem 0;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 8rem 3rem 4rem; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            nav { padding: 1.5rem; }
+            .container { padding: 6rem 1.5rem 3rem; }
+            .section-divider { margin: 4rem 0; }
+        }
+
+        {{ extra_css | safe }}
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    <div id="cursor-follower"></div>
+
+    <nav>
+        <a href="/" class="logo" style="color: var(--accent); text-decoration: none;">CONSARHOUSE</a>
+        <div class="nav-links">
+            <a href="/proiecte/" {% if nav_active == 'projects' %}class="active"{% endif %}>Proiecte</a>
+            <a href="/studio/" {% if nav_active == 'studio' %}class="active"{% endif %}>Studio</a>
+            <a href="/blog/" {% if nav_active == 'blog' %}class="active"{% endif %}>Blog</a>
+            <a href="/servicii/" {% if nav_active == 'services' %}class="active"{% endif %}>Servicii</a>
+            <a href="/contact/" {% if nav_active == 'contact' %}class="active"{% endif %}>Contact</a>
+        </div>
+        <div style="font-size: 0.6rem; opacity: 0.5;">EN / RO</div>
+    </nav>
+
+    <main>
+        {{ content | safe }}
+    </main>
+
+    <script>
+        var cursor = document.getElementById('cursor-follower');
+        document.addEventListener('mousemove', function(e) {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        var hoverSelectors = '.service-card, .gallery-item, .sust-card, .tab-btn, .tab-panel, .btn-primary, .btn-secondary, .tech-card, .portfolio-item, .pillar, .blog-card, .slideshow-controls, .slideshow-dot';
+        document.querySelectorAll(hoverSelectors).forEach(function(el) {
+            el.addEventListener('mouseenter', function() {
+                cursor.style.width = '80px';
+                cursor.style.height = '80px';
+                cursor.style.background = 'rgba(233, 228, 223, 0.08)';
+                cursor.innerHTML = '<span style="font-size: 10px; font-weight: 800; color: #E9E4DF;">VIEW</span>';
+            });
+            el.addEventListener('mouseleave', function() {
+                cursor.style.width = '40px';
+                cursor.style.height = '40px';
+                cursor.style.background = 'transparent';
+                cursor.innerHTML = '';
+            });
+        });
+
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.sust-card, .gallery-item, .portfolio-item, .pillar, .blog-card, .stat-item').forEach(function(el) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 1s cubic-bezier(0.16, 1, 0.3, 1)';
+            observer.observe(el);
+        });
+
+        {{ page_js | safe }}
+    </script>
+</body>
+</html>

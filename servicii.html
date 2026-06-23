@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicii de Arhitectură | CONSARHOUSE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0F0F0F;
+            --surface: #161616;
+            --accent: #E9E4DF;
+            --text-dim: rgba(233, 228, 223, 0.5);
+            --border: rgba(233, 228, 223, 0.1);
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--accent);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            cursor: crosshair;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.03;
+            background: url('images/noise.png');
+        }
+
+        #cursor-follower {
+            position: fixed;
+            width: 40px; height: 40px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #cursor-follower::after {
+            content: '';
+            width: 4px; height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 3rem;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+        }
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 8rem 3rem 4rem; }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 5rem 0;
+        }
+
+        .section-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.1;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .section-sub {
+            font-size: 1rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .intro {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            margin: -8rem -3rem 0;
+            padding: 8rem 3rem 5rem;
+        }
+        .intro .intro-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+        }
+        .intro h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.05;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .pillar {
+            padding: 3rem 2rem;
+            border-right: 1px solid var(--border);
+            position: relative;
+            transition: var(--transition);
+        }
+        .pillar:last-child { border-right: none; }
+        .pillar:hover { background: var(--surface); }
+        .pillar-num {
+            font-size: 0.7rem;
+            opacity: 0.35;
+            margin-bottom: 2rem;
+        }
+        .pillar h2 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .pillar .pillar-desc {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .pillar ul {
+            list-style: none;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+        .pillar ul li::before { content: '— '; opacity: 0.4; }
+
+        /* PORTFOLIO GALLERY */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .portfolio-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1) brightness(0.5);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .portfolio-item:hover img {
+            filter: grayscale(0%) contrast(1) brightness(0.85);
+            transform: scale(1.08);
+        }
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            z-index: 2;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .portfolio-overlay h4 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+        .portfolio-overlay span {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.6;
+        }
+
+        /* VIDEO SHOWCASE */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        .video-card {
+            position: relative;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        .video-card:hover {
+            border-color: rgba(233, 228, 223, 0.25);
+        }
+        .video-thumb {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+        .video-thumb iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(100%) contrast(1.1) brightness(0.45);
+            transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .video-card:hover .video-thumb iframe {
+            filter: grayscale(0%) contrast(1) brightness(0.9);
+        }
+        .video-info {
+            padding: 1.5rem;
+        }
+        .video-info h4 {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .video-info p {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        /* STATS */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .stat-item {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-right: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        .stat-item:last-child { border-right: none; }
+        .stat-item:hover { background: var(--surface); }
+        .stat-num {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-dim);
+        }
+
+        /* PROJECTS TABLE */
+        .projects-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .projects-table th {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--text-dim);
+            padding: 1.5rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-weight: 500;
+        }
+        .projects-table td {
+            padding: 1.5rem 1rem;
+            font-size: 0.8rem;
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        .projects-table tbody tr:hover td {
+            background: var(--surface);
+        }
+        .proj-name {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+        }
+        .proj-status {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid var(--border);
+            display: inline-block;
+        }
+        .proj-status.done { border-color: rgba(233, 228, 223, 0.3); }
+        .proj-status.ongoing { border-color: rgba(233, 228, 223, 0.15); color: var(--text-dim); }
+
+        /* CTA */
+        .cta-block {
+            text-align: center;
+            padding: 5rem 2rem;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+        }
+        .cta-block h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        .cta-block p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn-cta {
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            padding: 1.2rem 2.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-sans);
+        }
+        .btn-cta:hover {
+            background: transparent;
+            color: var(--accent);
+            outline: 1px solid var(--accent);
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 3rem;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: var(--transition);
+            line-height: 1;
+        }
+        .modal-close:hover { opacity: 1; }
+        .modal-step {
+            display: none;
+        }
+        .modal-step.active {
+            display: block;
+            animation: fadeSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal h3 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .modal .step-indicator {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.35em;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            display: block;
+        }
+        .modal .radio-group,
+        .modal .checkbox-group {
+            display: grid;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .modal .radio-group {
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        }
+        .modal .checkbox-group {
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        }
+        .modal .radio-item,
+        .modal .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.8rem;
+        }
+        .modal .radio-item:hover,
+        .modal .checkbox-item:hover {
+            border-color: rgba(233, 228, 223, 0.3);
+            background: rgba(233, 228, 223, 0.03);
+        }
+        .modal .radio-item input,
+        .modal .checkbox-item input {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 14px; height: 14px;
+            border: 1px solid var(--text-dim);
+            border-radius: 50%;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .modal .checkbox-item input { border-radius: 0; }
+        .modal .radio-item input:checked {
+            border-color: var(--accent);
+            background: var(--accent);
+        }
+        .modal .checkbox-item input:checked {
+            border-color: var(--accent);
+            background: var(--accent);
+        }
+        .modal .checkbox-item input:checked::after {
+            content: '';
+            position: absolute;
+            left: 4px; top: 1px;
+            width: 4px; height: 8px;
+            border: solid var(--bg);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .modal .radio-icon {
+            opacity: 0.35;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .modal .radio-item input:checked ~ .radio-icon {
+            opacity: 0.8;
+        }
+        .modal .radio-item input:checked ~ span,
+        .modal .checkbox-item input:checked ~ span {
+            color: var(--accent);
+        }
+        .modal .checkbox-icon {
+            opacity: 0.35;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .modal .checkbox-item input:checked ~ .checkbox-icon {
+            opacity: 0.8;
+        }
+        .modal .checkbox-thumb {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 2px;
+            flex-shrink: 0;
+            opacity: 0.65;
+            transition: var(--transition);
+        }
+        .modal .checkbox-item input:checked ~ .checkbox-thumb,
+        .modal .checkbox-item:hover .checkbox-thumb {
+            opacity: 1;
+        }
+        .modal .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+        .modal .field-group label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+        }
+        .modal .field-group input,
+        .modal .field-group textarea {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            padding: 0.8rem 1rem;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            transition: var(--transition);
+            outline: none;
+        }
+        .modal .field-group input:focus,
+        .modal .field-group textarea:focus {
+            border-color: rgba(233, 228, 223, 0.4);
+        }
+        .modal .contact-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .modal .btn-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .modal .btn-next,
+        .modal .btn-back {
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            padding: 0.9rem 2rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-sans);
+        }
+        .modal .btn-back {
+            background: transparent;
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+        }
+        .modal .btn-next:hover {
+            background: transparent;
+            color: var(--accent);
+            outline: 1px solid var(--accent);
+        }
+        .modal .btn-back:hover {
+            color: var(--accent);
+            border-color: rgba(233, 228, 223, 0.4);
+        }
+        .modal .sub-details {
+            margin-top: 1rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            background: rgba(22,22,22,0.5);
+        }
+        .modal .sub-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .modal .checkbox-bool {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+        .modal .sub-section-title {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            font-weight: 400;
+            margin: 1.5rem 0 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .modal .sub-section-title:first-of-type {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        .success-msg {
+            text-align: center;
+            padding: 2rem;
+        }
+        .success-msg .check {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .success-msg h2 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        /* SLIDESHOW */
+        .slideshow {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .slideshow::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.55) 50%, rgba(15,15,15,0.7) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .slideshow-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .slideshow-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .slideshow-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1) brightness(0.35);
+            transition: filter 2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .slideshow-slide.active-slide img {
+            filter: grayscale(100%) contrast(1.1) brightness(0.45);
+        }
+        .slideshow-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 4;
+            background: none;
+            border: 1px solid rgba(233,228,223,0.2);
+            color: var(--accent);
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            opacity: 0;
+        }
+        .slideshow:hover .slideshow-controls { opacity: 1; }
+        .slideshow-controls:hover {
+            background: rgba(233,228,223,0.1);
+            border-color: rgba(233,228,223,0.45);
+        }
+        .slideshow-prev { left: 2rem; }
+        .slideshow-next { right: 2rem; }
+        .slideshow-dots {
+            position: absolute;
+            bottom: 2.5rem;
+            right: 3rem;
+            z-index: 4;
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        .slideshow-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            border: 1px solid rgba(233,228,223,0.3);
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0;
+        }
+        .slideshow-dot.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        .slideshow-counter {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 3rem;
+            z-index: 4;
+            font-size: 0.65rem;
+            font-family: var(--font-sans);
+            opacity: 0.4;
+            letter-spacing: 0.2em;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 6rem 1.5rem 3rem; }
+            .pillars { grid-template-columns: 1fr; }
+            .pillar { border-right: none; }
+            .portfolio-grid { grid-template-columns: 1fr 1fr; }
+            .video-grid { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: 1fr 1fr; }
+            .stat-item:nth-child(2) { border-right: none; }
+            .modal { padding: 2rem; width: 95%; }
+            .modal .contact-row { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            nav { padding: 1.5rem; }
+            .projects-table { font-size: 0.7rem; }
+            .projects-table th, .projects-table td { padding: 1rem 0.5rem; }
+            .slideshow { aspect-ratio: auto; }
+            .slideshow-caption { padding: 1.5rem; }
+            .slideshow-caption h4 { font-size: 1.2rem; }
+            .slideshow-controls { opacity: 1; width: 36px; height: 36px; }
+            .slideshow-prev { left: 1rem; }
+            .slideshow-next { right: 1rem; }
+            .slideshow-dots { bottom: 1.5rem; right: 1.5rem; }
+            .slideshow-counter { bottom: 1.5rem; left: 1.5rem; }
+            .intro { min-height: 80vh; margin: -6rem -1.5rem 0; padding: 8rem 1.5rem 4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+    <div id="cursor-follower"></div>
+
+    <nav>
+        <a href="index.html" class="logo" style="color: var(--accent); text-decoration: none;">CONSARHOUSE</a>
+        <div class="nav-links">
+            <a href="index.html">Projects</a>
+            <a href="#">Studio</a>
+            <a href="#">Blog</a>
+            <a href="servicii.html" class="active">Services</a>
+            <a href="#">Contact</a>
+        </div>
+        <div style="font-size: 0.6rem; opacity: 0.5;">EN / RO</div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <!-- I. ANTET -->
+            <section class="intro">
+                <div class="slideshow" id="project-slideshow">
+                    <div class="slideshow-track" id="slideshow-track">
+                        <div class="slideshow-slide active-slide">
+                            <img src="images/portfolio-01.jpg" alt="Vilă Rezidențială" loading="lazy">
+                        </div>
+                        <div class="slideshow-slide">
+                            <img src="images/portfolio-02.jpg" alt="Complex Comercial" loading="lazy">
+                        </div>
+                        <div class="slideshow-slide">
+                            <img src="images/portfolio-03.jpg" alt="Ansamblu Rezidențial" loading="lazy">
+                        </div>
+                        <div class="slideshow-slide">
+                            <img src="images/portfolio-04.jpg" alt="Restaurare Monument" loading="lazy">
+                        </div>
+                        <div class="slideshow-slide">
+                            <img src="images/portfolio-05.jpg" alt="Casă Pasivă" loading="lazy">
+                        </div>
+                        <div class="slideshow-slide">
+                            <img src="images/portfolio-06.jpg" alt="Hotel Boutique" loading="lazy">
+                        </div>
+                    </div>
+                    <button class="slideshow-controls slideshow-prev" onclick="prevSlide()" aria-label="Slide anterior">&#8592;</button>
+                    <button class="slideshow-controls slideshow-next" onclick="nextSlide()" aria-label="Slide următor">&#8594;</button>
+                    <div class="slideshow-dots" id="slideshow-dots"></div>
+                    <div class="slideshow-counter" id="slideshow-counter">1 / 6</div>
+                </div>
+                <div class="intro-content">
+                    <span class="section-label">Servicii de Arhitectură</span>
+                    <h1>De la Idee la<br>Proiectul Tehnic</h1>
+                    <p class="section-sub" style="font-size: 1.1rem;">Consultanță, Planificare și Documentare pentru viitoarea ta construcție.</p>
+                    <p class="section-sub" style="font-size: 0.9rem;">
+                        Un proiect corect și personalizat începe cu o analiză riguroasă. Rolul nostru este să îți traducem nevoile în soluții concrete de compartimentare eficientă, optimizare a luminii naturale și planificare tehnică, oferindu-ți suportul complet în faza de proiectare și obținere a documentației.
+                    </p>
+                </div>
+            </section>
+
+            <hr class="section-divider">
+
+            <!-- II. PILONII DE SERVICII -->
+            <span class="section-label">Pilonii de Servicii</span>
+            <h2 class="section-title">Ce putem face<br>pentru proiectul tău</h2>
+            <p class="section-sub">Trei etape esențiale care transformă o idee într-un proiect tehnic complet, gata de execuție.</p>
+
+            <section class="pillars" style="margin-top: 3rem;">
+                <div class="pillar">
+                    <div class="pillar-num">[01]</div>
+                    <h2>Consultanță<br>Arhitecturală</h2>
+                    <p class="pillar-desc">Discuția inițială și analiza temei de proiectare. Identificăm constrângerile terenului, cerințele tale funcționale și stabilim direcția estetică generală.</p>
+                    <ul>
+                        <li>Analiza amplasamentului</li>
+                        <li>Stabilirea temei de proiectare</li>
+                        <li>Consultanță buget și fezabilitate</li>
+                    </ul>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-num">[02]</div>
+                    <h2>Planificare și Concept Arhitectural</h2>
+                    <p class="pillar-desc">Transformarea ideilor în schițe, planuri spațiale și concepte volumetrice tridimensionale.</p>
+                    <ul>
+                        <li>Concept arhitectural preliminar</li>
+                        <li>Compartimentare optimizată</li>
+                        <li>Studiu de orientare și eficiență</li>
+                        <li>Randări și vizualizări 3D</li>
+                    </ul>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-num">[03]</div>
+                    <h2>Documentare și Avizare</h2>
+                    <p class="pillar-desc">Pregătirea întregului set de piese scrise și desenate necesare pentru obținerea autorizațiilor.</p>
+                    <ul>
+                        <li>Documentație Certificat Urbanism</li>
+                        <li>Proiect Autorizație Construire (D.T.A.C.)</li>
+                        <li>Proiect Tehnic de Execuție (P.Th.)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr class="section-divider">
+
+            <!-- III. PORTOFOLIU -->
+            <span class="section-label">Portofoliu</span>
+            <h2 class="section-title">Lucrări Realizate</h2>
+            <p class="section-sub">O selecție de proiecte care ilustrează diversitatea și calitatea serviciilor noastre de arhitectură.</p>
+
+            <div class="portfolio-grid" style="margin-top: 3rem;">
+                <div class="portfolio-item">
+                    <img src="images/portfolio-01.jpg" alt="Vilă Rezidențială Cluj" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h4>Vilă Rezidențială</h4>
+                        <span>Cluj-Napoca, 2024</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/portfolio-02.jpg" alt="Complex Comercial" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h4>Complex Comercial</h4>
+                        <span>Timișoara, 2023</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/portfolio-03.jpg" alt="Ansamblu Rezidențial" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h4>Ansamblu Rezidențial</h4>
+                        <span>Brașov, 2024</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/portfolio-04.jpg" alt="Restaurare Monument" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h4>Restaurare Monument</h4>
+                        <span>Sibiu, 2022</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/portfolio-05.jpg" alt="Casă Pasivă" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h4>Casă Pasivă Premium</h4>
+                        <span>București, 2024</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/portfolio-06.jpg" alt="Hotel Boutique" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h4>Hotel Boutique</h4>
+                        <span>Constanța, 2023</span>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- IV. PROIECTE ÎN LUCRU -->
+            <span class="section-label">În Desfășurare</span>
+            <h2 class="section-title">Proiecte Active</h2>
+            <p class="section-sub">O parte din proiectele la care lucrăm în prezent, în diferite faze de proiectare și execuție.</p>
+
+            <div style="overflow-x: auto; margin-top: 2rem;">
+                <table class="projects-table">
+                    <thead>
+                        <tr>
+                            <th>Proiect</th>
+                            <th>Locație</th>
+                            <th>Tip</th>
+                            <th>Suprafață</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="proj-name">Reședința Avantgarde</span></td>
+                            <td>București</td>
+                            <td>Rezidențial</td>
+                            <td>480 m²</td>
+                            <td><span class="proj-status ongoing">În Proiectare</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="proj-name">Turnul Metropolitan</span></td>
+                            <td>Cluj-Napoca</td>
+                            <td>Birouri</td>
+                            <td>2.200 m²</td>
+                            <td><span class="proj-status ongoing">Avizare</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="proj-name">Campus Universitar Vest</span></td>
+                            <td>Timișoara</td>
+                            <td>Instituțional</td>
+                            <td>5.600 m²</td>
+                            <td><span class="proj-status done">Autorizat</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="proj-name">Ansamblul Rezidențial Nord</span></td>
+                            <td>Iași</td>
+                            <td>Rezidențial</td>
+                            <td>1.800 m²</td>
+                            <td><span class="proj-status ongoing">În Proiectare</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="proj-name">Centru Wellness & Spa</span></td>
+                            <td>Sinaia</td>
+                            <td>Turism</td>
+                            <td>950 m²</td>
+                            <td><span class="proj-status done">Finalizat</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- V. STATISTICI -->
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-num" id="counter-projects">0</div>
+                    <div class="stat-label">Proiecte Finalizate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num" id="counter-clients">0</div>
+                    <div class="stat-label">Clienți</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num" id="counter-years">0</div>
+                    <div class="stat-label">Ani Experiență</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num" id="counter-area">0</div>
+                    <div class="stat-label">m² Proiectați</div>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- VI. VIDEO SHOWCASE -->
+            <span class="section-label">Prezentări Video</span>
+            <h2 class="section-title">Proiecte în Mișcare</h2>
+            <p class="section-sub">Tururi virtuale și prezentări 3D ale proiectelor noastre recente.</p>
+
+            <div class="video-grid" style="margin-top: 2rem;">
+                <div class="video-card">
+                    <div class="video-thumb">
+                        <iframe src="https://www.youtube.com/embed/B3MsOKsFNnE" title="Arhitectură Modernă" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>Tur Virtual — Vilă Contemporană</h4>
+                        <p>Prezentare 3D completă a unei vile rezidențiale cu design contemporan și finisaje premium.</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumb">
+                        <iframe src="https://www.youtube.com/embed/r9yjRM6K6lE" title="Design Rezidențial" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>De la Schiță la Realitate</h4>
+                        <p>Procesul complet de proiectare: de la conceptul inițial până la randarea finală 3D.</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- VII. CTA + FORMULAR MODAL -->
+            <div class="cta-block">
+                <h2>Începe Proiectul Tău</h2>
+                <p>Completează configuratorul nostru de proiect și primești o ofertă personalizată în 48 de ore.</p>
+                <button class="btn-cta" onclick="openModal()">Configurează Proiectul</button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- MODAL FORM -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+
+            <!-- Step 1 -->
+            <div class="modal-step active" data-step="1">
+                <span class="step-indicator">Pasul 1 / 4</span>
+                <h3>Alege categoria de proiect</h3>
+                <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1.5rem;">Selectează o opțiune principală.</p>
+                <div class="radio-group">
+                    <label class="radio-item"><input type="radio" name="categorie" value="Construcții rezidențiale" onchange="onCatChange(this)"><svg class="radio-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg><span>Construcții rezidențiale</span></label>
+                    <label class="radio-item"><input type="radio" name="categorie" value="Clădiri comerciale" onchange="onCatChange(this)"><svg class="radio-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="18" rx="1"/><path d="M8 21v-4h8v4"/><path d="M12 7v4"/><path d="M8 9h8"/></svg><span>Clădiri comerciale</span></label>
+                    <label class="radio-item"><input type="radio" name="categorie" value="Clădiri publice și instituționale" onchange="onCatChange(this)"><svg class="radio-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="18" rx="1"/><path d="M6 3v18"/><path d="M2 9h22"/><path d="M12 12h4"/></svg><span>Clădiri publice și instituționale</span></label>
+                    <label class="radio-item"><input type="radio" name="categorie" value="Construcții industriale" onchange="onCatChange(this)"><svg class="radio-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20h20"/><path d="M5 20V6l7-3v17"/><path d="M19 20V12l-7-3"/><path d="M9 12h4"/><path d="M16 12h3"/></svg><span>Construcții industriale</span></label>
+                    <label class="radio-item"><input type="radio" name="categorie" value="Turism și agrement" onchange="onCatChange(this)"><svg class="radio-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="16" rx="1"/><path d="M6 12h4v4H6z"/><path d="M14 12h4v4h-4z"/><path d="M10 5V2h4v3"/></svg><span>Turism și agrement</span></label>
+                    <label class="radio-item"><input type="radio" name="categorie" value="Amenajări exterioare și urbanism" onchange="onCatChange(this)"><svg class="radio-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="18" r="2"/><circle cx="16" cy="18" r="2"/><path d="M4 18c0-5 3-9 8-9s8 4 8 9"/><path d="M12 9V3"/><path d="M9 3h6"/></svg><span>Amenajări exterioare și urbanism</span></label>
+                    <label class="radio-item"><input type="radio" name="categorie" value="Reabilitări și restaurări" onchange="onCatChange(this)"><svg class="radio-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94L2 24l4.53-11.53a6 6 0 0 1 7.94-7.94l.77.77"/></svg><span>Reabilitări și restaurări</span></label>
+                </div>
+                <div class="btn-row">
+                    <button class="btn-next" onclick="nextStep(2)">Continuă →</button>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="modal-step" data-step="2">
+                <span class="step-indicator">Pasul 2 / 4</span>
+                <h3>Detalii despre Proiect</h3>
+
+                <div id="step2-residential">
+                    <div class="sub-section-title">A. Tipul de locuință și dimensiuni</div>
+
+                    <div class="sub-details">
+                        <label class="checkbox-item" style="margin-bottom: 1rem;">
+                            <input type="checkbox" class="house-type" data-type="individuala" onchange="toggleHouseFields()">
+                            <img class="checkbox-thumb" src="images/thumbnails/1.jpg" alt="" loading="lazy"><span>1) Casă individuală</span>
+                        </label>
+                        <div class="sub-details-grid house-fields" data-type="individuala" style="display: none;">
+                            <div class="field-group"><label>Lungime (m)</label><input type="number" step="0.1" placeholder="ex: 15"></div>
+                            <div class="field-group"><label>Lățime (m)</label><input type="number" step="0.1" placeholder="ex: 10"></div>
+                            <div class="field-group"><label>Nr. etaje</label><input type="number" placeholder="ex: 2"></div>
+                            <div class="checkbox-bool"><input type="checkbox"> Subsol</div>
+                        </div>
+                    </div>
+
+                    <div class="sub-details" style="margin-top: 1rem;">
+                        <label class="checkbox-item" style="margin-bottom: 1rem;">
+                            <input type="checkbox" class="house-type" data-type="duplex" onchange="toggleHouseFields()">
+                            <img class="checkbox-thumb" src="images/thumbnails/2.jpg" alt="" loading="lazy"><span>2) Casă duplex</span>
+                        </label>
+                        <div class="sub-details-grid house-fields" data-type="duplex" style="display: none;">
+                            <div class="field-group"><label>Lungime (m)</label><input type="number" step="0.1" placeholder="ex: 18"></div>
+                            <div class="field-group"><label>Lățime (m)</label><input type="number" step="0.1" placeholder="ex: 12"></div>
+                            <div class="checkbox-bool"><input type="checkbox"> Subsol</div>
+                        </div>
+                    </div>
+
+                    <div class="sub-details" style="margin-top: 1rem;">
+                        <label class="checkbox-item" style="margin-bottom: 1rem;">
+                            <input type="checkbox" class="house-type" data-type="townhouse" onchange="toggleHouseFields()">
+                            <img class="checkbox-thumb" src="images/thumbnails/3.jpg" alt="" loading="lazy"><span>3) Casă înșiruită (townhouse)</span>
+                        </label>
+                        <div class="sub-details-grid house-fields" data-type="townhouse" style="display: none;">
+                            <div class="field-group"><label>Lungime (m)</label><input type="number" step="0.1" placeholder="ex: 12"></div>
+                            <div class="field-group"><label>Lățime (m)</label><input type="number" step="0.1" placeholder="ex: 6"></div>
+                            <div class="field-group"><label>Nr. etaje</label><input type="number" placeholder="ex: 2"></div>
+                            <div class="checkbox-bool"><input type="checkbox"> Subsol</div>
+                        </div>
+                    </div>
+
+                    <div class="sub-section-title">B. Stil, Materiale și Tehnologie</div>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Vilă"><img class="checkbox-thumb" src="images/thumbnails/4.jpg" alt="" loading="lazy"><span>Vilă</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Bungalow"><img class="checkbox-thumb" src="images/thumbnails/5.jpg" alt="" loading="lazy"><span>Bungalow</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Cărămidă"><img class="checkbox-thumb" src="images/thumbnails/6.jpg" alt="" loading="lazy"><span>Casă din cărămidă</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Beton"><img class="checkbox-thumb" src="images/thumbnails/7.jpg" alt="" loading="lazy"><span>Casă din beton</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Metalică"><img class="checkbox-thumb" src="images/thumbnails/8.jpg" alt="" loading="lazy"><span>Structură metalică</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Lemn"><img class="checkbox-thumb" src="images/thumbnails/9.jpg" alt="" loading="lazy"><span>Casă din lemn</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Modulară"><img class="checkbox-thumb" src="images/thumbnails/10.jpg" alt="" loading="lazy"><span>Modulară / prefabricată</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Modernă"><img class="checkbox-thumb" src="images/thumbnails/11.jpg" alt="" loading="lazy"><span>Modernă</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Contemporană"><img class="checkbox-thumb" src="images/thumbnails/12.jpg" alt="" loading="lazy"><span>Contemporană</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Tradițională"><img class="checkbox-thumb" src="images/thumbnails/13.jpg" alt="" loading="lazy"><span>Tradițională</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Rustic"><img class="checkbox-thumb" src="images/thumbnails/14.jpg" alt="" loading="lazy"><span>Rustic</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Mediteraneană"><img class="checkbox-thumb" src="images/thumbnails/15.jpg" alt="" loading="lazy"><span>Mediteraneană</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Scandinavă"><img class="checkbox-thumb" src="images/thumbnails/16.jpg" alt="" loading="lazy"><span>Scandinavă</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Industrială"><img class="checkbox-thumb" src="images/thumbnails/17.jpg" alt="" loading="lazy"><span>Industrială</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Pasivă"><img class="checkbox-thumb" src="images/thumbnails/18.jpg" alt="" loading="lazy"><span>Casă pasivă</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Smart"><img class="checkbox-thumb" src="images/thumbnails/19.jpg" alt="" loading="lazy"><span>Casă inteligentă</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Ecologică"><img class="checkbox-thumb" src="images/thumbnails/20.jpg" alt="" loading="lazy"><span>Casă ecologică</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Tiny"><img class="checkbox-thumb" src="images/thumbnails/21.jpg" alt="" loading="lazy"><span>Tiny house</span></label>
+                        <label class="checkbox-item"><input type="checkbox" name="stil" value="Piloni"><img class="checkbox-thumb" src="images/thumbnails/22.jpg" alt="" loading="lazy"><span>Casă pe piloni</span></label>
+                    </div>
+                </div>
+
+                <div id="step2-generic" style="display: none;">
+                    <div class="field-group">
+                        <label>Descrie proiectul tău</label>
+                        <textarea rows="4" name="descriere_proiect" placeholder="Detalii despre proiect: tip clădire, suprafață estimativă, specificații..."></textarea>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn-back" onclick="prevStep(1)">← Înapoi</button>
+                    <button class="btn-next" onclick="nextStep(3)">Continuă →</button>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="modal-step" data-step="3">
+                <span class="step-indicator">Pasul 3 / 4 (Opțional)</span>
+                <h3>Servicii de Prezentare / Randări 3D</h3>
+                <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1.5rem;">Bifează livrabilele vizuale de care ai nevoie.</p>
+                <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" name="randari" value="Randări Interioare"><span>Randări Interioare</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="randari" value="Randări Exterior"><span>Randări Exterior</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="randari" value="Interior Design"><span>Randări Interior Design</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="randari" value="Peisagistic"><span>Randări Design Peisagistic</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="randari" value="Produs Marketing"><span>Randări Produs / Marketing</span></label>
+                    <label class="checkbox-item"><input type="checkbox" name="randari" value="Animații 3D"><span>Animații 3D Imobiliare</span></label>
+                </div>
+                <div class="btn-row">
+                    <button class="btn-back" onclick="prevStep(2)">← Înapoi</button>
+                    <button class="btn-next" onclick="nextStep(4)">Continuă →</button>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="modal-step" data-step="4">
+                <span class="step-indicator">Pasul 4 / 4</span>
+                <h3>Date de Contact</h3>
+                <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1.5rem;">Completează datele și trimite solicitarea.</p>
+                <div class="contact-row">
+                    <div class="field-group"><label>Nume și Prenume *</label><input type="text" id="form-nume" required placeholder="Numele tău complet"></div>
+                    <div class="field-group"><label>Email *</label><input type="email" id="form-email" required placeholder="email@exemplu.ro"></div>
+                </div>
+                <div class="field-group"><label>Telefon *</label><input type="tel" id="form-telefon" required placeholder="07xx xxx xxx"></div>
+                <div class="field-group"><label>Mesaj / Detalii suplimentare</label><textarea rows="4" id="form-mesaj" placeholder="Data estimativă, buget orientativ, alte detalii..."></textarea></div>
+                <div class="btn-row">
+                    <button class="btn-back" onclick="prevStep(3)">← Înapoi</button>
+                    <button class="btn-next" onclick="submitForm()">Trimite Solicitarea →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cursor = document.getElementById('cursor-follower');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('.pillar, .portfolio-item, .video-card, .stat-item, .btn-cta, .proj-status, .slideshow-controls, .slideshow-dot').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '80px';
+                cursor.style.height = '80px';
+                cursor.style.background = 'rgba(233, 228, 223, 0.08)';
+                cursor.innerHTML = '<span style="font-size: 10px; font-weight: 800; color: #E9E4DF;">VIEW</span>';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '40px';
+                cursor.style.height = '40px';
+                cursor.style.background = 'transparent';
+                cursor.innerHTML = '';
+            });
+        });
+
+        function openModal() {
+            document.getElementById('modal-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            goToStep(1);
+        }
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.getElementById('modal-overlay').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        function goToStep(n) {
+            document.querySelectorAll('.modal-step').forEach(s => s.classList.remove('active'));
+            const step = document.querySelector('.modal-step[data-step="' + n + '"]');
+            if (step) step.classList.add('active');
+        }
+        function nextStep(n) { goToStep(n); }
+        function prevStep(n) { goToStep(n); }
+
+        function onCatChange(radio) {
+            const step2r = document.getElementById('step2-residential');
+            const step2g = document.getElementById('step2-generic');
+            if (radio.value === 'Construcții rezidențiale') {
+                step2r.style.display = 'block';
+                step2g.style.display = 'none';
+            } else {
+                step2r.style.display = 'none';
+                step2g.style.display = 'block';
+            }
+        }
+
+        function toggleHouseFields() {
+            document.querySelectorAll('.house-type').forEach(cb => {
+                const fields = document.querySelector('.house-fields[data-type="' + cb.dataset.type + '"]');
+                if (fields) fields.style.display = cb.checked ? 'grid' : 'none';
+            });
+        }
+
+        function submitForm() {
+            const nume = document.getElementById('form-nume').value.trim();
+            const email = document.getElementById('form-email').value.trim();
+            const telefon = document.getElementById('form-telefon').value.trim();
+            if (!nume || !email || !telefon) {
+                alert('Te rugăm să completezi toate câmpurile obligatorii (*).');
+                return;
+            }
+            const cat = document.querySelector('input[name="categorie"]:checked');
+            if (!cat) {
+                alert('Te rugăm să selectezi o categorie de proiect (Pasul 1).');
+                goToStep(1);
+                return;
+            }
+            const stiluri = Array.from(document.querySelectorAll('input[name="stil"]:checked')).map(c => c.value);
+            const randari = Array.from(document.querySelectorAll('input[name="randari"]:checked')).map(c => c.value);
+
+            alert('✓ Solicitarea a fost trimisă cu succes!\n\n' +
+                  'Categorie: ' + cat.value + '\n' +
+                  'Nume: ' + nume + '\n' +
+                  'Email: ' + email + '\n\n' +
+                  'Te vom contacta în maxim 48 de ore.');
+            closeModal();
+        }
+
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.pillar, .portfolio-item, .video-card, .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 1s cubic-bezier(0.16, 1, 0.3, 1)';
+            observer.observe(el);
+        });
+
+        function animateCounter(el, target, duration) {
+            let start = 0;
+            const step = (t) => {
+                start = Math.floor(t / duration * target);
+                el.textContent = start >= target ? target : start;
+                if (start < target) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        }
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(document.getElementById('counter-projects'), 178, 2000);
+                    animateCounter(document.getElementById('counter-clients'), 143, 2000);
+                    animateCounter(document.getElementById('counter-years'), 20, 2000);
+                    animateCounter(document.getElementById('counter-area'), 32600, 2000);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsRow = document.querySelector('.stats-row');
+        if (statsRow) counterObserver.observe(statsRow);
+
+        let currentSlide = 0;
+        const totalSlides = document.querySelectorAll('.slideshow-slide').length;
+        const track = document.getElementById('slideshow-track');
+        const dotsContainer = document.getElementById('slideshow-dots');
+        const counter = document.getElementById('slideshow-counter');
+        let autoPlayInterval;
+
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'slideshow-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+            document.querySelectorAll('.slideshow-slide').forEach((s, i) => {
+                s.classList.toggle('active-slide', i === currentSlide);
+            });
+            document.querySelectorAll('.slideshow-dot').forEach((d, i) => {
+                d.classList.toggle('active', i === currentSlide);
+            });
+            counter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+        }
+
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % totalSlides);
+            resetAutoPlay();
+        }
+
+        function prevSlide() {
+            goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
+            resetAutoPlay();
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(() => {
+                goToSlide((currentSlide + 1) % totalSlides);
+            }, 5000);
+        }
+
+        autoPlayInterval = setInterval(() => {
+            goToSlide((currentSlide + 1) % totalSlides);
+        }, 5000);
+    </script>
+
+</body>
+</html>

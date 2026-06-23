@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa S+P+1 — Integrare în Pădure | CONSARHOUSE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #3D454D;
+            --surface: #454D55;
+            --accent: #E9E4DF;
+            --text-dim: rgba(233, 228, 223, 0.5);
+            --border: rgba(233, 228, 223, 0.1);
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--accent);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            cursor: crosshair;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.03;
+            background: url('images/noise.png');
+        }
+
+        #cursor-follower {
+            position: fixed;
+            width: 40px; height: 40px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #cursor-follower::after {
+            content: '';
+            width: 4px; height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 3rem;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+        }
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 8rem 3rem 4rem; }
+
+        .section-label {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--text-dim);
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+        .section-sub {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 640px;
+        }
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 6rem 0;
+        }
+
+        /* I. HERO */
+        .hero {
+            position: relative;
+            margin: -8rem -3rem 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1) brightness(0.35);
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--bg) 0%, transparent 45%, transparent 80%, var(--bg) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            margin-top: auto;
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: end;
+        }
+        .hero-title h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .hero-title .subtitle {
+            color: var(--text-dim);
+            font-size: 1rem;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Tech Card */
+        .tech-card {
+            background: rgba(15, 15, 15, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+        .tech-card dt {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-dim);
+            margin-bottom: 0.2rem;
+        }
+        .tech-card dd {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* II. POVESTEA — two-column */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            margin-top: 2rem;
+        }
+        .story-col h3 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 1.2rem;
+            color: var(--accent);
+        }
+        .story-col p {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: var(--text-dim);
+        }
+        .architect-quote {
+            margin-top: 2rem;
+            padding-left: 1.5rem;
+            border-left: 2px solid var(--accent);
+        }
+        .architect-quote blockquote {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.7;
+            color: var(--accent);
+        }
+        .architect-quote cite {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            font-style: normal;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        /* III. GALERIA EXTERIOARĂ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+        .gallery-grid .gallery-item { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+        .gallery-grid .gallery-item:first-child {
+            grid-column: 1 / -1;
+            aspect-ratio: 21/9;
+        }
+        .gallery-grid .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1) brightness(0.35);
+            transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-grid .gallery-item:hover img {
+            filter: grayscale(60%) contrast(1) brightness(0.65);
+            transform: scale(1.03);
+        }
+
+        /* IV. VIDEO */
+        .video-section {
+            margin-top: 2rem;
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+        .video-section iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .video-section .video-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1) brightness(0.3);
+        }
+
+        /* V. GALERIA INTERIOARĂ */
+        .interior-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+        .interior-grid .gallery-item { position: relative; overflow: hidden; aspect-ratio: 4/5; }
+        .interior-grid .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1) brightness(0.35);
+            transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .interior-grid .gallery-item:hover img {
+            filter: grayscale(60%) contrast(1) brightness(0.65);
+            transform: scale(1.03);
+        }
+
+        /* VI. DESENE TEHNICE — tabs */
+        .tabs {
+            display: flex;
+            gap: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 1.2rem 1rem;
+            background: none;
+            border: none;
+            border-right: 1px solid var(--border);
+            color: var(--text-dim);
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .tab-btn:last-child { border-right: none; }
+        .tab-btn.active, .tab-btn:hover { color: var(--accent); background: rgba(233, 228, 223, 0.03); }
+
+        .tab-panels { margin-top: 0.5rem; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+        .tab-panel img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%) contrast(1.1) brightness(0.5);
+            transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .tab-panel:hover img { filter: grayscale(60%) contrast(1) brightness(0.7); }
+        .tab-note {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+        }
+
+        /* VII. SUSTENABILITATE */
+        .sustainability-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .sust-card {
+            border: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+            transition: var(--transition);
+        }
+        .sust-card:hover { border-color: rgba(233, 228, 223, 0.2); background: rgba(233, 228, 223, 0.02); }
+        .sust-card .sust-icon {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.5;
+        }
+        .sust-card h4 {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+        }
+        .sust-card p {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+        }
+
+        /* VIII. CTA */
+        .cta-section {
+            text-align: center;
+            padding: 5rem 3rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+        .cta-section h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        .cta-section p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            max-width: 480px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2.5rem;
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+        }
+        .btn-primary:hover { background: #fff; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover { border-color: var(--accent); background: rgba(233, 228, 223, 0.05); }
+
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; gap: 2rem; }
+            .story-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .interior-grid { grid-template-columns: 1fr 1fr; }
+            .sustainability-grid { grid-template-columns: 1fr; }
+            .tabs { flex-wrap: wrap; }
+            .tab-btn { flex: 1 1 50%; border-bottom: 1px solid var(--border); }
+        }
+        @media (max-width: 768px) {
+            .container { padding: 6rem 1.5rem 3rem; }
+            .hero { margin: -6rem -1.5rem 0; }
+            .hero-content { padding: 2rem 1.5rem; }
+            .hero-title h1 { font-size: 2.2rem; }
+            .tech-card { grid-template-columns: 1fr; padding: 1.5rem; }
+            .gallery-grid { grid-template-columns: 1fr; gap: 0.3rem; }
+            .gallery-grid .gallery-item:first-child { grid-column: 1; aspect-ratio: 16/9; }
+            .interior-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            nav { padding: 1.5rem; }
+            .cta-section { padding: 3rem 1.5rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .section-divider { margin: 4rem 0; }
+            .tabs { flex-direction: column; }
+            .tab-btn { border-right: none; border-bottom: 1px solid var(--border); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+    <div id="cursor-follower"></div>
+
+    <nav>
+        <a href="index.html" class="logo" style="color: var(--accent); text-decoration: none;">CONSARHOUSE</a>
+        <div class="nav-links">
+            <a href="index.html" class="active">Proiecte</a>
+            <a href="#">Studio</a>
+            <a href="#">Blog</a>
+            <a href="servicii.html">Servicii</a>
+            <a href="#">Contact</a>
+        </div>
+        <div style="font-size: 0.6rem; opacity: 0.5;">EN / RO</div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <!-- I. HERO & METADATA -->
+            <section class="hero">
+                <div class="hero-bg">
+                    <img src="images/projects/1/1.jpeg" alt="Casa S+P+1 — Integrare în Pădure" loading="eager">
+                </div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <div class="hero-title">
+                        <h1>Casa S+P+1<br>Integrare în Pădure</h1>
+                        <p class="subtitle">Un proiect definit de fluiditatea spațiilor interioare și orientarea optimă față de punctele cardinale.</p>
+                    </div>
+                    <dl class="tech-card">
+                        <div>
+                            <dt>Locație</dt>
+                            <dd>Brașov, România</dd>
+                        </div>
+                        <div>
+                            <dt>Suprafață utilă</dt>
+                            <dd>240 m²</dd>
+                        </div>
+                        <div>
+                            <dt>An proiect</dt>
+                            <dd>2025</dd>
+                        </div>
+                        <div>
+                            <dt>Faza atinsă</dt>
+                            <dd>D.T.A.C. + Proiect Tehnic</dd>
+                        </div>
+                        <div style="grid-column: 1 / -1;">
+                            <dt>Echipa de proiectare</dt>
+                            <dd>Arh. Andrei Popescu, Arh. Maria Ionescu — Structură: Ing. Radu Vasile — Instalații: Ing. Elena Dumitrescu</dd>
+                        </div>
+                    </dl>
+                </div>
+            </section>
+
+            <hr class="section-divider">
+
+            <!-- II. POVESTEA PROIECTULUI -->
+            <span class="section-label">Tema de proiectare și abordarea conceptuală</span>
+            <h2 class="section-title">Povestea<br>Proiectului</h2>
+
+            <div class="story-grid">
+                <div class="story-col">
+                    <h3>Provocarea inițială</h3>
+                    <p>Terenul, situat pe o parcelă atipică în pantă ușoară la marginea unei păduri de conifere, a venit cu trei constrângeri majore: orientarea neregulată a laturilor față de punctele cardinale, un front stradal îngust și dorința beneficiarului de a maximiza lumina naturală fără a sacrifica intimitatea. Forma neregulată a parcelei impunea o abordare atentă a retragerilor față de limitele laterale.</p>
+                </div>
+                <div class="story-col">
+                    <h3>Soluția de Arhitectură</h3>
+                    <p>Am optat pentru o organizare longitudinală, cu zona de zi dezvoltată pe direcția est-vest, captând lumina de sud prin vitraje generoase protejate de o consolă care asigură umbrirea naturală vara. Circulația a fost gândită fără coridoare inutile: livingul, diningul și bucătăria comunică direct, iar scara centrală devine elementul de articulare între parter și etajul dedicat zonei de noapte.</p>
+                </div>
+            </div>
+
+            <div class="architect-quote" style="margin-top: 3rem; max-width: 640px;">
+                <blockquote>&ldquo;În acest proiect, am urmărit să creăm o trecere naturală între interior și exterior, reducând la minimum spațiile de tranziție neutilizate — coridoarele — pentru a maximiza zona de zi.&rdquo;</blockquote>
+                <cite>— Arh. Andrei Popescu, CONSARHOUSE</cite>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- III. GALERIA EXTERIOARĂ -->
+            <span class="section-label">Relația cu exteriorul și volumetria</span>
+            <h2 class="section-title">Exteriorul<br>Clădirii</h2>
+            <p class="section-sub">Fațadele combină betonul aparent cu lambriuri din lemn de cedru și tâmplărie aluminiu-negru, asigurând o imagine sobră și un contrast natural cu fondul forestier. Volumul este fragmentat în două registre distincte — soclul masiv și cutia vitrată de deasupra — pentru a reduce impactul vizual.</p>
+
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="images/projects/1/2.jpeg" alt="Fațada principală — vedere de ansamblu" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/projects/1/3.jpeg" alt="Fațada sud — vitraje și terasă" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/projects/1/4.jpeg" alt="Detaliu fațadă — îmbinare lemn-beton" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/projects/1/5.jpeg" alt="Vedere amurg — iluminat exterior" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/projects/1/6.jpeg" alt="Inserția în context natural" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/projects/1/7.jpeg" alt="Detaliu textură beton aparent" loading="lazy"></div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- IV. VIDEO -->
+            <span class="section-label">Turul virtual și atmosfera proiectului</span>
+            <h2 class="section-title">Prezentarea<br>Cinematică</h2>
+            <p class="section-sub">Urmărește animația 3D walkthrough pentru a descoperi dinamica luminii pe parcursul unei zile, conexiunile vizuale între etaje și relația dintre spațiile interioare și terasele exterioare.</p>
+
+            <div class="video-section">
+                <iframe src="https://www.youtube.com/embed/B3MsOKsFNnE" title="Tur Virtual — Casa S+P+1" allowfullscreen loading="lazy"></iframe>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- V. GALERIA INTERIOARĂ -->
+            <span class="section-label">Compartimentare eficientă și design interior</span>
+            <h2 class="section-title">Interiorul<br>Proiectului</h2>
+            <p class="section-sub">Parterul reunește zona de zi — living, dining și bucătărie open-space — iar etajul găzduiește zona privată cu trei dormitoare, două băi și un birou. Separarea pe verticală între zona socială (parter) și cea de noapte (etaj) asigură intimitatea acustică fără a compromite fluiditatea spațială.</p>
+
+            <div class="interior-grid">
+                <div class="gallery-item"><img src="images/projects/1/14.jpeg" alt="Living open-space" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/projects/1/15.jpeg" alt="Bucătărie și dining" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/projects/1/16.jpeg" alt="Dormitor principal" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/projects/1/17.jpeg" alt="Baie principală" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/projects/1/18.jpeg" alt="Birou de lucru" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/projects/1/19.jpeg" alt="Iluminat natural — detaliu" loading="lazy"></div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- VI. DESENE TEHNICE -->
+            <span class="section-label">De la schița inițială la planul de execuție</span>
+            <h2 class="section-title">Desene Tehnice<br>și Documentație</h2>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab(0)">Schițe de Concept</button>
+                <button class="tab-btn" onclick="switchTab(1)">Plan Parter</button>
+                <button class="tab-btn" onclick="switchTab(2)">Plan Etaj</button>
+                <button class="tab-btn" onclick="switchTab(3)">Secțiuni & Fațade</button>
+            </div>
+
+            <div class="tab-panels">
+                <div class="tab-panel active">
+                    <img src="images/projects/1/25.jpeg" alt="Schițe de concept" loading="lazy">
+                </div>
+                <div class="tab-panel">
+                    <img src="images/projects/1/26.jpeg" alt="Plan Parter" loading="lazy">
+                </div>
+                <div class="tab-panel">
+                    <img src="images/projects/1/27.jpeg" alt="Plan Etaj" loading="lazy">
+                </div>
+                <div class="tab-panel">
+                    <img src="images/projects/1/28.jpeg" alt="Secțiuni și Fațade" loading="lazy">
+                </div>
+            </div>
+
+            <p class="tab-note">Documentația include soluții de izolație perimetrală cu polistiren extrudat de 20 cm, înălțime liberă de 2,80 m la ambele niveluri și adaptări structurale — grinzi metalice mascate — care susțin vitrajele generoase de pe fațada sudică, fără stâlpi vizibili.</p>
+
+            <hr class="section-divider">
+
+            <!-- VII. SUSTENABILITATE -->
+            <span class="section-label">Eficiență energetică și tehnologii propuse</span>
+            <h2 class="section-title">Sustenabilitate<br>și Eficiență</h2>
+
+            <div class="sustainability-grid">
+                <div class="sust-card">
+                    <div class="sust-icon">&#9725;</div>
+                    <h4>Izolație termică</h4>
+                    <p>Anvelopă continuă din polistiren expandat grafitat de 20 cm la pereți și 30 cm la terasă, eliminând punțile termice. Ferestre tripan cu transmitanță termică de 0,7 W/m²K.</p>
+                </div>
+                <div class="sust-card">
+                    <div class="sust-icon">&#9788;</div>
+                    <h4>Sistem de încălzire/răcire</h4>
+                    <p>Pompă de căldură aer-apă cu aport de panouri fotovoltaice de 6 kW, încălzire în pardoseală la parter și ventilație mecanică cu recuperare de căldură.</p>
+                </div>
+                <div class="sust-card">
+                    <div class="sust-icon">&#9726;</div>
+                    <h4>Managementul luminii</h4>
+                    <p>Suprafața vitrată a fost calibrată pe simulări de însorire: 35% din fațada sudică asigură aport solar optim iarna, iar consola de 1,20 m protejează împotriva supraîncălzirii estivale.</p>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- VIII. CTA -->
+            <div class="cta-section">
+                <p style="font-family: var(--font-serif); font-size: 1.2rem; font-style: italic; margin-bottom: 3rem;">Fiecare proiect începe cu o discuție sinceră despre nevoi, constrângeri și posibilități. Restul este planificare.</p>
+                <h2>Îți dorești un concept adaptat nevoilor tale?</h2>
+                <p>Planificarea riguroasă a unui proiect este cheia unei construcții de succes, fără bugete depășite și fără erori pe șantier. Stabilim o consultanță inițială pentru proiectul tău?</p>
+                <div class="cta-buttons">
+                    <a href="servicii.html" class="btn-primary">Programează o Consultanță</a>
+                    <a href="index.html" class="btn-secondary">Vezi alte proiecte</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        const cursor = document.getElementById('cursor-follower');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        const hoverSelectors = '.gallery-item, .sust-card, .tab-btn, .tab-panel, .btn-primary, .btn-secondary, .tech-card';
+        document.querySelectorAll(hoverSelectors).forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '80px';
+                cursor.style.height = '80px';
+                cursor.style.background = 'rgba(233, 228, 223, 0.08)';
+                cursor.innerHTML = '<span style="font-size: 10px; font-weight: 800; color: #E9E4DF;">VIEW</span>';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '40px';
+                cursor.style.height = '40px';
+                cursor.style.background = 'transparent';
+                cursor.innerHTML = '';
+            });
+        });
+
+        function switchTab(index) {
+            document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', i === index));
+            document.querySelectorAll('.tab-panel').forEach((p, i) => p.classList.toggle('active', i === index));
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.sust-card, .gallery-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 1s cubic-bezier(0.16, 1, 0.3, 1)';
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>

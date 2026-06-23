@@ -1,0 +1,92 @@
+---
+layout: base.njk
+nav_active: blog
+---
+
+{% set extra_css %}
+.article-hero {
+    margin: -4rem -3rem 0;
+    position: relative;
+    height: 60vh;
+    overflow: hidden;
+}
+.article-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.1) brightness(0.35);
+}
+.article-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--bg) 0%, transparent 60%);
+    z-index: 1;
+}
+.article-hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.article-hero-content h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+}
+.article-meta {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+}
+.article-body {
+    max-width: 720px;
+    margin: 4rem auto;
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--accent);
+}
+.article-body p {
+    margin-bottom: 1.5rem;
+}
+.article-body img {
+    width: 100%;
+    margin: 2rem 0;
+    filter: grayscale(100%) contrast(1.1) brightness(0.5);
+    transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.article-body img:hover {
+    filter: grayscale(60%) contrast(1) brightness(0.7);
+}
+
+@media (max-width: 768px) {
+    .article-hero { margin: -4rem -1.5rem 0; height: 40vh; }
+    .article-hero-content { padding: 2rem 1.5rem; }
+    .article-body { padding: 0 1.5rem; margin: 2rem auto; }
+}
+{% endset %}
+
+<article>
+    {% if image %}
+    <div class="article-hero">
+        <img src="{{ image }}" alt="{{ title }}" loading="eager">
+        <div class="article-hero-overlay"></div>
+        <div class="article-hero-content">
+            <span class="article-meta">{{ date | default("2025") }} — {{ author | default("CONSARHOUSE") }}</span>
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="container" style="padding-top: {% if image %}4rem{% else %}8rem{% endif %};">
+        <div class="article-body">
+            {{ content | safe }}
+        </div>
+    </div>
+</article>

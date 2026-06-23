@@ -1,0 +1,432 @@
+---
+layout: base.njk
+nav_active: projects
+---
+
+{% set extra_css %}
+.hero {
+    position: relative;
+    margin: -8rem -3rem 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+}
+.hero-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.1) brightness(0.35);
+}
+.hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, var(--bg) 0%, transparent 45%, transparent 80%, var(--bg) 100%);
+    z-index: 1;
+}
+.hero-content {
+    position: relative; z-index: 2;
+    margin-top: auto;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+}
+.hero-title h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+.hero-title .subtitle {
+    color: var(--text-dim);
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.tech-card {
+    background: rgba(21, 24, 27, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+}
+.tech-card dt {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    margin-bottom: 0.2rem;
+}
+.tech-card dd {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    margin-top: 2rem;
+}
+.story-col h3 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 1.2rem;
+}
+.story-col p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+}
+
+.architect-quote {
+    margin-top: 2rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--accent);
+    max-width: 640px;
+}
+.architect-quote blockquote {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--accent);
+}
+.architect-quote cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+.gallery-grid .gallery-item { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+.gallery-grid .gallery-item:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 21/9;
+}
+.gallery-grid .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.1) brightness(0.35);
+    transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gallery-grid .gallery-item:hover img {
+    filter: grayscale(60%) contrast(1) brightness(0.65);
+    transform: scale(1.03);
+}
+
+.video-wrapper {
+    margin-top: 2rem;
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+.video-wrapper iframe {
+    width: 100%; height: 100%;
+    border: none;
+}
+
+.tabs {
+    display: flex;
+    gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-top: 2rem;
+}
+.tab-btn {
+    flex: 1;
+    padding: 1.2rem 1rem;
+    background: none;
+    border: none;
+    border-right: 1px solid var(--border);
+    color: var(--text-dim);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.tab-btn:last-child { border-right: none; }
+.tab-btn.active, .tab-btn:hover { color: var(--accent); background: rgba(233, 228, 223, 0.03); }
+.tab-panels { margin-top: 0.5rem; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+.tab-panel img {
+    width: 100%; height: auto;
+    display: block;
+    filter: grayscale(100%) contrast(1.1) brightness(0.5);
+    transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tab-panel:hover img { filter: grayscale(60%) contrast(1) brightness(0.7); }
+.tab-note {
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+}
+
+.sustainability-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.sust-card {
+    border: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    transition: var(--transition);
+}
+.sust-card:hover { border-color: rgba(233, 228, 223, 0.2); background: rgba(233, 228, 223, 0.02); }
+.sust-card .sust-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.5;
+}
+.sust-card h4 {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+}
+.sust-card p {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+}
+
+.cta-section {
+    text-align: center;
+    padding: 5rem 3rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin-top: 2rem;
+}
+.cta-section h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+.cta-section p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+}
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.btn-primary, .btn-secondary {
+    padding: 1rem 2.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+}
+.btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+}
+.btn-primary:hover { background: #fff; }
+.btn-secondary {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--border);
+}
+.btn-secondary:hover { border-color: var(--accent); background: rgba(233, 228, 223, 0.05); }
+
+@media (max-width: 1024px) {
+    .hero-content { grid-template-columns: 1fr; gap: 2rem; }
+    .story-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .sustainability-grid { grid-template-columns: 1fr; }
+    .tabs { flex-wrap: wrap; }
+    .tab-btn { flex: 1 1 50%; border-bottom: 1px solid var(--border); }
+}
+@media (max-width: 768px) {
+    .hero { margin: -6rem -1.5rem 0; }
+    .hero-content { padding: 2rem 1.5rem; }
+    .hero-title h1 { font-size: 2.2rem; }
+    .tech-card { grid-template-columns: 1fr; padding: 1.5rem; }
+    .gallery-grid { grid-template-columns: 1fr; gap: 0.3rem; }
+    .gallery-grid .gallery-item:first-child { grid-column: 1; aspect-ratio: 16/9; }
+    .cta-section { padding: 3rem 1.5rem; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .tabs { flex-direction: column; }
+    .tab-btn { border-right: none; border-bottom: 1px solid var(--border); }
+}
+{% endset %}
+
+{% set page_js %}
+function switchTab(index) {
+    document.querySelectorAll('.tab-btn').forEach(function(b, i) { b.classList.toggle('active', i === index); });
+    document.querySelectorAll('.tab-panel').forEach(function(p, i) { p.classList.toggle('active', i === index); });
+}
+{% endset %}
+
+<div class="container">
+    {% for block in blocks %}
+        {% if block.type === 'hero' %}
+        <section class="hero">
+            <div class="hero-bg">
+                <img src="{{ block.image }}" alt="{{ block.title }}" loading="eager">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-title">
+                    <h1>{{ block.title | replace('\n', '<br>') | safe }}</h1>
+                    <p class="subtitle">{{ block.subtitle }}</p>
+                </div>
+                <dl class="tech-card">
+                    {% for field in block.tech_fields %}
+                    <div {% if loop.last and field.label == 'Echipă' %}style="grid-column: 1 / -1;"{% endif %}>
+                        <dt>{{ field.label }}</dt>
+                        <dd>{{ field.value }}</dd>
+                    </div>
+                    {% endfor %}
+                </dl>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        {% elif block.type === 'story_2col' %}
+        <span class="section-label">{{ block.label }}</span>
+        <h2 class="section-title">{{ block.title | replace('\n', '<br>') | safe }}</h2>
+        <div class="story-grid">
+            <div class="story-col">
+                <h3>{{ block.left_title }}</h3>
+                <p>{{ block.left_text }}</p>
+            </div>
+            <div class="story-col">
+                <h3>{{ block.right_title }}</h3>
+                <p>{{ block.right_text }}</p>
+            </div>
+        </div>
+        {% if block.quote %}
+        <div class="architect-quote" style="margin-top: 3rem;">
+            <blockquote>&ldquo;{{ block.quote }}&rdquo;</blockquote>
+            <cite>— {{ block.quote_author }}</cite>
+        </div>
+        {% endif %}
+
+        <hr class="section-divider">
+
+        {% elif block.type === 'gallery' %}
+        <span class="section-label">{{ block.label }}</span>
+        <h2 class="section-title">{{ block.title | replace('\n', '<br>') | safe }}</h2>
+        <p class="section-sub">{{ block.description }}</p>
+        <div class="gallery-grid">
+            {% for img in block.images %}
+            <div class="gallery-item">
+                <img src="{{ img.src }}" alt="{{ img.alt }}" loading="lazy">
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr class="section-divider">
+
+        {% elif block.type === 'video' %}
+        <span class="section-label">{{ block.label }}</span>
+        <h2 class="section-title">{{ block.title | replace('\n', '<br>') | safe }}</h2>
+        <p class="section-sub">{{ block.description }}</p>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/{{ block.youtube_id }}" title="{{ block.title }}" allowfullscreen loading="lazy"></iframe>
+        </div>
+
+        <hr class="section-divider">
+
+        {% elif block.type === 'interior_gallery' %}
+        <span class="section-label">{{ block.label }}</span>
+        <h2 class="section-title">{{ block.title | replace('\n', '<br>') | safe }}</h2>
+        <p class="section-sub">{{ block.description }}</p>
+        {# ponytail: reuses gallery-grid, overrides cols via inline style #}
+        <div class="gallery-grid" style="grid-template-columns: repeat(3, 1fr);">
+            {% for img in block.images %}
+            <div class="gallery-item" style="aspect-ratio: 4/5;">
+                <img src="{{ img.src }}" alt="{{ img.alt }}" loading="lazy">
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr class="section-divider">
+
+        {% elif block.type === 'tabs' %}
+        <span class="section-label">{{ block.label }}</span>
+        <h2 class="section-title">{{ block.title | replace('\n', '<br>') | safe }}</h2>
+        <div class="tabs">
+            {% for tab in block.tabs %}
+            <button class="tab-btn {% if loop.first %}active{% endif %}" onclick="switchTab({{ loop.index0 }})">{{ tab.label }}</button>
+            {% endfor %}
+        </div>
+        <div class="tab-panels">
+            {% for tab in block.tabs %}
+            <div class="tab-panel {% if loop.first %}active{% endif %}">
+                <img src="{{ tab.image }}" alt="{{ tab.label }}" loading="lazy">
+            </div>
+            {% endfor %}
+        </div>
+        {% if block.note %}
+        <p class="tab-note">{{ block.note }}</p>
+        {% endif %}
+
+        <hr class="section-divider">
+
+        {% elif block.type === 'sustainability' %}
+        <span class="section-label">{{ block.label }}</span>
+        <h2 class="section-title">{{ block.title | replace('\n', '<br>') | safe }}</h2>
+        <div class="sustainability-grid">
+            {% for card in block.cards %}
+            <div class="sust-card">
+                <div class="sust-icon">{{ card.icon }}</div>
+                <h4>{{ card.title }}</h4>
+                <p>{{ card.text }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr class="section-divider">
+
+        {% elif block.type === 'cta' %}
+        <div class="cta-section">
+            {% if block.quote %}
+            <p style="font-family: var(--font-serif); font-size: 1.2rem; font-style: italic; margin-bottom: 3rem;">{{ block.quote }}</p>
+            {% endif %}
+            <h2>{{ block.title }}</h2>
+            <p>{{ block.description }}</p>
+            <div class="cta-buttons">
+                <a href="{{ block.primary_url }}" class="btn-primary">{{ block.primary_label }}</a>
+                <a href="{{ block.secondary_url }}" class="btn-secondary">{{ block.secondary_label }}</a>
+            </div>
+        </div>
+        {% endif %}
+
+    {% endfor %}
+</div>

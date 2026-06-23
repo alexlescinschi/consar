@@ -1,0 +1,13 @@
+{% macro render(active_page) %}
+<nav>
+    <a href="/" class="logo" style="color: var(--accent); text-decoration: none;">CONSARHOUSE</a>
+    <div class="nav-links">
+        <a href="/proiecte/" {% if active_page == 'projects' %}class="active"{% endif %}>Proiecte</a>
+        <a href="/studio/" {% if active_page == 'studio' %}class="active"{% endif %}>Studio</a>
+        <a href="/blog/" {% if active_page == 'blog' %}class="active"{% endif %}>Blog</a>
+        <a href="/servicii/" {% if active_page == 'services' %}class="active"{% endif %}>Servicii</a>
+        <a href="/contact/" {% if active_page == 'contact' %}class="active"{% endif %}>Contact</a>
+    </div>
+    <div style="font-size: 0.6rem; opacity: 0.5;">EN / RO</div>
+</nav>
+{% endmacro %}

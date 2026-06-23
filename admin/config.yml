@@ -1,0 +1,141 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "projects"
+    label: "Proiecte"
+    folder: "src/content/projects"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Titlu", name: "title", widget: "string" }
+      - { label: "Descriere SEO", name: "description", widget: "text" }
+      - { label: "Imagine Featured (thumbnail)", name: "image", widget: "image" }
+      - label: "Blocuri de conținut"
+        name: "blocks"
+        widget: "list"
+        types:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Imagine panoramică", name: "image", widget: "image" }
+              - { label: "Titlu", name: "title", widget: "text", hint: "Folosește Enter pentru linie nouă" }
+              - { label: "Subtitlu", name: "subtitle", widget: "text" }
+              - label: "Fișă Tehnică"
+                name: "tech_fields"
+                widget: "list"
+                fields:
+                  - { label: "Etichetă", name: "label", widget: "string" }
+                  - { label: "Valoare", name: "value", widget: "string" }
+
+          - label: "Poveste — Text 2 Coloane"
+            name: "story_2col"
+            widget: "object"
+            fields:
+              - { label: "Etichetă secțiune", name: "label", widget: "string", default: "Tema de proiectare și abordarea conceptuală" }
+              - { label: "Titlu secțiune", name: "title", widget: "text" }
+              - { label: "Titlu stânga", name: "left_title", widget: "string" }
+              - { label: "Text stânga", name: "left_text", widget: "text" }
+              - { label: "Titlu dreapta", name: "right_title", widget: "string" }
+              - { label: "Text dreapta", name: "right_text", widget: "text" }
+              - { label: "Citat arhitect (opțional)", name: "quote", widget: "text", required: false }
+              - { label: "Autor citat", name: "quote_author", widget: "string", required: false }
+
+          - label: "Galerie Exterior"
+            name: "gallery"
+            widget: "object"
+            fields:
+              - { label: "Etichetă secțiune", name: "label", widget: "string" }
+              - { label: "Titlu secțiune", name: "title", widget: "text" }
+              - { label: "Descriere", name: "description", widget: "text" }
+              - label: "Imagini"
+                name: "images"
+                widget: "list"
+                fields:
+                  - { label: "Imagine", name: "src", widget: "image" }
+                  - { label: "Text alternativ", name: "alt", widget: "string" }
+
+          - label: "Video"
+            name: "video"
+            widget: "object"
+            fields:
+              - { label: "Etichetă secțiune", name: "label", widget: "string" }
+              - { label: "Titlu secțiune", name: "title", widget: "text" }
+              - { label: "Descriere", name: "description", widget: "text" }
+              - { label: "YouTube Video ID", name: "youtube_id", widget: "string", hint: "ex: B3MsOKsFNnE (partea din URL după ?v=)" }
+
+          - label: "Galerie Interior"
+            name: "interior_gallery"
+            widget: "object"
+            fields:
+              - { label: "Etichetă secțiune", name: "label", widget: "string" }
+              - { label: "Titlu secțiune", name: "title", widget: "text" }
+              - { label: "Descriere", name: "description", widget: "text" }
+              - label: "Imagini"
+                name: "images"
+                widget: "list"
+                fields:
+                  - { label: "Imagine", name: "src", widget: "image" }
+                  - { label: "Text alternativ", name: "alt", widget: "string" }
+
+          - label: "Desene Tehnice (Tab-uri)"
+            name: "tabs"
+            widget: "object"
+            fields:
+              - { label: "Etichetă secțiune", name: "label", widget: "string" }
+              - { label: "Titlu secțiune", name: "title", widget: "text" }
+              - label: "Tab-uri"
+                name: "tabs"
+                widget: "list"
+                fields:
+                  - { label: "Etichetă tab", name: "label", widget: "string" }
+                  - { label: "Imagine", name: "image", widget: "image" }
+              - { label: "Notă tehnică (opțional)", name: "note", widget: "text", required: false }
+
+          - label: "Sustenabilitate"
+            name: "sustainability"
+            widget: "object"
+            fields:
+              - { label: "Etichetă secțiune", name: "label", widget: "string" }
+              - { label: "Titlu secțiune", name: "title", widget: "text" }
+              - label: "Carduri"
+                name: "cards"
+                widget: "list"
+                fields:
+                  - { label: "Iconiță", name: "icon", widget: "string", hint: "&#9725; &#9788; &#9726; etc." }
+                  - { label: "Titlu card", name: "title", widget: "string" }
+                  - { label: "Text card", name: "text", widget: "text" }
+
+          - label: "CTA Final"
+            name: "cta"
+            widget: "object"
+            fields:
+              - { label: "Citat final (opțional)", name: "quote", widget: "text", required: false }
+              - { label: "Titlu CTA", name: "title", widget: "string" }
+              - { label: "Descriere CTA", name: "description", widget: "text" }
+              - { label: "Text buton principal", name: "primary_label", widget: "string" }
+              - { label: "Link buton principal", name: "primary_url", widget: "string" }
+              - { label: "Text buton secundar", name: "secondary_label", widget: "string" }
+              - { label: "Link buton secundar", name: "secondary_url", widget: "string" }
+
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Titlu", name: "title", widget: "string" }
+      - { label: "Descriere SEO", name: "description", widget: "text" }
+      - { label: "Autor", name: "author", widget: "string", default: "CONSARHOUSE" }
+      - { label: "Data", name: "date", widget: "date" }
+      - { label: "Imagine Featured", name: "image", widget: "image", required: false }
+      - { label: "Conținut", name: "body", widget: "markdown" }

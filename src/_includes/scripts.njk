@@ -1,0 +1,41 @@
+{% macro render() %}
+<script>
+    const cursor = document.getElementById('cursor-follower');
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    const hoverSelectors = '.service-card, .gallery-item, .sust-card, .tab-btn, .tab-panel, .btn-primary, .btn-secondary, .tech-card, .portfolio-item, .pillar, .blog-card, .slideshow-controls, .slideshow-dot';
+    document.querySelectorAll(hoverSelectors).forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.width = '80px';
+            cursor.style.height = '80px';
+            cursor.style.background = 'rgba(233, 228, 223, 0.08)';
+            cursor.innerHTML = '<span style="font-size: 10px; font-weight: 800; color: #E9E4DF;">VIEW</span>';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.width = '40px';
+            cursor.style.height = '40px';
+            cursor.style.background = 'transparent';
+            cursor.innerHTML = '';
+        });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.sust-card, .gallery-item, .portfolio-item, .pillar, .blog-card, .stat-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 1s cubic-bezier(0.16, 1, 0.3, 1)';
+        observer.observe(el);
+    });
+</script>
+{% endmacro %}
