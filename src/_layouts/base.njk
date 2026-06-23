@@ -125,8 +125,20 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 8rem 3rem 4rem; }
 
+        .nav-mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+
         @media (max-width: 768px) {
             .nav-links { display: none; }
+            .nav-mobile-toggle { display: block; }
             nav { padding: 1.5rem; }
             .container { padding: 6rem 1.5rem 3rem; }
             .section-divider { margin: 4rem 0; }
@@ -258,6 +270,7 @@
 
     <nav>
         <a href="/" class="logo" style="color: var(--accent); text-decoration: none;">CONSARHOUSE</a>
+        <button class="nav-mobile-toggle" onclick="toggleDropdown()" aria-label="Meniu">☰</button>
         <div class="nav-links">
             <a href="/" {% if nav_active == 'home' %}class="active"{% endif %}>Acasă</a>
             <button class="nav-dropdown-trigger" onclick="toggleDropdown()" aria-expanded="false">Servicii <span class="nav-chevron">▾</span></button>
