@@ -253,8 +253,11 @@
             .container { padding: 6rem 1.5rem 3rem; }
             .section-divider { margin: 4rem 0; }
             .footer-grid { grid-template-columns: 1fr; }
-            .footer-col { border-right: none; border-bottom: 1px solid var(--border); }
+            .footer-col { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 1.5rem; }
             .footer-col:last-child { border-bottom: none; }
+            .footer-map { min-height: 180px; }
+            .footer-map iframe { height: 180px; }
+            .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
         }
 
         .nav-dropdown-trigger {
@@ -437,6 +440,12 @@
             font-size: 0.65rem;
             color: var(--text-dim);
         }
+        .footer-bottom a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-bottom a:hover { color: var(--accent); }
 
     /* pagină-specific */
     </style>
