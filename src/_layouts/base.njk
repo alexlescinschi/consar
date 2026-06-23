@@ -165,6 +165,8 @@
         {{ content | safe }}
     </main>
 
+    {% block after_main %}{% endblock %}
+
     <script>
         if (window.location.hash && window.location.hash.indexOf('invite_token') !== -1) {
             window.location.replace('/admin/' + window.location.hash);
