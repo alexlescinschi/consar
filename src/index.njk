@@ -172,23 +172,6 @@ nav_active: home
 }
 </style>
 
-<script>
-document.querySelectorAll('.service-card').forEach(function(card) {
-    card.addEventListener('mouseenter', function() {
-        cursor.style.width = '80px';
-        cursor.style.height = '80px';
-        cursor.style.background = 'rgba(233, 228, 223, 0.08)';
-        cursor.innerHTML = '<span style="font-size: 10px; font-weight: 800; color: white;">VIEW</span>';
-    });
-    card.addEventListener('mouseleave', function() {
-        cursor.style.width = '40px';
-        cursor.style.height = '40px';
-        cursor.style.background = 'transparent';
-        cursor.innerHTML = '';
-    });
-});
-</script>
-
 <div class="hero-matrix">
     <div class="matrix-cell title-cell">
         <div class="metadata">
@@ -275,3 +258,20 @@ document.querySelectorAll('.service-card').forEach(function(card) {
         <div style="font-weight: 700; border-bottom: 2px solid var(--bg); display: inline-block; padding-bottom: 0.5rem;">hello@consarhouse.ro</div>
     </div>
 </div>
+
+<script>
+document.querySelectorAll('.service-card').forEach(function(card) {
+    card.addEventListener('mouseenter', function() {
+        cursor.style.width = '80px';
+        cursor.style.height = '80px';
+        cursor.style.background = 'rgba(233, 228, 223, 0.08)';
+        cursor.innerHTML = '<span style="font-size: 10px; font-weight: 800; color: white;">VIEW</span>';
+    });
+    card.addEventListener('mouseleave', function() {
+        cursor.style.width = '40px';
+        cursor.style.height = '40px';
+        cursor.style.background = 'transparent';
+        cursor.innerHTML = '';
+    });
+});
+</script>

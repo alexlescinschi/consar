@@ -284,13 +284,6 @@ nav_active: projects
 }
 </style>
 
-<script>
-function switchTab(index) {
-    document.querySelectorAll('.tab-btn').forEach(function(b, i) { b.classList.toggle('active', i === index); });
-    document.querySelectorAll('.tab-panel').forEach(function(p, i) { p.classList.toggle('active', i === index); });
-}
-</script>
-
 <div class="container">
     {% for block in blocks %}
         {% if block.type === 'hero' %}
@@ -430,3 +423,10 @@ function switchTab(index) {
 
     {% endfor %}
 </div>
+
+<script>
+function switchTab(index) {
+    document.querySelectorAll('.tab-btn').forEach(function(b, i) { b.classList.toggle('active', i === index); });
+    document.querySelectorAll('.tab-panel').forEach(function(p, i) { p.classList.toggle('active', i === index); });
+}
+</script>

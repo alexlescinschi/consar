@@ -486,129 +486,6 @@ nav_active: services
 }
 </style>
 
-<script>
-var currentSlide = 0;
-var totalSlides = document.querySelectorAll('.slideshow-slide').length;
-var track = document.getElementById('slideshow-track');
-var dotsContainer = document.getElementById('slideshow-dots');
-var counter = document.getElementById('slideshow-counter');
-var autoPlayInterval;
-
-for (var i = 0; i < totalSlides; i++) {
-    var dot = document.createElement('button');
-    dot.className = 'slideshow-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
-    dot.addEventListener('click', (function(idx) { return function() { goToSlide(idx); }; })(i));
-    dotsContainer.appendChild(dot);
-}
-
-function goToSlide(index) {
-    currentSlide = index;
-    track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
-    document.querySelectorAll('.slideshow-slide').forEach(function(s, i) {
-        s.classList.toggle('active-slide', i === currentSlide);
-    });
-    document.querySelectorAll('.slideshow-dot').forEach(function(d, i) {
-        d.classList.toggle('active', i === currentSlide);
-    });
-    counter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
-}
-
-function nextSlide() { goToSlide((currentSlide + 1) % totalSlides); resetAutoPlay(); }
-function prevSlide() { goToSlide((currentSlide - 1 + totalSlides) % totalSlides); resetAutoPlay(); }
-
-function resetAutoPlay() {
-    clearInterval(autoPlayInterval);
-    autoPlayInterval = setInterval(function() { goToSlide((currentSlide + 1) % totalSlides); }, 5000);
-}
-
-autoPlayInterval = setInterval(function() { goToSlide((currentSlide + 1) % totalSlides); }, 5000);
-
-function openModal() {
-    document.getElementById('modal-overlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
-    goToStep(1);
-}
-function closeModal() {
-    document.getElementById('modal-overlay').classList.remove('active');
-    document.body.style.overflow = '';
-}
-document.getElementById('modal-overlay').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-});
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
-});
-
-function goToStep(n) {
-    document.querySelectorAll('.modal-step').forEach(function(s) { s.classList.remove('active'); });
-    var step = document.querySelector('.modal-step[data-step="' + n + '"]');
-    if (step) step.classList.add('active');
-}
-
-function onCatChange(radio) {
-    var step2r = document.getElementById('step2-residential');
-    var step2g = document.getElementById('step2-generic');
-    if (radio.value === 'Construcții rezidențiale') {
-        step2r.style.display = 'block';
-        step2g.style.display = 'none';
-    } else {
-        step2r.style.display = 'none';
-        step2g.style.display = 'block';
-    }
-}
-
-function toggleHouseFields() {
-    document.querySelectorAll('.house-type').forEach(function(cb) {
-        var fields = document.querySelector('.house-fields[data-type="' + cb.dataset.type + '"]');
-        if (fields) fields.style.display = cb.checked ? 'grid' : 'none';
-    });
-}
-
-function submitForm() {
-    var nume = document.getElementById('form-nume').value.trim();
-    var email = document.getElementById('form-email').value.trim();
-    var telefon = document.getElementById('form-telefon').value.trim();
-    if (!nume || !email || !telefon) {
-        alert('Te rugăm să completezi toate câmpurile obligatorii (*).');
-        return;
-    }
-    var cat = document.querySelector('input[name="categorie"]:checked');
-    if (!cat) {
-        alert('Te rugăm să selectezi o categorie de proiect (Pasul 1).');
-        goToStep(1);
-        return;
-    }
-    alert('✓ Solicitarea a fost trimisă cu succes!\n\nCategorie: ' + cat.value + '\nNume: ' + nume + '\nEmail: ' + email + '\n\nTe vom contacta în maxim 48 de ore.');
-    closeModal();
-}
-
-function animateCounter(el, target, duration) {
-    var start = 0;
-    var step = function(t) {
-        start = Math.floor(t / duration * target);
-        el.textContent = start >= target ? target : start;
-        if (start < target) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-}
-
-var counterObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-            animateCounter(document.getElementById('counter-projects'), 178, 2000);
-            animateCounter(document.getElementById('counter-clients'), 143, 2000);
-            animateCounter(document.getElementById('counter-years'), 20, 2000);
-            animateCounter(document.getElementById('counter-area'), 32600, 2000);
-            counterObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
-
-var statsRow = document.querySelector('.stats-row');
-if (statsRow) counterObserver.observe(statsRow);
-</script>
-
 <div class="container" style="padding-top: 0;">
 
     <!-- I. INTRO -->
@@ -995,3 +872,126 @@ if (statsRow) counterObserver.observe(statsRow);
     </div>
 </div>
 {% endblock %}
+
+<script>
+var currentSlide = 0;
+var totalSlides = document.querySelectorAll('.slideshow-slide').length;
+var track = document.getElementById('slideshow-track');
+var dotsContainer = document.getElementById('slideshow-dots');
+var counter = document.getElementById('slideshow-counter');
+var autoPlayInterval;
+
+for (var i = 0; i < totalSlides; i++) {
+    var dot = document.createElement('button');
+    dot.className = 'slideshow-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+    dot.addEventListener('click', (function(idx) { return function() { goToSlide(idx); }; })(i));
+    dotsContainer.appendChild(dot);
+}
+
+function goToSlide(index) {
+    currentSlide = index;
+    track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    document.querySelectorAll('.slideshow-slide').forEach(function(s, i) {
+        s.classList.toggle('active-slide', i === currentSlide);
+    });
+    document.querySelectorAll('.slideshow-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === currentSlide);
+    });
+    counter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+}
+
+function nextSlide() { goToSlide((currentSlide + 1) % totalSlides); resetAutoPlay(); }
+function prevSlide() { goToSlide((currentSlide - 1 + totalSlides) % totalSlides); resetAutoPlay(); }
+
+function resetAutoPlay() {
+    clearInterval(autoPlayInterval);
+    autoPlayInterval = setInterval(function() { goToSlide((currentSlide + 1) % totalSlides); }, 5000);
+}
+
+autoPlayInterval = setInterval(function() { goToSlide((currentSlide + 1) % totalSlides); }, 5000);
+
+function openModal() {
+    document.getElementById('modal-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    goToStep(1);
+}
+function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+}
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+});
+
+function goToStep(n) {
+    document.querySelectorAll('.modal-step').forEach(function(s) { s.classList.remove('active'); });
+    var step = document.querySelector('.modal-step[data-step="' + n + '"]');
+    if (step) step.classList.add('active');
+}
+
+function onCatChange(radio) {
+    var step2r = document.getElementById('step2-residential');
+    var step2g = document.getElementById('step2-generic');
+    if (radio.value === 'Construcții rezidențiale') {
+        step2r.style.display = 'block';
+        step2g.style.display = 'none';
+    } else {
+        step2r.style.display = 'none';
+        step2g.style.display = 'block';
+    }
+}
+
+function toggleHouseFields() {
+    document.querySelectorAll('.house-type').forEach(function(cb) {
+        var fields = document.querySelector('.house-fields[data-type="' + cb.dataset.type + '"]');
+        if (fields) fields.style.display = cb.checked ? 'grid' : 'none';
+    });
+}
+
+function submitForm() {
+    var nume = document.getElementById('form-nume').value.trim();
+    var email = document.getElementById('form-email').value.trim();
+    var telefon = document.getElementById('form-telefon').value.trim();
+    if (!nume || !email || !telefon) {
+        alert('Te rugăm să completezi toate câmpurile obligatorii (*).');
+        return;
+    }
+    var cat = document.querySelector('input[name="categorie"]:checked');
+    if (!cat) {
+        alert('Te rugăm să selectezi o categorie de proiect (Pasul 1).');
+        goToStep(1);
+        return;
+    }
+    alert('✓ Solicitarea a fost trimisă cu succes!\n\nCategorie: ' + cat.value + '\nNume: ' + nume + '\nEmail: ' + email + '\n\nTe vom contacta în maxim 48 de ore.');
+    closeModal();
+}
+
+function animateCounter(el, target, duration) {
+    var start = 0;
+    var step = function(t) {
+        start = Math.floor(t / duration * target);
+        el.textContent = start >= target ? target : start;
+        if (start < target) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+}
+
+var counterObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+            animateCounter(document.getElementById('counter-projects'), 178, 2000);
+            animateCounter(document.getElementById('counter-clients'), 143, 2000);
+            animateCounter(document.getElementById('counter-years'), 20, 2000);
+            animateCounter(document.getElementById('counter-area'), 32600, 2000);
+            counterObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+var statsRow = document.querySelector('.stats-row');
+if (statsRow) counterObserver.observe(statsRow);
+</script>
