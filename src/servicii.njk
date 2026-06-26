@@ -120,11 +120,9 @@ permalink: /arhitectura/
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) contrast(1.1) brightness(0.5);
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .portfolio-item:hover img {
-    filter: grayscale(0%) contrast(1) brightness(0.85);
     transform: scale(1.08);
 }
 .portfolio-overlay {
@@ -190,75 +188,6 @@ permalink: /arhitectura/
 }
 
 /* STATS */
-.stats-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    border: 1px solid var(--border);
-}
-.stat-item {
-    padding: 3rem 2rem;
-    text-align: center;
-    border-right: 1px solid var(--border);
-}
-.stat-item:last-child { border-right: none; }
-.stat-num {
-    font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-    line-height: 1;
-}
-.stat-label {
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--text-dim);
-}
-
-/* PROJECTS TABLE */
-.projects-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid var(--border);
-}
-.projects-table th {
-    text-align: left;
-    padding: 1.5rem;
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--text-dim);
-    font-weight: 600;
-    border-bottom: 1px solid var(--border);
-    border-right: 1px solid var(--border);
-}
-.projects-table th:last-child { border-right: none; }
-.projects-table td {
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--border);
-    border-right: 1px solid var(--border);
-    font-size: 0.8rem;
-    transition: var(--transition);
-}
-.projects-table td:last-child { border-right: none; }
-.projects-table tbody tr:last-child td { border-bottom: none; }
-.projects-table tbody tr:hover td { background: var(--surface); }
-.proj-name {
-    font-family: var(--font-serif);
-    font-size: 1.1rem;
-}
-.proj-status {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    padding: 0.3rem 0.8rem;
-    border: 1px solid var(--border);
-    display: inline-block;
-}
-.proj-status.done { border-color: rgba(233, 228, 223, 0.3); }
-.proj-status.ongoing { border-color: rgba(233, 228, 223, 0.15); color: var(--text-dim); }
-
 /* CTA */
 .cta-block {
     text-align: left;
@@ -616,11 +545,6 @@ permalink: /arhitectura/
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) contrast(1.1) brightness(0.35);
-    transition: filter 2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.slideshow-slide.active-slide img {
-    filter: grayscale(100%) contrast(1.1) brightness(0.45);
 }
 .slideshow-controls {
     position: absolute;
@@ -692,12 +616,8 @@ permalink: /arhitectura/
     .portfolio-item:nth-child(2n) { border-right: 1px solid var(--border); }
     .portfolio-item:last-child { border-right: none; }
     .video-grid { grid-template-columns: 1fr; }
-    .stats-row { grid-template-columns: 1fr 1fr; }
-    .stat-item:nth-child(2) { border-right: none; }
     .modal { padding: 2rem; width: 95%; }
     .modal .contact-row { grid-template-columns: 1fr; }
-    .projects-table { font-size: 0.7rem; }
-    .projects-table th, .projects-table td { padding: 1rem 0.5rem; }
     .slideshow { aspect-ratio: auto; }
     .slideshow-caption { padding: 1.5rem; }
     .slideshow-caption h4 { font-size: 1.2rem; }
@@ -853,86 +773,6 @@ permalink: /arhitectura/
                 <h4>Hotel Boutique</h4>
                 <span>Constanța, 2023</span>
             </div>
-        </div>
-    </div>
-
-    <hr class="section-divider">
-
-    <!-- IV. PROIECTE ÎN LUCRU -->
-    <span class="section-label">În Desfășurare</span>
-    <h2 class="section-title">Proiecte Active</h2>
-    <p class="section-sub">O parte din proiectele la care lucrăm în prezent, în diferite faze de proiectare și execuție.</p>
-
-    <div style="overflow-x: auto; margin-top: 2rem;">
-        <table class="projects-table">
-            <thead>
-                <tr>
-                    <th>Proiect</th>
-                    <th>Locație</th>
-                    <th>Tip</th>
-                    <th>Suprafață</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span class="proj-name">Reședința Avantgarde</span></td>
-                    <td>București</td>
-                    <td>Rezidențial</td>
-                    <td>480 m²</td>
-                    <td><span class="proj-status ongoing">În Proiectare</span></td>
-                </tr>
-                <tr>
-                    <td><span class="proj-name">Turnul Metropolitan</span></td>
-                    <td>Cluj-Napoca</td>
-                    <td>Birouri</td>
-                    <td>2.200 m²</td>
-                    <td><span class="proj-status ongoing">Avizare</span></td>
-                </tr>
-                <tr>
-                    <td><span class="proj-name">Campus Universitar Vest</span></td>
-                    <td>Timișoara</td>
-                    <td>Instituțional</td>
-                    <td>5.600 m²</td>
-                    <td><span class="proj-status done">Autorizat</span></td>
-                </tr>
-                <tr>
-                    <td><span class="proj-name">Ansamblul Rezidențial Nord</span></td>
-                    <td>Iași</td>
-                    <td>Rezidențial</td>
-                    <td>1.800 m²</td>
-                    <td><span class="proj-status ongoing">În Proiectare</span></td>
-                </tr>
-                <tr>
-                    <td><span class="proj-name">Centru Wellness & Spa</span></td>
-                    <td>Sinaia</td>
-                    <td>Turism</td>
-                    <td>950 m²</td>
-                    <td><span class="proj-status done">Finalizat</span></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <hr class="section-divider">
-
-    <!-- V. STATISTICI -->
-    <div class="stats-row">
-        <div class="stat-item">
-            <div class="stat-num" id="counter-projects">0</div>
-            <div class="stat-label">Proiecte Finalizate</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-num" id="counter-clients">0</div>
-            <div class="stat-label">Clienți</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-num" id="counter-years">0</div>
-            <div class="stat-label">Ani Experiență</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-num" id="counter-area">0</div>
-            <div class="stat-label">m² Proiectați</div>
         </div>
     </div>
 
@@ -1208,31 +1048,6 @@ function submitForm() {
     alert('✓ Solicitarea a fost trimisă cu succes!\n\nCategorie: ' + cat.value + '\nNume: ' + nume + '\nEmail: ' + email + '\n\nTe vom contacta în maxim 48 de ore.');
     closeModal();
 }
-
-function animateCounter(el, target, duration) {
-    var start = 0;
-    var step = function(t) {
-        start = Math.floor(t / duration * target);
-        el.textContent = start >= target ? target : start;
-        if (start < target) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-}
-
-var counterObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-            animateCounter(document.getElementById('counter-projects'), 178, 2000);
-            animateCounter(document.getElementById('counter-clients'), 143, 2000);
-            animateCounter(document.getElementById('counter-years'), 20, 2000);
-            animateCounter(document.getElementById('counter-area'), 32600, 2000);
-            counterObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
-
-var statsRow = document.querySelector('.stats-row');
-if (statsRow) counterObserver.observe(statsRow);
 
 var currentSlide = 0;
 var totalSlides = document.querySelectorAll('.slideshow-slide').length;

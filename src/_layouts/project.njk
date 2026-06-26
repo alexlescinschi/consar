@@ -16,7 +16,6 @@ nav_active: projects
 .hero-bg img {
     width: 100%; height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) contrast(1.1) brightness(0.35);
 }
 .hero-overlay {
     position: absolute; inset: 0;
@@ -123,11 +122,9 @@ nav_active: projects
 .gallery-grid .gallery-item img {
     width: 100%; height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) contrast(1.1) brightness(0.35);
-    transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .gallery-grid .gallery-item:hover img {
-    filter: grayscale(60%) contrast(1) brightness(0.65);
     transform: scale(1.03);
 }
 
@@ -172,10 +169,7 @@ nav_active: projects
 .tab-panel img {
     width: 100%; height: auto;
     display: block;
-    filter: grayscale(100%) contrast(1.1) brightness(0.5);
-    transition: filter 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.tab-panel:hover img { filter: grayscale(60%) contrast(1) brightness(0.7); }
 .tab-note {
     margin-top: 1.5rem;
     font-size: 0.8rem;
