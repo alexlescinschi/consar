@@ -1,0 +1,990 @@
+---
+layout: base.njk
+title: Design Interior
+nav_active: services
+permalink: /interior-design/
+varianta_oferta: interior-design
+---
+
+<style>
+.container { max-width: 1200px; margin: 0 auto; padding: 8rem 3rem 4rem; }
+
+.section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 5rem 0;
+}
+
+.section-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.section-sub {
+    font-size: 1rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+
+.intro {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding: 6rem 3rem 5rem;
+}
+.intro .intro-content {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+}
+.intro h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+}
+.btn-cta {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 1.2rem 2.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--font-sans);
+    margin-top: 1rem;
+}
+.btn-cta:hover {
+    background: transparent;
+    color: var(--accent);
+    outline: 1px solid var(--accent);
+}
+
+/* SLIDESHOW HERO */
+.slideshow {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+.slideshow::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(61, 69, 77, 0.9) 0%, rgba(61, 69, 77, 0.6) 50%, rgba(61, 69, 77, 0.75) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+.slideshow-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slideshow-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.slideshow-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.slideshow-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+    background: none;
+    border: 1px solid rgba(233,228,223,0.2);
+    color: var(--accent);
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    opacity: 0;
+}
+.slideshow:hover .slideshow-controls { opacity: 1; }
+.slideshow-controls:hover {
+    background: rgba(233,228,223,0.1);
+    border-color: rgba(233,228,223,0.45);
+}
+.slideshow-prev { left: 2rem; }
+.slideshow-next { right: 2rem; }
+.slideshow-dots {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 3rem;
+    z-index: 4;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+}
+.slideshow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 1px solid rgba(233,228,223,0.3);
+    background: transparent;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0;
+}
+.slideshow-dot.active { background: var(--accent); border-color: var(--accent); }
+.slideshow-counter {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 3rem;
+    z-index: 4;
+    font-size: 0.65rem;
+    font-family: var(--font-sans);
+    opacity: 0.4;
+    letter-spacing: 0.2em;
+}
+
+/* SPLIT TEXT + IMAGINE */
+.split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+}
+.split-text .check-list { margin-bottom: 2rem; }
+.check-list {
+    list-style: none;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 2.1;
+    columns: 2;
+    column-gap: 2rem;
+}
+.check-list li::before { content: '— '; opacity: 0.4; }
+.split-img {
+    position: relative;
+    aspect-ratio: 6/7;
+    max-width: 480px;
+    justify-self: end;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+.split-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.split-img:hover img {
+    transform: scale(1.04);
+}
+
+/* GRID SERVICII DESIGN */
+.lucrari-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-top: 3rem;
+}
+.lucrare-card {
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+.lucrare-card:nth-child(2n) { border-right: none; }
+.lucrare-card:nth-last-child(-n+2) { border-bottom: none; }
+.lucrare-card:hover { background: var(--surface); }
+.lucrare-thumb {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+}
+.lucrare-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.05) brightness(0.55);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lucrare-card:hover .lucrare-thumb img {
+    filter: grayscale(0%) contrast(1) brightness(0.95);
+    transform: scale(1.06);
+}
+.lucrare-body { padding: 2rem; display: flex; flex-direction: column; flex-grow: 1; }
+.lucrare-num {
+    font-size: 0.7rem;
+    opacity: 0.35;
+    margin-bottom: 1.2rem;
+}
+.lucrare-body h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+    line-height: 1.25;
+}
+.lucrare-desc {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+}
+.lucrare-body ul {
+    list-style: none;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    line-height: 1.9;
+}
+.lucrare-body ul li::before { content: '— '; opacity: 0.4; }
+.lucrare-note {
+    margin-top: auto;
+    padding-top: 1.2rem;
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--text-dim);
+    opacity: 0.8;
+}
+
+/* BANNER CITAT PE IMAGINE */
+.banner {
+    position: relative;
+    min-height: 46vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-top: 5rem;
+}
+.banner > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.05) brightness(0.35);
+}
+.banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(61, 69, 77, 0.15), rgba(61, 69, 77, 0.55));
+    z-index: 1;
+}
+.banner-content {
+    position: relative;
+    z-index: 2;
+    padding: 4rem 2rem;
+    max-width: 800px;
+}
+.banner-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+/* PORTOFOLIU */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-top: 3rem;
+}
+.portfolio-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    cursor: pointer;
+}
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.1) brightness(0.5);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.portfolio-item:hover img {
+    filter: grayscale(0%) contrast(1) brightness(0.95);
+    transform: scale(1.08);
+}
+.portfolio-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 2rem;
+    background: linear-gradient(transparent, rgba(61, 69, 77, 0.9));
+    z-index: 2;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: var(--transition);
+}
+.portfolio-item:hover .portfolio-overlay {
+    transform: translateY(0);
+    opacity: 1;
+}
+.portfolio-overlay h4 {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+}
+.portfolio-overlay span {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.6;
+}
+
+/* PAȘI — CUM LUCRĂM */
+.pasi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-top: 3rem;
+}
+.pas-card {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    transition: var(--transition);
+}
+.pas-card:nth-child(3n) { border-right: none; }
+.pas-card:nth-last-child(-n+3) { border-bottom: none; }
+.pas-card:hover { background: var(--surface); }
+.pas-num {
+    font-size: 0.7rem;
+    opacity: 0.35;
+    margin-bottom: 1.5rem;
+}
+.pas-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-bottom: 0.7rem;
+}
+.pas-card p {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+}
+
+/* MOTIVE */
+.motive-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-top: 3rem;
+}
+.motiv-card {
+    padding: 2.5rem 1.5rem;
+    border-right: 1px solid var(--border);
+    transition: var(--transition);
+}
+.motiv-card:last-child { border-right: none; }
+.motiv-card:hover { background: var(--surface); }
+.motiv-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.6rem;
+}
+.motiv-card p {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    line-height: 1.65;
+}
+
+/* CITAT COSTURI */
+.quote-box {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 3.5rem 3rem;
+    text-align: center;
+    margin-top: 3rem;
+}
+.quote-box .q-main {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+    font-weight: 400;
+    line-height: 1.35;
+    margin-bottom: 1rem;
+}
+.quote-box .q-sub {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    max-width: 520px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+}
+
+/* STATISTICI */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 5rem 0;
+}
+.stat-item {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    transition: var(--transition);
+}
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: var(--surface); }
+.stat-num {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+.stat-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+}
+
+/* CTA FINAL */
+.cta-final {
+    text-align: center;
+    padding: 5rem 3rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+.cta-final h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+.cta-final p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+}
+
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 1024px) {
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .motive-grid { grid-template-columns: 1fr 1fr; }
+    .motiv-card { border-bottom: 1px solid var(--border); }
+    .motiv-card:nth-child(odd) { border-right: 1px solid var(--border); }
+    .motiv-card:nth-child(even) { border-right: none; }
+    .motiv-card:nth-last-child(-n+2) { border-bottom: none; }
+    .motive-grid .motiv-card:last-child { border-right: none; }
+}
+
+@media (max-width: 768px) {
+    .container { padding: 6rem 1.5rem 3rem; }
+    .intro { min-height: 70vh; padding: 5rem 1.5rem 3rem; }
+    .intro h1 { font-size: clamp(2rem, 7vw, 2.8rem); margin-bottom: 1rem; }
+    .section-title { font-size: clamp(1.8rem, 5vw, 2.5rem); }
+    .section-label { font-size: 0.6rem; }
+    .section-sub { font-size: 0.85rem; }
+    .split-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .split-img { justify-self: stretch; max-width: 100%; aspect-ratio: 16/10; }
+    .check-list { columns: 1; }
+    .lucrari-grid { grid-template-columns: 1fr; }
+    .lucrare-card { border-right: none; }
+    .lucrare-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+    .lucrare-card:last-child { border-bottom: none; }
+    .banner { min-height: 320px; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .slideshow-controls { opacity: 1; width: 36px; height: 36px; }
+    .slideshow-prev { left: 1rem; }
+    .slideshow-next { right: 1rem; }
+    .slideshow-dots { bottom: 1.5rem; right: 1.5rem; }
+    .slideshow-counter { bottom: 1.5rem; left: 1.5rem; }
+    .pasi-grid { grid-template-columns: 1fr; }
+    .pas-card { border-right: none; }
+    .pas-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--border); }
+    .pas-card:last-child { border-bottom: none; }
+    .motive-grid { grid-template-columns: 1fr; }
+    .motiv-card { border-right: none; border-bottom: 1px solid var(--border); }
+    .motiv-card:last-child { border-bottom: none; }
+    .quote-box { padding: 2.5rem 1.5rem; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .stat-item { padding: 2rem 1rem; }
+    .stat-item:nth-child(2) { border-right: none; }
+    .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+    .stat-num { font-size: 2.2rem; }
+    .cta-final { padding: 3rem 1.5rem; }
+}
+</style>
+
+<section class="intro">
+    <div class="slideshow" id="project-slideshow">
+        <div class="slideshow-track" id="slideshow-track">
+            {% for i in [1, 2, 3, 4, 5, 6] %}
+            <div class="slideshow-slide{% if i == 1 %} active-slide{% endif %}">
+                <img src="/images/interior-design/hero-0{{ i }}.jpg" alt="Design interior — proiect {{ i }}" loading="lazy"
+                     onerror="this.onerror=null;this.src='/images/interior-design/ph/hero-0{{ i }}.svg';">
+            </div>
+            {% endfor %}
+        </div>
+        <button class="slideshow-controls slideshow-prev" onclick="prevSlide()" aria-label="Slide anterior">&#8592;</button>
+        <button class="slideshow-controls slideshow-next" onclick="nextSlide()" aria-label="Slide următor">&#8594;</button>
+        <div class="slideshow-dots" id="slideshow-dots"></div>
+        <div class="slideshow-counter" id="slideshow-counter">1 / 6</div>
+    </div>
+    <div class="intro-content">
+        <span class="section-label">Servicii de Design</span>
+        <h1>Design<br>Interior</h1>
+        <p class="section-sub" style="font-size: 1.1rem;">Proiectăm interioare în care îți place să locuiești, să lucrezi și să îți primești oaspeții.</p>
+        <p class="section-sub" style="font-size: 0.9rem;">
+            De la concept și planuri de mobilare până la randări 3D fotorealistice și documentația completă de execuție — un proiect de design interior adaptat spațiului, stilului și bugetului tău.
+        </p>
+        <button class="btn-cta" onclick="openModal()">Solicită o Ofertă</button>
+    </div>
+</section>
+
+<div class="container">
+
+    <hr class="section-divider">
+
+    <!-- I. DOMENII DE APLICARE -->
+    <span class="section-label">Domenii de Aplicare</span>
+    <h2 class="section-title">Design interior<br>pentru orice spațiu</h2>
+    <p class="section-sub">Proiectăm amenajări interioare pentru diverse tipuri de spații, de la locuințe până la spații comerciale.</p>
+
+    <div class="split-grid">
+        <div class="split-text">
+            <ul class="check-list">
+                <li>Apartamente</li>
+                <li>Case</li>
+                <li>Birouri</li>
+                <li>Spații comerciale</li>
+                <li>Spații noi</li>
+                <li>Spații existente care necesită renovare</li>
+            </ul>
+            <p class="section-sub" style="margin-bottom: 0;">Analizăm spațiul și nevoile tale, apoi dezvoltăm un proiect complet — de la concept la documentația de execuție.</p>
+        </div>
+        <div class="split-img">
+            <img src="/images/interior-design/spatii-01.jpg" alt="Interior proiectat de CONSARHOUSE" loading="lazy"
+                 onerror="this.onerror=null;this.src='/images/interior-design/ph/spatii-01.svg';">
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- II. CE SERVICII OFERIM -->
+    <span class="section-label">Ce Servicii Oferim</span>
+    <h2 class="section-title">Zece servicii.<br>Un proiect complet.</h2>
+    <p class="section-sub">Preluăm proiectul integral sau doar serviciile de care ai nevoie — de la conceptul inițial până la alegerea finisajelor.</p>
+
+    <div class="lucrari-grid">
+        <div class="lucrare-card">
+            <div class="lucrare-thumb"><img src="/images/interior-design/thumb-01.jpg" alt="Concept de design interior" loading="lazy" onerror="this.onerror=null;this.src='/images/interior-design/ph/thumb-01.svg';"></div>
+            <div class="lucrare-body">
+                <div class="lucrare-num">[01]</div>
+                <h3>Concept de design interior</h3>
+                <p class="lucrare-desc">Stabilim direcția vizuală a proiectului:</p>
+                <ul>
+                    <li>Moodboard și planșe de concept</li>
+                    <li>Stil și paletă cromatică</li>
+                    <li>Zonare funcțională</li>
+                    <li>Plan de mobilare</li>
+                </ul>
+            </div>
+        </div>
+        <div class="lucrare-card">
+            <div class="lucrare-thumb"><img src="/images/interior-design/thumb-02.jpg" alt="Amenajare apartamente" loading="lazy" onerror="this.onerror=null;this.src='/images/interior-design/ph/thumb-02.svg';"></div>
+            <div class="lucrare-body">
+                <div class="lucrare-num">[02]</div>
+                <h3>Amenajare apartamente</h3>
+                <p class="lucrare-desc">Proiecte de amenajare pentru apartamente de orice tip:</p>
+                <ul>
+                    <li>Studio și garsoniere</li>
+                    <li>Apartamente cu 2–4 camere</li>
+                    <li>Penthouses și duplexuri</li>
+                    <li>Soluții pentru spații mici</li>
+                </ul>
+                <p class="lucrare-note">Folosim fiecare metru pătrat în mod inteligent, fără compromisuri la confort.</p>
+            </div>
+        </div>
+        <div class="lucrare-card">
+            <div class="lucrare-thumb"><img src="/images/interior-design/thumb-03.jpg" alt="Design interior pentru case" loading="lazy" onerror="this.onerror=null;this.src='/images/interior-design/ph/thumb-03.svg';"></div>
+            <div class="lucrare-body">
+                <div class="lucrare-num">[03]</div>
+                <h3>Design interior pentru case</h3>
+                <p class="lucrare-desc">Amenajări complete pentru case individuale:</p>
+                <ul>
+                    <li>Proiect pe niveluri</li>
+                    <li>Zonare zi / noapte</li>
+                    <li>Hol, living, bucătărie, dormitoare</li>
+                    <li>Spații tehnice și depozitare</li>
+                </ul>
+            </div>
+        </div>
+        <div class="lucrare-card">
+            <div class="lucrare-thumb"><img src="/images/interior-design/thumb-04.jpg" alt="Design pentru bucătării" loading="lazy" onerror="this.onerror=null;this.src='/images/interior-design/ph/thumb-04.svg';"></div>
+            <div class="lucrare-body">
+                <div class="lucrare-num">[04]</div>
+                <h3>Design pentru bucătării</h3>
+                <p class="lucrare-desc">Bucătării funcționale, gândite pentru utilizarea zilnică:</p>
+                <ul>
+                    <li>Triunghiul de lucru</li>
+                    <li>Mobilier la comandă</li>
+                    <li>Integrarea electrocasnicelor</li>
+                    <li>Iluminat funcțional și decorativ</li>
+                </ul>
+            </div>
+        </div>
+        <div class="lucrare-card">
+            <div class="lucrare-thumb"><img src="/images/interior-design/thumb-05.jpg" alt="Design băi" loading="lazy" onerror="this.onerror=null;this.src='/images/interior-design/ph/thumb-05.svg';"></div>
+            <div class="lucrare-body">
+                <div class="lucrare-num">[05]</div>
+                <h3>Design băi</h3>
+                <p class="lucrare-desc">Proiectăm băi moderne și ușor de întreținut:</p>
+                <ul>
+                    <li>Planificarea instalațiilor</li>
+                    <li>Alegerea finisajelor și a obiectelor sanitare</li>
+                    <li>Iluminat și ventilație</li>
+                    <li>Depozitare inteligentă</li>
+                </ul>
+            </div>
+        </div>
+        <div class="lucrare-card">
+            <div class="lucrare-thumb"><img src="/images/interior-design/thumb-06.jpg" alt="Design living și dormitoare" loading="lazy" onerror="this.onerror=null;this.src='/images/interior-design/ph/thumb-06.svg';"></div>
+            <div class="lucrare-body">
+                <div class="lucrare-num">[06]</div>
+                <h3>Design living și dormitoare</h3>
+                <p class="lucrare-desc">Spațiile în care petreci cel mai mult timp:</p>
+                <ul>
+                    <li>Mobilier și amenajare</li>
+                    <li>Scenarii de iluminat</li>
+                    <li>Materiale și textile</li>
+                    <li>Decor și accesorii</li>
+                </ul>
+            </div>
+        </div>
+        <div class="lucrare-card">
+            <div class="lucrare-thumb"><img src="/images/interior-design/thumb-07.jpg" alt="Vizualizare 3D fotorealistă" loading="lazy" onerror="this.onerror=null;this.src='/images/interior-design/ph/thumb-07.svg';"></div>
+            <div class="lucrare-body">
+                <div class="lucrare-num">[07]</div>
+                <h3>Vizualizare 3D fotorealistă</h3>
+                <p class="lucrare-desc">Vezi rezultatul final înainte de a începe lucrările:</p>
+                <ul>
+                    <li>Randări pentru fiecare cameră</li>
+                    <li>Materiale și lumini realiste</li>
+                    <li>Mai multe unghiuri de vizualizare</li>
+                    <li>Revizii până la aprobare</li>
+                </ul>
+                <p class="lucrare-note">Randările te ajută să iei decizii sigure privind materialele și mobilierul.</p>
+            </div>
+        </div>
+        <div class="lucrare-card">
+            <div class="lucrare-thumb"><img src="/images/interior-design/thumb-08.jpg" alt="Planuri și documentație pentru execuție" loading="lazy" onerror="this.onerror=null;this.src='/images/interior-design/ph/thumb-08.svg';"></div>
+            <div class="lucrare-body">
+                <div class="lucrare-num">[08]</div>
+                <h3>Planuri și documentație pentru execuție</h3>
+                <p class="lucrare-desc">Documentația completă pentru echipele de execuție:</p>
+                <ul>
+                    <li>Planuri de demolare și compartimentare</li>
+                    <li>Planuri de mobilare și mobilier</li>
+                    <li>Trasee electrice și sanitare</li>
+                    <li>Planuri de tavan și iluminat</li>
+                    <li>Desene tehnice pentru finisaje</li>
+                </ul>
+            </div>
+        </div>
+        <div class="lucrare-card">
+            <div class="lucrare-thumb"><img src="/images/interior-design/thumb-09.jpg" alt="Alegerea materialelor și finisajelor" loading="lazy" onerror="this.onerror=null;this.src='/images/interior-design/ph/thumb-09.svg';"></div>
+            <div class="lucrare-body">
+                <div class="lucrare-num">[09]</div>
+                <h3>Alegerea materialelor și finisajelor</h3>
+                <p class="lucrare-desc">Te ajutăm să alegi corect și la timp:</p>
+                <ul>
+                    <li>Listă de materiale și finisaje</li>
+                    <li>Mostre și combinații</li>
+                    <li>Recomandări de furnizori</li>
+                    <li>Alternativa potrivită bugetului</li>
+                </ul>
+            </div>
+        </div>
+        <div class="lucrare-card">
+            <div class="lucrare-thumb"><img src="/images/interior-design/thumb-10.jpg" alt="Design interior + execuție" loading="lazy" onerror="this.onerror=null;this.src='/images/interior-design/ph/thumb-10.svg';"></div>
+            <div class="lucrare-body">
+                <div class="lucrare-num">[10]</div>
+                <h3>Design interior + execuție</h3>
+                <p class="lucrare-desc">Proiectăm și executăm — un singur partener:</p>
+                <ul>
+                    <li>Proiect de design complet</li>
+                    <li>Coordonarea echipelor de execuție</li>
+                    <li>Respectarea proiectului în detalii</li>
+                    <li>Predare la cheie</li>
+                </ul>
+                <p class="lucrare-note">Când proiectul și execuția aparțin aceleiași echipe, rezultatul corespunde întocmai randărilor.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner citat: Randări 3D -->
+    <div class="banner">
+        <img src="/images/interior-design/banner-concept.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/interior-design/ph/banner-concept.svg';">
+        <div class="banner-content">
+            <span class="section-label" style="color: var(--accent); opacity: 0.6;">Vizualizări 3D</span>
+            <p class="banner-quote">„Vezi cum va arăta casa ta<br>înainte de a începe lucrările."</p>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- III. PORTOFOLIU -->
+    <span class="section-label">Portofoliu</span>
+    <h2 class="section-title">Proiecte de Design</h2>
+    <p class="section-sub">O selecție din interioarele pe care le-am proiectat.</p>
+
+    <div class="portfolio-grid">
+        {% set proiecte = [
+            { f: '01', t: 'Apartament — Design Complet', s: 'Chișinău, 2024' },
+            { f: '02', t: 'Casă — Amenajare Integrală', s: 'Orhei, 2024' },
+            { f: '03', t: 'Baie — Proiect Modern', s: 'Chișinău, 2023' },
+            { f: '04', t: 'Bucătărie — Design La Comandă', s: 'Bălți, 2024' },
+            { f: '05', t: 'Birou — Spațiu de Lucru', s: 'Chișinău, 2023' },
+            { f: '06', t: 'Spațiu Comercial — Concept', s: 'Chișinău, 2025' }
+        ] %}
+        {% for p in proiecte %}
+        <div class="portfolio-item">
+            <img src="/images/interior-design/lucrare-{{ p.f }}.jpg" alt="{{ p.t }}" loading="lazy"
+                 onerror="this.onerror=null;this.src='/images/interior-design/ph/lucrare-{{ p.f }}.svg';">
+            <div class="portfolio-overlay">
+                <h4>{{ p.t }}</h4>
+                <span>{{ p.s }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- IV. CUM LUCRĂM -->
+    <span class="section-label">Proces</span>
+    <h2 class="section-title">Cum lucrăm</h2>
+    <p class="section-sub">Șase pași clari, de la prima discuție până la proiectul final.</p>
+
+    <div class="pasi-grid">
+        <div class="pas-card">
+            <div class="pas-num">[01]</div>
+            <h3>Discutăm proiectul</h3>
+            <p>Analizăm spațiul, nevoile și stilul preferat.</p>
+        </div>
+        <div class="pas-card">
+            <div class="pas-num">[02]</div>
+            <h3>Dezvoltăm conceptul</h3>
+            <p>Moodboard, zonare și plan de mobilare.</p>
+        </div>
+        <div class="pas-card">
+            <div class="pas-num">[03]</div>
+            <h3>Randări 3D</h3>
+            <p>Vezi fiecare cameră fotorealist, înainte de execuție.</p>
+        </div>
+        <div class="pas-card">
+            <div class="pas-num">[04]</div>
+            <h3>Documentație de execuție</h3>
+            <p>Planuri tehnice complete pentru echipe.</p>
+        </div>
+        <div class="pas-card">
+            <div class="pas-num">[05]</div>
+            <h3>Alegem materialele</h3>
+            <p>Liste de materiale, mostre și furnizori recomandați.</p>
+        </div>
+        <div class="pas-card">
+            <div class="pas-num">[06]</div>
+            <h3>Coordonăm execuția</h3>
+            <p>Ne asigurăm că rezultatul corespunde proiectului.</p>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- V. DE CE NOI -->
+    <span class="section-label">Avantaje</span>
+    <h2 class="section-title">De ce să alegi serviciile noastre</h2>
+
+    <div class="motive-grid">
+        <div class="motiv-card">
+            <h3>Proiect complet</h3>
+            <p>De la concept la documentația de execuție, într-un singur proiect.</p>
+        </div>
+        <div class="motiv-card">
+            <h3>Randări realiste</h3>
+            <p>Vezi exact cum va arăta interiorul înainte de a investi.</p>
+        </div>
+        <div class="motiv-card">
+            <h3>Decizii corecte</h3>
+            <p>Materiale și finisaje alese din timp, fără improvizații costisitoare.</p>
+        </div>
+        <div class="motiv-card">
+            <h3>Design + execuție</h3>
+            <p>Poți prelua și execuția — proiectul este respectat până la final.</p>
+        </div>
+        <div class="motiv-card">
+            <h3>Atenție la detalii</h3>
+            <p>Fiecare detaliu este gândit: lumini, materiale, proporții, funcționalitate.</p>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- VI. COSTURI -->
+    <span class="section-label">Buget</span>
+    <h2 class="section-title">Cât costă<br>un proiect de design interior?</h2>
+    <p class="section-sub">Costul depinde de mai mulți factori:</p>
+
+    <ul class="check-list" style="margin-bottom: 0;">
+        <li>Suprafața spațiului</li>
+        <li>Numărul de camere</li>
+        <li>Complexitatea proiectului</li>
+        <li>Numărul de randări 3D</li>
+        <li>Detalierea documentației</li>
+        <li>Dacă se include și execuția</li>
+        <li>Nivelul de personalizare</li>
+    </ul>
+
+    <div class="quote-box">
+        <p class="q-main">Fiecare spațiu este diferit.<br>Și fiecare proiect de design la fel.</p>
+        <p class="q-sub">Spune-ne despre spațiul tău și îți pregătim o ofertă personalizată pentru proiectul de design interior.</p>
+        <button class="btn-cta" onclick="openModal()">Solicită o Ofertă</button>
+    </div>
+
+    <!-- VII. STATISTICI -->
+    <div class="stats-row">
+        <div class="stat-item">
+            <div class="stat-num" id="counter-projects">0</div>
+            <div class="stat-label">Proiecte Finalizate</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num" id="counter-clients">0</div>
+            <div class="stat-label">Clienți</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num" id="counter-years">0</div>
+            <div class="stat-label">Ani Experiență</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num" id="counter-area">0</div>
+            <div class="stat-label">m² Proiectați</div>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- VIII. CTA FINAL -->
+    <div class="cta-final">
+        <h2>Ai Nevoie de un Proiect de Design?</h2>
+        <p>Spune-ne despre spațiul tău și cum vrei să arate — îți pregătim un proiect complet, de la concept la execuție.</p>
+        <button class="btn-cta" onclick="openModal()">Cere Oferta</button>
+    </div>
+
+</div>
+
+{% include "oferta-modal.njk" %}
+
+<script>
+var currentSlide = 0;
+var totalSlides = document.querySelectorAll('.slideshow-slide').length;
+var track = document.getElementById('slideshow-track');
+var dotsContainer = document.getElementById('slideshow-dots');
+var displayCounter = document.getElementById('slideshow-counter');
+var autoPlayInterval;
+
+for (var i = 0; i < totalSlides; i++) {
+    var dot = document.createElement('button');
+    dot.className = 'slideshow-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+    dot.addEventListener('click', (function(idx) { return function() { goToSlide(idx); }; })(i));
+    dotsContainer.appendChild(dot);
+}
+
+function goToSlide(index) {
+    currentSlide = index;
+    track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    document.querySelectorAll('.slideshow-slide').forEach(function(s, i) {
+        s.classList.toggle('active-slide', i === currentSlide);
+    });
+    document.querySelectorAll('.slideshow-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === currentSlide);
+    });
+    if (displayCounter) displayCounter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+}
+
+function nextSlide() { goToSlide((currentSlide + 1) % totalSlides); resetAutoPlay(); }
+function prevSlide() { goToSlide((currentSlide - 1 + totalSlides) % totalSlides); resetAutoPlay(); }
+
+function resetAutoPlay() {
+    clearInterval(autoPlayInterval);
+    autoPlayInterval = setInterval(function() { goToSlide((currentSlide + 1) % totalSlides); }, 5000);
+}
+
+autoPlayInterval = setInterval(function() { goToSlide((currentSlide + 1) % totalSlides); }, 5000);
+
+/* STATISTICI */
+function animateCounter(el, target, duration) {
+    var start = performance.now();
+    function update(now) {
+        var p = Math.min((now - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased).toLocaleString('ro-RO');
+        if (p < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+}
+var counterObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+            animateCounter(document.getElementById('counter-projects'), 178, 2000);
+            animateCounter(document.getElementById('counter-clients'), 143, 2000);
+            animateCounter(document.getElementById('counter-years'), 20, 2000);
+            animateCounter(document.getElementById('counter-area'), 32600, 2000);
+            counterObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+var statsRow = document.querySelector('.stats-row');
+if (statsRow) counterObserver.observe(statsRow);
+</script>

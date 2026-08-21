@@ -68,6 +68,7 @@ reparatii:
 
   pas2_titlu: "Ce lucrări îți sunt necesare?"
   pas2_sub: "Bifează toate categoriile de lucrări de care ai nevoie."
+  pas2_placeholder: "Ex: două băi, tavan suspendat în living, schimbarea parchetului..."
   lucrari:
     - nume: "Pereți și tavane"
       thumb: "/images/reparatii/thumb-01.jpg"
@@ -102,3 +103,65 @@ reparatii:
 
   pas3_titlu: "Detalii despre Spațiu"
   pas3_sub: "Completează câteva informații pentru o ofertă precisă."
+  pas3_campuri:
+    - { nume: "suprafata", label: "Suprafață estimativă (m²)", tip: "number", placeholder: "ex: 60" }
+    - { nume: "localitate", label: "Localitate", tip: "text", placeholder: "ex: Chișinău" }
+    - { nume: "stadiu", label: "Stadiul actual", tip: "text", placeholder: "ex: spațiu nou / locuit / după demolare" }
+    - { nume: "buget", label: "Buget estimativ", tip: "text", placeholder: "ex: 5.000 – 10.000 €" }
+
+interior-design:
+  pas1_titlu: "Ce tip de spațiu proiectăm?"
+  pas1_sub: "Selectează tipul spațiului."
+  pas1:
+    - valoare: "Apartament"
+      icon: "apartament"
+    - valoare: "Casă"
+      icon: "casa"
+    - valoare: "Birou"
+      icon: "birou"
+    - valoare: "Spațiu comercial"
+      icon: "spatiu"
+
+  pas2_titlu: "Ce servicii de design îți sunt necesare?"
+  pas2_sub: "Bifează serviciile de care ai nevoie."
+  pas2_placeholder: "Ex: living și bucătărie, stil minimalist, randări pentru fiecare cameră..."
+  lucrari:
+    - nume: "Concept de design interior"
+      thumb: "/images/interior-design/thumb-01.jpg"
+      ph: "/images/interior-design/ph/thumb-01.svg"
+    - nume: "Amenajare apartamente"
+      thumb: "/images/interior-design/thumb-02.jpg"
+      ph: "/images/interior-design/ph/thumb-02.svg"
+    - nume: "Design interior pentru case"
+      thumb: "/images/interior-design/thumb-03.jpg"
+      ph: "/images/interior-design/ph/thumb-03.svg"
+    - nume: "Design pentru bucătării"
+      thumb: "/images/interior-design/thumb-04.jpg"
+      ph: "/images/interior-design/ph/thumb-04.svg"
+    - nume: "Design băi"
+      thumb: "/images/interior-design/thumb-05.jpg"
+      ph: "/images/interior-design/ph/thumb-05.svg"
+    - nume: "Design living și dormitoare"
+      thumb: "/images/interior-design/thumb-06.jpg"
+      ph: "/images/interior-design/ph/thumb-06.svg"
+    - nume: "Vizualizare 3D fotorealistă"
+      thumb: "/images/interior-design/thumb-07.jpg"
+      ph: "/images/interior-design/ph/thumb-07.svg"
+    - nume: "Planuri și documentație pentru execuție"
+      thumb: "/images/interior-design/thumb-08.jpg"
+      ph: "/images/interior-design/ph/thumb-08.svg"
+    - nume: "Alegerea materialelor și finisajelor"
+      thumb: "/images/interior-design/thumb-09.jpg"
+      ph: "/images/interior-design/ph/thumb-09.svg"
+    - nume: "Design interior + execuție"
+      thumb: "/images/interior-design/thumb-10.jpg"
+      ph: "/images/interior-design/ph/thumb-10.svg"
+
+  pas3_titlu: "Detalii despre Spațiu"
+  pas3_sub: "Completează câteva informații pentru o ofertă personalizată."
+  pas3_campuri:
+    - { nume: "suprafata", label: "Suprafață (m²)", tip: "number", placeholder: "ex: 60" }
+    - { nume: "localitate", label: "Localitate", tip: "text", placeholder: "ex: Chișinău" }
+    - { nume: "stil", label: "Stil dorit", tip: "text", placeholder: "ex: modern / minimalist / clasic" }
+    - { nume: "camere", label: "Număr camere", tip: "number", placeholder: "ex: 3" }
+    - { nume: "buget", label: "Buget estimativ", tip: "text", placeholder: "ex: 500 – 1.500 €" }
