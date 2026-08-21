@@ -1,0 +1,104 @@
+# Configurație centrală pentru modalul "Solicită Ofertă".
+# Componenta: src/_includes/oferta-modal.njk
+# Paginile aleg varianta prin frontmatter:  varianta_oferta: reparatii
+# Aici ajustezi titluri, opțiuni și imagini — fără să atingi paginile.
+
+arhitectura:
+  pas1_titlu: "Alege categoria de proiect"
+  pas1_sub: "Selectează o opțiune principală."
+  pas1:
+    - valoare: "Construcții rezidențiale"
+      icon: "house"
+    - valoare: "Clădiri comerciale"
+      icon: "comercial"
+    - valoare: "Clădiri publice și instituționale"
+      icon: "public"
+    - valoare: "Construcții industriale"
+      icon: "industrial"
+    - valoare: "Turism și agrement"
+      icon: "turism"
+    - valoare: "Amenajări exterioare și urbanism"
+      icon: "urbanism"
+    - valoare: "Reabilitări și restaurări"
+      icon: "renov"
+
+  pas2_titlu: "Detalii despre Proiect"
+
+  stil:
+    - { nume: "Vilă", thumb: "/images/thumbnails/4.jpg" }
+    - { nume: "Bungalow", thumb: "/images/thumbnails/5.jpg" }
+    - { nume: "Cărămidă", thumb: "/images/thumbnails/6.jpg" }
+    - { nume: "Beton", thumb: "/images/thumbnails/7.jpg" }
+    - { nume: "Metalică", thumb: "/images/thumbnails/8.jpg" }
+    - { nume: "Lemn", thumb: "/images/thumbnails/9.jpg" }
+    - { nume: "Modulară", thumb: "/images/thumbnails/10.jpg" }
+    - { nume: "Modernă", thumb: "/images/thumbnails/11.jpg" }
+    - { nume: "Contemporană", thumb: "/images/thumbnails/12.jpg" }
+    - { nume: "Tradițională", thumb: "/images/thumbnails/13.jpg" }
+    - { nume: "Rustic", thumb: "/images/thumbnails/14.jpg" }
+    - { nume: "Mediteraneană", thumb: "/images/thumbnails/15.jpg" }
+    - { nume: "Scandinavă", thumb: "/images/thumbnails/16.jpg" }
+    - { nume: "Industrială", thumb: "/images/thumbnails/17.jpg" }
+    - { nume: "Pasivă", thumb: "/images/thumbnails/18.jpg" }
+    - { nume: "Smart", thumb: "/images/thumbnails/19.jpg" }
+    - { nume: "Ecologică", thumb: "/images/thumbnails/20.jpg" }
+    - { nume: "Tiny", thumb: "/images/thumbnails/21.jpg" }
+    - { nume: "Piloni", thumb: "/images/thumbnails/22.jpg" }
+
+  pas3_titlu: "Servicii de Prezentare / Randări 3D"
+  pas3_sub: "Bifează livrabilele vizuale de care ai nevoie."
+  randari:
+    - "Randări Interioare"
+    - "Randări Exterior"
+    - "Randări Interior Design"
+    - "Randări Design Peisagistic"
+    - "Randări Produs / Marketing"
+    - "Animații 3D Imobiliare"
+
+reparatii:
+  pas1_titlu: "Ce tip de spațiu vrei să renovezi?"
+  pas1_sub: "Selectează tipul spațiului."
+  pas1:
+    - valoare: "Apartament"
+      icon: "apartament"
+    - valoare: "Casă"
+      icon: "casa"
+    - valoare: "Spațiu comercial"
+      icon: "spatiu"
+
+  pas2_titlu: "Ce lucrări îți sunt necesare?"
+  pas2_sub: "Bifează toate categoriile de lucrări de care ai nevoie."
+  lucrari:
+    - nume: "Pereți și tavane"
+      thumb: "/images/reparatii/thumb-01.jpg"
+      ph: "/images/reparatii/ph/thumb-01.svg"
+    - nume: "Gresie și faianță"
+      thumb: "/images/reparatii/thumb-02.jpg"
+      ph: "/images/reparatii/ph/thumb-02.svg"
+    - nume: "Pardoseli și parchet"
+      thumb: "/images/reparatii/thumb-03.jpg"
+      ph: "/images/reparatii/ph/thumb-03.svg"
+    - nume: "Zugrăveli și vopsitorii"
+      thumb: "/images/reparatii/thumb-04.jpg"
+      ph: "/images/reparatii/ph/thumb-04.svg"
+    - nume: "Reparații băi"
+      thumb: "/images/reparatii/thumb-05.jpg"
+      ph: "/images/reparatii/ph/thumb-05.svg"
+    - nume: "Reparații bucătării"
+      thumb: "/images/reparatii/thumb-06.jpg"
+      ph: "/images/reparatii/ph/thumb-06.svg"
+    - nume: "Lucrări electrice"
+      thumb: "/images/reparatii/thumb-07.jpg"
+      ph: "/images/reparatii/ph/thumb-07.svg"
+    - nume: "Lucrări sanitare și termice"
+      thumb: "/images/reparatii/thumb-08.jpg"
+      ph: "/images/reparatii/ph/thumb-08.svg"
+    - nume: "Compartimentări interioare"
+      thumb: "/images/reparatii/thumb-09.jpg"
+      ph: "/images/reparatii/ph/thumb-09.svg"
+    - nume: "Montaj și finisaje finale"
+      thumb: "/images/reparatii/thumb-10.jpg"
+      ph: "/images/reparatii/ph/thumb-10.svg"
+
+  pas3_titlu: "Detalii despre Spațiu"
+  pas3_sub: "Completează câteva informații pentru o ofertă precisă."

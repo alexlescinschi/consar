@@ -2,6 +2,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "images": "images" });
   eleventyConfig.addPassthroughCopy({ "admin": "admin" });
 
+  eleventyConfig.addDataExtension("yml", {
+    parser: (content) => require("js-yaml").load(content)
+  });
+
   eleventyConfig.addCollection("projects", function (collectionApi) {
     return collectionApi.getFilteredByGlob("src/content/projects/*.md");
   });

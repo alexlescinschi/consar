@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="100%" height="100%" fill="#3E464E"/>
+  <rect x="12" y="12" width="776" height="576" fill="none" stroke="#E9E4DF" stroke-opacity="0.14" stroke-width="2"/>
+  <line x1="12" y1="12" x2="92" y2="12" stroke="#E9E4DF" stroke-opacity="0.55" stroke-width="2"/>
+  <line x1="12" y1="12" x2="12" y2="72" stroke="#E9E4DF" stroke-opacity="0.55" stroke-width="2"/>
+  <line x1="788" y1="588" x2="708" y2="588" stroke="#E9E4DF" stroke-opacity="0.55" stroke-width="2"/>
+  <line x1="788" y1="588" x2="788" y2="528" stroke="#E9E4DF" stroke-opacity="0.55" stroke-width="2"/>
+  <text x="50%" y="47%" text-anchor="middle" font-family="Georgia, serif" font-size="33" fill="#E9E4DF" fill-opacity="0.85">thumb-08</text>
+  <text x="50%" y="56%" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" letter-spacing="6" fill="#E9E4DF" fill-opacity="0.4">SLOT POZĂ · 800 × 600</text>
+</svg>
