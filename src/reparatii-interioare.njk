@@ -81,6 +81,58 @@ varianta_oferta: reparatii
     outline: 1px solid var(--accent);
 }
 
+/* CTA CU GALERIE AUTO-SCROLL */
+.cta-block {
+    text-align: left;
+    padding: 5rem 3rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--surface);
+}
+.cta-block h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+.cta-block p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin: 0 0 2rem;
+    line-height: 1.7;
+}
+.cta-block-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 3rem;
+    align-items: center;
+}
+.cta-block-gallery {
+    min-width: 0;
+    overflow: hidden;
+}
+.cta-block-scroll { overflow: hidden; }
+.cta-block-track { display: flex; width: max-content; }
+.cta-block-row-left .cta-block-track { animation: cta-block-scroll-left 60s linear infinite; }
+.cta-block-row-right .cta-block-track { animation: cta-block-scroll-right 60s linear infinite; }
+.cta-block-scroll:hover .cta-block-track { animation-play-state: paused; }
+.cta-block-scroll img {
+    width: 180px; height: 130px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+@keyframes cta-block-scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+@keyframes cta-block-scroll-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
 /* SLIDESHOW HERO */
 .slideshow {
     position: absolute;
@@ -96,7 +148,7 @@ varianta_oferta: reparatii
     top: 0; left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, rgba(61, 69, 77, 0.9) 0%, rgba(61, 69, 77, 0.6) 50%, rgba(61, 69, 77, 0.75) 100%);
+    background: linear-gradient(to right, rgba(61, 69, 77, 0.85) 0%, rgba(61, 69, 77, 0.55) 50%, rgba(61, 69, 77, 0.7) 100%);
     z-index: 2;
     pointer-events: none;
 }
@@ -204,11 +256,9 @@ varianta_oferta: reparatii
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) contrast(1.05) brightness(0.85);
-    transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .split-img:hover img {
-    filter: grayscale(0%) contrast(1) brightness(1);
     transform: scale(1.04);
 }
 
@@ -239,11 +289,9 @@ varianta_oferta: reparatii
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) contrast(1.05) brightness(0.55);
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .lucrare-card:hover .lucrare-thumb img {
-    filter: grayscale(0%) contrast(1) brightness(0.95);
     transform: scale(1.06);
 }
 .lucrare-body { padding: 2rem; display: flex; flex-direction: column; flex-grow: 1; }
@@ -299,7 +347,7 @@ varianta_oferta: reparatii
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) contrast(1.05) brightness(0.35);
+    filter: brightness(0.5);
 }
 .banner::after {
     content: '';
@@ -340,11 +388,9 @@ varianta_oferta: reparatii
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) contrast(1.1) brightness(0.5);
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .portfolio-item:hover img {
-    filter: grayscale(0%) contrast(1) brightness(0.95);
     transform: scale(1.08);
 }
 .portfolio-overlay {
@@ -364,13 +410,10 @@ varianta_oferta: reparatii
 .portfolio-overlay h4 {
     font-family: var(--font-serif);
     font-size: 1.3rem;
-    font-weight: 400;
     margin-bottom: 0.3rem;
 }
 .portfolio-overlay span {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
+    font-size: 0.7rem;
     opacity: 0.6;
 }
 
@@ -664,6 +707,13 @@ varianta_oferta: reparatii
     .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
     .stat-num { font-size: 2.2rem; }
     .cta-final { padding: 3rem 1.5rem; }
+    .cta-block { padding: 3rem 1.5rem; text-align: center; }
+    .cta-block h2 { font-size: clamp(1.5rem, 4vw, 2rem); text-align: center; }
+    .cta-block p { text-align: center; max-width: 480px; margin: 0 auto 2rem; }
+    .cta-block-grid { grid-template-columns: 1fr; }
+    .cta-block-gallery { order: 1; }
+    .cta-block-text { order: 2; }
+    .cta-block-scroll img { width: 140px; height: 100px; }
 }
 </style>
 
@@ -692,6 +742,38 @@ varianta_oferta: reparatii
         <button class="btn-cta" onclick="openModal()">Solicită o Ofertă</button>
     </div>
 </section>
+
+<div class="cta-block" style="margin: 0; max-width: 1200px; margin: 0 auto; padding: 4rem 3rem;">
+    <div class="cta-block-grid">
+        <div class="cta-block-text">
+            <h2>Începe Renovarea</h2>
+            <p>Spune-ne ce spațiu vrei să renovezi și primești o ofertă personalizată în 48 de ore.</p>
+            <button class="btn-cta" onclick="openModal()">Solicită o Ofertă</button>
+        </div>
+        <div class="cta-block-gallery">
+            <div class="cta-block-scroll cta-block-row-left">
+                <div class="cta-block-track">
+                    <img src="/images/reparatii/lucrare-01.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-01.svg';">
+                    <img src="/images/reparatii/lucrare-02.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-02.svg';">
+                    <img src="/images/reparatii/lucrare-03.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-03.svg';">
+                    <img src="/images/reparatii/lucrare-01.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-01.svg';">
+                    <img src="/images/reparatii/lucrare-02.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-02.svg';">
+                    <img src="/images/reparatii/lucrare-03.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-03.svg';">
+                </div>
+            </div>
+            <div class="cta-block-scroll cta-block-row-right" style="margin-top: 0.5rem;">
+                <div class="cta-block-track">
+                    <img src="/images/reparatii/lucrare-04.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-04.svg';">
+                    <img src="/images/reparatii/lucrare-05.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-05.svg';">
+                    <img src="/images/reparatii/lucrare-06.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-06.svg';">
+                    <img src="/images/reparatii/lucrare-04.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-04.svg';">
+                    <img src="/images/reparatii/lucrare-05.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-05.svg';">
+                    <img src="/images/reparatii/lucrare-06.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-06.svg';">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container">
 
