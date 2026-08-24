@@ -165,3 +165,54 @@ interior-design:
     - { nume: "stil", label: "Stil dorit", tip: "text", placeholder: "ex: modern / minimalist / clasic" }
     - { nume: "camere", label: "Număr camere", tip: "number", placeholder: "ex: 3" }
     - { nume: "buget", label: "Buget estimativ", tip: "text", placeholder: "ex: 500 – 1.500 €" }
+
+desen-tehnic:
+  pas1_titlu: "Ce tip de proiect ai?"
+  pas1_sub: "Selectează categoria proiectului."
+  pas1:
+    - valoare: "Casă"
+      icon: "casa"
+    - valoare: "Apartament"
+      icon: "apartament"
+    - valoare: "Proiect comercial"
+      icon: "comercial"
+    - valoare: "Alt tip de proiect"
+      icon: "public"
+  pas2_titlu: "De ce servicii ai nevoie?"
+  pas2_sub: "Bifează toate serviciile necesare."
+  pas2_placeholder: "Ex: planuri CAD, model 3D, randări exterioare, termen dorit..."
+  lucrari:
+    - nume: "Desen tehnic și planuri 2D"
+      thumb: "/images/desen-tehnic/thumb-01.jpg"
+      ph: "/images/desen-tehnic/ph/thumb-01.svg"
+    - nume: "CAD / AutoCAD"
+      thumb: "/images/desen-tehnic/thumb-02.jpg"
+      ph: "/images/desen-tehnic/ph/thumb-02.svg"
+    - nume: "Modelare 3D"
+      thumb: "/images/desen-tehnic/thumb-03.jpg"
+      ph: "/images/desen-tehnic/ph/thumb-03.svg"
+    - nume: "BIM / Revit"
+      thumb: "/images/desen-tehnic/thumb-04.jpg"
+      ph: "/images/desen-tehnic/ph/thumb-04.svg"
+    - nume: "Randare interioară"
+      thumb: "/images/desen-tehnic/thumb-05.jpg"
+      ph: "/images/desen-tehnic/ph/thumb-05.svg"
+    - nume: "Randare exterioară"
+      thumb: "/images/desen-tehnic/thumb-06.jpg"
+      ph: "/images/desen-tehnic/ph/thumb-06.svg"
+    - nume: "Documentație tehnică"
+      thumb: "/images/desen-tehnic/thumb-07.jpg"
+      ph: "/images/desen-tehnic/ph/thumb-07.svg"
+    - nume: "Redesenare după schiță"
+      thumb: "/images/desen-tehnic/thumb-08.jpg"
+      ph: "/images/desen-tehnic/ph/thumb-08.svg"
+    - nume: "Randări pentru dezvoltatori"
+      thumb: "/images/desen-tehnic/thumb-09.jpg"
+      ph: "/images/desen-tehnic/ph/thumb-09.svg"
+  pas3_titlu: "Detalii despre proiect"
+  pas3_sub: "Trimite câteva informații pentru o ofertă exactă."
+  pas3_campuri:
+    - { nume: "suprafata", label: "Suprafață (m²)", tip: "number", placeholder: "ex: 180" }
+    - { nume: "planse", label: "Număr planșe / imagini", tip: "number", placeholder: "ex: 12" }
+    - { nume: "termen", label: "Termen dorit", tip: "text", placeholder: "ex: 10 zile" }
+    - { nume: "documentatie", label: "Documentație disponibilă", tip: "text", placeholder: "ex: PDF, DWG, schiță" }
