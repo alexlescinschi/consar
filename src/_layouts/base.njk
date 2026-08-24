@@ -75,10 +75,14 @@
             mix-blend-mode: difference;
         }
         .logo {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
+            display: block;
+            width: 190px;
+            line-height: 0;
+        }
+        .logo img {
+            display: block;
+            width: 100%;
+            height: auto;
         }
         .nav-links {
             display: flex;
@@ -257,11 +261,13 @@
         }
         .footer-col:last-child { border-right: none; }
         .footer-logo {
-            font-family: var(--font-serif);
-            font-size: 1.3rem;
-            font-weight: 700;
+            width: 220px;
             margin-bottom: 1rem;
-            letter-spacing: -0.02em;
+        }
+        .footer-logo img {
+            display: block;
+            width: 100%;
+            height: auto;
         }
         .footer-col h4 {
             font-size: 0.55rem;
@@ -453,7 +459,9 @@
     <div id="cursor-follower"></div>
 
     <nav>
-        <a href="/" class="logo" style="color: var(--accent); text-decoration: none;">CONSARHOUSE</a>
+        <a href="/" class="logo" aria-label="CONSARHOUSE">
+            <img src="/images/logo.png" alt="CONSARHOUSE" width="1840" height="660">
+        </a>
         <button class="nav-mobile-toggle" onclick="openMobileMenu()" aria-label="Meniu">☰</button>
         <div class="nav-links">
             <a href="/" {% if nav_active == 'home' %}class="active"{% endif %}>Acasă</a>
@@ -532,7 +540,9 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <div class="footer-logo">CONSARHOUSE</div>
+                <div class="footer-logo">
+                    <img src="/images/logo.png" alt="CONSARHOUSE" width="1840" height="660" loading="lazy">
+                </div>
                 <p class="footer-about">Birou de arhitectură și construcții. Transformăm ideile în proiecte tehnice complete — de la concept la execuție.</p>
             </div>
             <div class="footer-col">
