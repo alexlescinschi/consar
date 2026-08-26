@@ -216,3 +216,147 @@ desen-tehnic:
     - { nume: "planse", label: "Număr planșe / imagini", tip: "number", placeholder: "ex: 12" }
     - { nume: "termen", label: "Termen dorit", tip: "text", placeholder: "ex: 10 zile" }
     - { nume: "documentatie", label: "Documentație disponibilă", tip: "text", placeholder: "ex: PDF, DWG, schiță" }
+
+constructii-case:
+  pas1_titlu: "Ce fel de casă vrei să construiești?"
+  pas1_sub: "Selectează regimul de înălțime al proiectului."
+  pas1:
+    - valoare: "Parter"
+      icon: "casa"
+    - valoare: "Parter + etaj"
+      icon: "casa"
+    - valoare: "Parter + mansardă"
+      icon: "casa"
+    - valoare: "Alt tip de construcție"
+      icon: "public"
+  pas2_titlu: "La ce stadiu vrei să construim?"
+  pas2_sub: "Bifează stadiul dorit și lucrările necesare."
+  pas2_placeholder: "Ex: teren în pantă, proiect în lucru, preferințe pentru materiale..."
+  lucrari:
+    - nume: "Casă la roșu"
+      thumb: "/images/constructii-case/thumb-01.jpg"
+      ph: "/images/constructii-case/ph/thumb-01.svg"
+    - nume: "Casă la gri / semifinisată"
+      thumb: "/images/constructii-case/thumb-02.jpg"
+      ph: "/images/constructii-case/ph/thumb-02.svg"
+    - nume: "Casă la alb"
+      thumb: "/images/constructii-case/thumb-03.jpg"
+      ph: "/images/constructii-case/ph/thumb-03.svg"
+    - nume: "Casă la cheie"
+      thumb: "/images/constructii-case/thumb-04.jpg"
+      ph: "/images/constructii-case/ph/thumb-04.svg"
+    - nume: "Fundații și structură"
+      thumb: "/images/constructii-case/thumb-05.jpg"
+      ph: "/images/constructii-case/ph/thumb-05.svg"
+    - nume: "Acoperiș, fațadă și termoizolație"
+      thumb: "/images/constructii-case/thumb-06.jpg"
+      ph: "/images/constructii-case/ph/thumb-06.svg"
+    - nume: "Instalații"
+      thumb: "/images/constructii-case/thumb-07.jpg"
+      ph: "/images/constructii-case/ph/thumb-07.svg"
+    - nume: "Finisaje interioare"
+      thumb: "/images/constructii-case/thumb-08.jpg"
+      ph: "/images/constructii-case/ph/thumb-08.svg"
+  pas3_titlu: "Detalii despre proiect"
+  pas3_sub: "Completează informațiile necesare pentru o estimare corectă."
+  pas3_campuri:
+    - { nume: "suprafata", label: "Suprafață (m²)", tip: "number", placeholder: "ex: 150" }
+    - { nume: "localitate", label: "Localitatea", tip: "text", placeholder: "ex: Chișinău" }
+    - { nume: "stadiu", label: "Stadiul dorit", tip: "text", placeholder: "ex: la roșu / la cheie" }
+    - { nume: "proiect", label: "Proiect existent", tip: "text", placeholder: "ex: da / nu / în lucru" }
+
+consultanta:
+  pas1_titlu: "Pentru ce ai nevoie de consultanță?"
+  pas1_sub: "Selectează situația care se potrivește proiectului tău."
+  pas1:
+    - valoare: "Construcție nouă"
+      icon: "casa"
+    - valoare: "Renovare"
+      icon: "renov"
+    - valoare: "Achiziție proprietate"
+      icon: "apartament"
+    - valoare: "Proiect imobiliar"
+      icon: "comercial"
+  pas2_titlu: "Ce vrei să analizăm?"
+  pas2_sub: "Bifează toate subiectele pentru care ai nevoie de recomandări."
+  pas2_placeholder: "Ex: ai primit un deviz, vrei să verifici o lucrare sau să alegi materiale..."
+  lucrari:
+    - nume: "Consultanță înainte de construcție"
+      thumb: "/images/consultanta/thumb-01.jpg"
+      ph: "/images/consultanta/ph/thumb-01.svg"
+    - nume: "Consultanță pentru renovări"
+      thumb: "/images/consultanta/thumb-02.jpg"
+      ph: "/images/consultanta/ph/thumb-02.svg"
+    - nume: "Verificarea ofertelor și devizelor"
+      thumb: "/images/consultanta/thumb-03.jpg"
+      ph: "/images/consultanta/ph/thumb-03.svg"
+    - nume: "Estimarea costului construcției"
+      thumb: "/images/consultanta/thumb-04.jpg"
+      ph: "/images/consultanta/ph/thumb-04.svg"
+    - nume: "Alegerea materialelor"
+      thumb: "/images/consultanta/thumb-05.jpg"
+      ph: "/images/consultanta/ph/thumb-05.svg"
+    - nume: "Alegerea constructorului"
+      thumb: "/images/consultanta/thumb-06.jpg"
+      ph: "/images/consultanta/ph/thumb-06.svg"
+    - nume: "Consultanță pe parcursul execuției"
+      thumb: "/images/consultanta/thumb-07.jpg"
+      ph: "/images/consultanta/ph/thumb-07.svg"
+    - nume: "Evaluare proprietate"
+      thumb: "/images/consultanta/thumb-08.jpg"
+      ph: "/images/consultanta/ph/thumb-08.svg"
+  pas3_titlu: "Spune-ne despre proiect"
+  pas3_sub: "Câteva detalii ne ajută să pregătim consultația potrivită."
+  pas3_campuri:
+    - { nume: "localitate", label: "Localitate", tip: "text", placeholder: "ex: Chișinău" }
+    - { nume: "suprafata", label: "Suprafață estimativă (m²)", tip: "number", placeholder: "ex: 120" }
+    - { nume: "documente", label: "Documente disponibile", tip: "text", placeholder: "ex: deviz, proiect, fotografii" }
+    - { nume: "problema", label: "Problema principală", tip: "text", placeholder: "ex: verificare ofertă / renovare" }
+
+proiectare-arhitecturala:
+  pas1_titlu: "Ce tip de proiect ai?"
+  pas1_sub: "Selectează categoria construcției."
+  pas1:
+    - valoare: "Casă / vilă"
+      icon: "casa"
+    - valoare: "Clădire comercială"
+      icon: "comercial"
+    - valoare: "Renovare sau extindere"
+      icon: "renov"
+    - valoare: "Proiect pentru dezvoltator"
+      icon: "public"
+  pas2_titlu: "Ce servicii te interesează?"
+  pas2_sub: "Bifează toate serviciile necesare proiectului."
+  pas2_placeholder: "Ex: casă P+1, schiță disponibilă, ai nevoie de randări sau documentație..."
+  lucrari:
+    - nume: "Proiectare case și vile"
+      thumb: "/images/proiectare-arhitecturala/thumb-01.jpg"
+      ph: "/images/proiectare-arhitecturala/ph/thumb-01.svg"
+    - nume: "Construcții noi"
+      thumb: "/images/proiectare-arhitecturala/thumb-02.jpg"
+      ph: "/images/proiectare-arhitecturala/ph/thumb-02.svg"
+    - nume: "Renovări și extinderi"
+      thumb: "/images/proiectare-arhitecturala/thumb-03.jpg"
+      ph: "/images/proiectare-arhitecturala/ph/thumb-03.svg"
+    - nume: "Desen tehnic și CAD"
+      thumb: "/images/proiectare-arhitecturala/thumb-04.jpg"
+      ph: "/images/proiectare-arhitecturala/ph/thumb-04.svg"
+    - nume: "Modelare BIM / Revit"
+      thumb: "/images/proiectare-arhitecturala/thumb-05.jpg"
+      ph: "/images/proiectare-arhitecturala/ph/thumb-05.svg"
+    - nume: "Vizualizare arhitecturală 3D"
+      thumb: "/images/proiectare-arhitecturala/thumb-06.jpg"
+      ph: "/images/proiectare-arhitecturala/ph/thumb-06.svg"
+    - nume: "Proiectare interioară"
+      thumb: "/images/proiectare-arhitecturala/thumb-07.jpg"
+      ph: "/images/proiectare-arhitecturala/ph/thumb-07.svg"
+    - nume: "Suport B2B pentru proiectare"
+      thumb: "/images/proiectare-arhitecturala/thumb-08.jpg"
+      ph: "/images/proiectare-arhitecturala/ph/thumb-08.svg"
+  pas3_titlu: "Detalii despre proiect"
+  pas3_sub: "Trimite câteva informații pentru o ofertă adaptată."
+  pas3_campuri:
+    - { nume: "localitate", label: "Localitatea proiectului", tip: "text", placeholder: "ex: Chișinău" }
+    - { nume: "suprafata", label: "Suprafață aproximativă (m²)", tip: "number", placeholder: "ex: 180" }
+    - { nume: "constructie", label: "Tipul construcției", tip: "text", placeholder: "ex: casă P+1" }
+    - { nume: "documentatie", label: "Documentație existentă", tip: "text", placeholder: "ex: schiță, plan, PDF" }
