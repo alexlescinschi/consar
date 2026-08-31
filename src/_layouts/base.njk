@@ -251,7 +251,7 @@
         footer { border-top: 1px solid var(--border); }
         .footer-grid {
             display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
             gap: 0;
             border-bottom: 1px solid var(--border);
         }
@@ -543,18 +543,30 @@
                 <div class="footer-logo">
                     <img src="/images/logo.png" alt="CONSARHOUSE" width="1840" height="660" loading="lazy">
                 </div>
+                {% if lang == 'en' %}
+                <p class="footer-about">Architecture and construction office. We turn ideas into complete technical projects — from concept to execution.</p>
+                {% else %}
                 <p class="footer-about">Birou de arhitectură și construcții. Transformăm ideile în proiecte tehnice complete — de la concept la execuție.</p>
+                {% endif %}
             </div>
             <div class="footer-col">
-                <h4>Meniu</h4>
+                {% if lang == 'en' %}<h4>Menu</h4>{% else %}<h4>Meniu</h4>{% endif %}
+                {% if lang == 'en' %}
+                <a href="/">Home</a>
+                <a href="/arhitectura/">Services</a>
+                <a href="/proiecte/">Portfolio</a>
+                <a href="/blog/">Blog</a>
+                <a href="/contact/">Contacts</a>
+                {% else %}
                 <a href="/">Acasă</a>
                 <a href="/arhitectura/">Servicii</a>
                 <a href="/proiecte/">Portofoliu</a>
                 <a href="/blog/">Blog</a>
                 <a href="/contact/">Contacte</a>
+                {% endif %}
             </div>
             <div class="footer-col footer-contact">
-                <h4>Contacte</h4>
+                {% if lang == 'en' %}<h4>Contacts</h4>{% else %}<h4>Contacte</h4>{% endif %}
                 <p>Mun. Chișinău<br>str. Burebista, 17<br>Oficiul 410</p>
                 <p style="margin-top: 1rem;">
                     <a href="tel:+37360543475">+373 60 543 475</a>
@@ -564,7 +576,7 @@
                 </p>
             </div>
             <div class="footer-col">
-                <h4>Urmărește-ne</h4>
+                {% if lang == 'en' %}<h4>Follow us</h4>{% else %}<h4>Urmărește-ne</h4>{% endif %}
                 <a href="https://www.facebook.com/profile.php?id=61572853877102" target="_blank" rel="noopener">Facebook ↗</a>
                 <a href="https://www.tiktok.com/@consar.house" target="_blank" rel="noopener">TikTok ↗</a>
             </div>
@@ -573,7 +585,11 @@
             </div>
         </div>
         <div class="footer-bottom">
+            {% if lang == 'en' %}
+            <span>&copy; 2025 CONSARHOUSE. All rights reserved.</span>
+            {% else %}
             <span>&copy; 2025 CONSARHOUSE. Toate drepturile rezervate.</span>
+            {% endif %}
             <a href="/arhitectura/">Arhitectură & Construcții</a>
         </div>
     </footer>
