@@ -9,25 +9,30 @@ public_folder: "/images"
 
 collections:
   - name: "projects"
-    label: "Proiecte"
+    label: "Proiecte realizate (RO)"
     folder: "src/content/projects"
     create: true
     slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    media_folder: "images/projects"
+    public_folder: "/images/projects"
     editor:
       preview: false
     fields:
       - { label: "Titlu", name: "title", widget: "string" }
       - { label: "Descriere SEO", name: "description", widget: "text" }
-      - { label: "Imagine Featured (thumbnail)", name: "image", widget: "image" }
+      - { label: "Imagine copertă (16:9)", name: "image", widget: "image", hint: "Folosește o fotografie orizontală 16:9, minimum 1920×1080. Cardul din portofoliu o decupează automat." }
       - label: "Blocuri de conținut"
         name: "blocks"
         widget: "list"
+        hint: "Adaugă blocul Hero primul. Pentru imagini orizontale folosește 16:9; alege 9:16 doar pentru cadre verticale."
         types:
           - label: "Hero"
             name: "hero"
             widget: "object"
             fields:
-              - { label: "Imagine panoramică", name: "image", widget: "image" }
+              - { label: "Imagine Hero (16:9)", name: "image", widget: "image", hint: "1920×1080 sau mai mare." }
               - { label: "Titlu", name: "title", widget: "text", hint: "Folosește Enter pentru linie nouă" }
               - { label: "Subtitlu", name: "subtitle", widget: "text" }
               - label: "Fișă Tehnică"
@@ -61,8 +66,15 @@ collections:
                 name: "images"
                 widget: "list"
                 fields:
-                  - { label: "Imagine", name: "src", widget: "image" }
+                  - { label: "Imagine", name: "src", widget: "image", hint: "16:9 pentru cadre orizontale; 9:16 numai pentru cadre verticale." }
                   - { label: "Text alternativ", name: "alt", widget: "string" }
+                  - label: "Format imagine"
+                    name: "ratio"
+                    widget: "select"
+                    default: "wide"
+                    options:
+                      - { label: "Orizontal 16:9", value: "wide" }
+                      - { label: "Vertical 9:16", value: "vertical" }
 
           - label: "Video"
             name: "video"
@@ -84,8 +96,15 @@ collections:
                 name: "images"
                 widget: "list"
                 fields:
-                  - { label: "Imagine", name: "src", widget: "image" }
+                  - { label: "Imagine", name: "src", widget: "image", hint: "16:9 pentru cadre orizontale; 9:16 numai pentru cadre verticale." }
                   - { label: "Text alternativ", name: "alt", widget: "string" }
+                  - label: "Format imagine"
+                    name: "ratio"
+                    widget: "select"
+                    default: "wide"
+                    options:
+                      - { label: "Orizontal 16:9", value: "wide" }
+                      - { label: "Vertical 9:16", value: "vertical" }
 
           - label: "Desene Tehnice (Tab-uri)"
             name: "tabs"
@@ -98,7 +117,7 @@ collections:
                 widget: "list"
                 fields:
                   - { label: "Etichetă tab", name: "label", widget: "string" }
-                  - { label: "Imagine", name: "image", widget: "image" }
+                  - { label: "Imagine (16:9)", name: "image", widget: "image", hint: "Plan sau desen tehnic orizontal." }
               - { label: "Notă tehnică (opțional)", name: "note", widget: "text", required: false }
 
           - label: "Sustenabilitate"

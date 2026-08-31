@@ -11,7 +11,9 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addCollection("projects_ro", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/content/projects/*.ro.md");
+    return collectionApi
+      .getFilteredByGlob("src/content/projects/*.md")
+      .filter((item) => !item.inputPath.endsWith(".en.md"));
   });
 
   eleventyConfig.addCollection("projects_en", function (collectionApi) {
