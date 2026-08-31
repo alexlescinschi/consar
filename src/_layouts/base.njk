@@ -460,17 +460,55 @@
     <div class="noise-overlay"></div>
     <div id="cursor-follower"></div>
 
+    {% if lang == 'en' %}
+    {% set L = {
+        acasa: "Home", servicii: "Services", portofoliu: "Portfolio", contacte: "Contacts", meniu: "Menu",
+        c1t: "Construction Consulting", c2t: "Architectural Design", c3t: "House Construction",
+        c4t: "Interior Design", c5t: "Interior Renovations", c6t: "Technical Drawings & 3D Visualization",
+        d1p: "Project analysis, cost estimates, renovations and investment supervision.",
+        d2p: "Houses, extensions, technical documentation, BIM and 3D renderings.",
+        d3p: "From foundation and structure to turnkey construction.",
+        d4p: "Concept, 3D renderings, execution plans, complete fit-out.",
+        d5p: "Renovations, installations, finishes and turnkey interventions.",
+        d6p: "CAD, Revit, 3D modeling and architectural renderings.",
+        m1p: "Estimates, projects and renovations",
+        m2p: "Houses, BIM, documentation and renderings",
+        m3p: "Foundations, structure and turnkey homes",
+        m4p: "Concept, 3D renderings, execution",
+        m5p: "Renovations, installations and finishes",
+        m6p: "CAD, Revit, modeling and renderings"
+    } %}
+    {% else %}
+    {% set L = {
+        acasa: "Acasă", servicii: "Servicii", portofoliu: "Portofoliu", contacte: "Contacte", meniu: "Meniu",
+        c1t: "Consultanță în Construcții", c2t: "Proiectare Arhitecturală", c3t: "Construcții Case",
+        c4t: "Design Interior", c5t: "Reparații Interioare", c6t: "Desen Tehnic & Vizualizare 3D",
+        d1p: "Analiză proiecte, devize, renovări și controlul investiției.",
+        d2p: "Case, extinderi, documentație tehnică, BIM și randări 3D.",
+        d3p: "De la fundație și structură până la construcția la cheie.",
+        d4p: "Concept, randări 3D, planuri de execuție, amenajare completă.",
+        d5p: "Renovări, instalații, finisaje și intervenții la cheie.",
+        d6p: "CAD, Revit, modelare 3D și randări arhitecturale.",
+        m1p: "Devize, proiecte și renovări",
+        m2p: "Case, BIM, documentație și randări",
+        m3p: "Fundații, structură și case la cheie",
+        m4p: "Concept, randări 3D, execuție",
+        m5p: "Renovări, instalații și finisaje",
+        m6p: "CAD, Revit, modelare și randări"
+    } %}
+    {% endif %}
+
     <nav>
         <a href="/" class="logo" aria-label="CONSARHOUSE">
             <img src="/images/logo.png" alt="CONSARHOUSE" width="1840" height="660">
         </a>
-        <button class="nav-mobile-toggle" onclick="openMobileMenu()" aria-label="Meniu">☰</button>
+        <button class="nav-mobile-toggle" onclick="openMobileMenu()" aria-label="{{ L.meniu }}">☰</button>
         <div class="nav-links">
-            <a href="/" {% if nav_active == 'home' %}class="active"{% endif %}>Acasă</a>
-            <button class="nav-dropdown-trigger" onclick="toggleDropdown()" aria-expanded="false">Servicii <span class="nav-chevron">▾</span></button>
-            <a href="/proiecte/" {% if nav_active == 'projects' %}class="active"{% endif %}>Portofoliu</a>
+            <a href="/" {% if nav_active == 'home' %}class="active"{% endif %}>{{ L.acasa }}</a>
+            <button class="nav-dropdown-trigger" onclick="toggleDropdown()" aria-expanded="false">{{ L.servicii }} <span class="nav-chevron">▾</span></button>
+            <a href="/proiecte/" {% if nav_active == 'projects' %}class="active"{% endif %}>{{ L.portofoliu }}</a>
             <a href="/blog/" {% if nav_active == 'blog' %}class="active"{% endif %}>Blog</a>
-            <a href="/contact/" {% if nav_active == 'contact' %}class="active"{% endif %}>Contacte</a>
+            <a href="/contact/" {% if nav_active == 'contact' %}class="active"{% endif %}>{{ L.contacte }}</a>
         </div>
         <div style="font-size: 0.6rem;">
             {% if lang == 'en' %}
@@ -493,43 +531,43 @@
                     <div class="nav-dropdown-img">
                         <img src="/images/servicii/consultanta-in-constructii.jpg" alt="Consultanță în construcții" loading="lazy">
                     </div>
-                    <h4>Consultanță în Construcții</h4>
-                    <p>Analiză proiecte, devize, renovări și controlul investiției.</p>
+                    <h4>{{ L.c1t }}</h4>
+                    <p>{{ L.d1p }}</p>
                 </a>
                 <a href="/proiectare-arhitecturala/" class="nav-dropdown-card" onclick="closeDropdown()">
                     <div class="nav-dropdown-img">
                         <img src="/images/servicii/proiectare-arhitecturala.png" alt="Proiectare arhitecturală" loading="lazy">
                     </div>
-                    <h4>Proiectare Arhitecturală</h4>
-                    <p>Case, extinderi, documentație tehnică, BIM și randări 3D.</p>
+                    <h4>{{ L.c2t }}</h4>
+                    <p>{{ L.d2p }}</p>
                 </a>
                 <a href="/constructii-case/" class="nav-dropdown-card" onclick="closeDropdown()">
                     <div class="nav-dropdown-img">
                         <img src="/images/servicii/constructii-case.jpg" alt="Construcții case" loading="lazy">
                     </div>
-                    <h4>Construcții Case</h4>
-                    <p>De la fundație și structură până la construcția la cheie.</p>
+                    <h4>{{ L.c3t }}</h4>
+                    <p>{{ L.d3p }}</p>
                 </a>
                 <a href="/interior-design/" class="nav-dropdown-card" onclick="closeDropdown()">
                     <div class="nav-dropdown-img">
                         <img src="/images/servicii/design-interior.jpg" alt="Design interior" loading="lazy">
                     </div>
-                    <h4>Design Interior</h4>
-                    <p>Concept, randări 3D, planuri de execuție, amenajare completă.</p>
+                    <h4>{{ L.c4t }}</h4>
+                    <p>{{ L.d4p }}</p>
                 </a>
                 <a href="/reparatii-interioare/" class="nav-dropdown-card" onclick="closeDropdown()">
                     <div class="nav-dropdown-img">
                         <img src="/images/servicii/reparatii-interioare.jpg" alt="Reparații interioare" loading="lazy">
                     </div>
-                    <h4>Reparații Interioare</h4>
-                    <p>Renovări, instalații, finisaje și intervenții la cheie.</p>
+                    <h4>{{ L.c5t }}</h4>
+                    <p>{{ L.d5p }}</p>
                 </a>
                 <a href="/desen-tehnic-vizualizare/" class="nav-dropdown-card" onclick="closeDropdown()">
                     <div class="nav-dropdown-img">
                         <img src="/images/servicii/desen-tehnic-vizualizare-3d.jpeg" alt="Desen tehnic și vizualizare 3D" loading="lazy">
                     </div>
-                    <h4>Desen Tehnic & Vizualizare 3D</h4>
-                    <p>CAD, Revit, modelare 3D și randări arhitecturale.</p>
+                    <h4>{{ L.c6t }}</h4>
+                    <p>{{ L.d6p }}</p>
                 </a>
             </div>
         </div>
@@ -599,57 +637,57 @@
     <div class="mobile-menu-backdrop" onclick="closeMobileMenu()"></div>
     <div class="mobile-menu" id="mobile-menu">
         <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
-        <a href="/" onclick="closeMobileMenu()">Acasă</a>
+        <a href="/" onclick="closeMobileMenu()">{{ L.acasa }}</a>
         <button class="mobile-sub-toggle" onclick="toggleMobileSub(this)">
-            Servicii <span class="chevron">▾</span>
+            {{ L.servicii }} <span class="chevron">▾</span>
         </button>
         <div class="mobile-sub-panel" id="mobile-sub-panel">
             <a href="/consultanta-constructii-renovari/" class="mobile-service-card" onclick="closeMobileMenu()">
                 <img src="/images/servicii/consultanta-in-constructii.jpg" alt="Consultanță în construcții" loading="lazy">
                 <div>
-                    <h4>Consultanță în Construcții</h4>
-                    <p>Devize, proiecte și renovări</p>
+                    <h4>{{ L.c1t }}</h4>
+                    <p>{{ L.m1p }}</p>
                 </div>
             </a>
             <a href="/proiectare-arhitecturala/" class="mobile-service-card" onclick="closeMobileMenu()">
                 <img src="/images/servicii/proiectare-arhitecturala.png" alt="Proiectare arhitecturală" loading="lazy">
                 <div>
-                    <h4>Proiectare Arhitecturală</h4>
-                    <p>Case, BIM, documentație și randări</p>
+                    <h4>{{ L.c2t }}</h4>
+                    <p>{{ L.m2p }}</p>
                 </div>
             </a>
             <a href="/constructii-case/" class="mobile-service-card" onclick="closeMobileMenu()">
                 <img src="/images/servicii/constructii-case.jpg" alt="Construcții case" loading="lazy">
                 <div>
-                    <h4>Construcții Case</h4>
-                    <p>Fundații, structură și case la cheie</p>
+                    <h4>{{ L.c3t }}</h4>
+                    <p>{{ L.m3p }}</p>
                 </div>
             </a>
             <a href="/interior-design/" class="mobile-service-card" onclick="closeMobileMenu()">
                 <img src="/images/servicii/design-interior.jpg" alt="Design interior" loading="lazy">
                 <div>
-                    <h4>Design Interior</h4>
-                    <p>Concept, randări 3D, execuție</p>
+                    <h4>{{ L.c4t }}</h4>
+                    <p>{{ L.m4p }}</p>
                 </div>
             </a>
             <a href="/reparatii-interioare/" class="mobile-service-card" onclick="closeMobileMenu()">
                 <img src="/images/servicii/reparatii-interioare.jpg" alt="Reparații interioare" loading="lazy">
                 <div>
-                    <h4>Reparații Interioare</h4>
-                    <p>Renovări, instalații și finisaje</p>
+                    <h4>{{ L.c5t }}</h4>
+                    <p>{{ L.m5p }}</p>
                 </div>
             </a>
             <a href="/desen-tehnic-vizualizare/" class="mobile-service-card" onclick="closeMobileMenu()">
                 <img src="/images/servicii/desen-tehnic-vizualizare-3d.jpeg" alt="Desen tehnic și vizualizare 3D" loading="lazy">
                 <div>
-                    <h4>Desen Tehnic & Vizualizare 3D</h4>
-                    <p>CAD, Revit, modelare și randări</p>
+                    <h4>{{ L.c6t }}</h4>
+                    <p>{{ L.m6p }}</p>
                 </div>
             </a>
         </div>
-        <a href="/proiecte/" onclick="closeMobileMenu()">Portofoliu</a>
+        <a href="/proiecte/" onclick="closeMobileMenu()">{{ L.portofoliu }}</a>
         <a href="/blog/" onclick="closeMobileMenu()">Blog</a>
-        <a href="/contact/" onclick="closeMobileMenu()">Contacte</a>
+        <a href="/contact/" onclick="closeMobileMenu()">{{ L.contacte }}</a>
     </div>
 
     {% block after_main %}{% endblock %}
