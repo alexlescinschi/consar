@@ -452,7 +452,11 @@ nav_active: projects
                     <h2>{{ block.title }}</h2>
                     <p>{{ block.description }}</p>
                     <div class="cta-buttons">
+                        {% if block.varianta_oferta %}
+                        <button class="btn-primary" onclick="openModal()">{{ block.primary_label or 'Solicită o Ofertă' }}</button>
+                        {% else %}
                         <a href="{{ block.primary_url }}" class="btn-primary">{{ block.primary_label }}</a>
+                        {% endif %}
                         <a href="{{ block.secondary_url }}" class="btn-secondary">{{ block.secondary_label }}</a>
                     </div>
                 </div>
@@ -485,6 +489,14 @@ nav_active: projects
 
     {% endfor %}
 </div>
+
+{# Modal „Solicită Ofertă" — varianta se alege în admin, în blocul CTA al proiectului #}
+{% for b in blocks %}
+    {% if b.type === 'cta' and b.varianta_oferta %}
+    {% set varianta_oferta = b.varianta_oferta %}
+    {% include "oferta-modal.njk" %}
+    {% endif %}
+{% endfor %}
 
 <script>
 function switchTab(index) {

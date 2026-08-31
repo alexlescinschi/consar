@@ -76,8 +76,8 @@ blocks:
     quote: "Every project begins with an honest discussion about needs, constraints and possibilities. The rest is planning."
     title: "Would you like a concept tailored to your needs?"
     description: "Rigorous planning is the key to a successful build — no exceeded budgets, no on-site errors. Shall we schedule an initial consultation for your project?"
-    primary_label: "Schedule a Consultation"
-    primary_url: "/arhitectura/"
+    primary_label: "Request a Quote"
+    varianta_oferta: constructii-case
     secondary_label: "View other projects"
     secondary_url: "/en/projects/"
 ---

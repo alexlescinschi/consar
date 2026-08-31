@@ -141,8 +141,20 @@ collections:
               - { label: "Citat final (opțional)", name: "quote", widget: "text", required: false }
               - { label: "Titlu CTA", name: "title", widget: "string" }
               - { label: "Descriere CTA", name: "description", widget: "text" }
-              - { label: "Text buton principal", name: "primary_label", widget: "string" }
-              - { label: "Link buton principal", name: "primary_url", widget: "string" }
+              - { label: "Text buton principal", name: "primary_label", widget: "string", default: "Solicită o Ofertă" }
+              - label: "Formular ofertă"
+                name: "varianta_oferta"
+                widget: "select"
+                required: false
+                hint: "Butonul principal deschide formularul de ofertă pentru serviciul ales. Lasă gol dacă vrei link clasic."
+                options:
+                  - { label: "Construcții case", value: "constructii-case" }
+                  - { label: "Proiectare arhitecturală", value: "proiectare-arhitecturala" }
+                  - { label: "Arhitectură", value: "arhitectura" }
+                  - { label: "Design interior", value: "interior-design" }
+                  - { label: "Reparații interioare", value: "reparatii" }
+                  - { label: "Desen tehnic / Vizualizare", value: "desen-tehnic" }
+                  - { label: "Consultanță", value: "consultanta" }
               - { label: "Text buton secundar", name: "secondary_label", widget: "string" }
               - { label: "Link buton secundar", name: "secondary_url", widget: "string" }
 
