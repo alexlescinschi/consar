@@ -463,6 +463,7 @@
     {% if lang == 'en' %}
     {% set L = {
         acasa: "Home", servicii: "Services", portofoliu: "Portfolio", contacte: "Contacts", meniu: "Menu",
+        u_home: "/en/", u_portfolio: "/en/projects/", u_blog: "/en/blog/", u_contact: "/en/contact/",
         c1t: "Construction Consulting", c2t: "Architectural Design", c3t: "House Construction",
         c4t: "Interior Design", c5t: "Interior Renovations", c6t: "Technical Drawings & 3D Visualization",
         d1p: "Project analysis, cost estimates, renovations and investment supervision.",
@@ -481,6 +482,7 @@
     {% else %}
     {% set L = {
         acasa: "Acasă", servicii: "Servicii", portofoliu: "Portofoliu", contacte: "Contacte", meniu: "Meniu",
+        u_home: "/", u_portfolio: "/proiecte/", u_blog: "/blog/", u_contact: "/contact/",
         c1t: "Consultanță în Construcții", c2t: "Proiectare Arhitecturală", c3t: "Construcții Case",
         c4t: "Design Interior", c5t: "Reparații Interioare", c6t: "Desen Tehnic & Vizualizare 3D",
         d1p: "Analiză proiecte, devize, renovări și controlul investiției.",
@@ -504,11 +506,11 @@
         </a>
         <button class="nav-mobile-toggle" onclick="openMobileMenu()" aria-label="{{ L.meniu }}">☰</button>
         <div class="nav-links">
-            <a href="/" {% if nav_active == 'home' %}class="active"{% endif %}>{{ L.acasa }}</a>
+            <a href="{{ L.u_home }}" {% if nav_active == 'home' %}class="active"{% endif %}>{{ L.acasa }}</a>
             <button class="nav-dropdown-trigger" onclick="toggleDropdown()" aria-expanded="false">{{ L.servicii }} <span class="nav-chevron">▾</span></button>
-            <a href="/proiecte/" {% if nav_active == 'projects' %}class="active"{% endif %}>{{ L.portofoliu }}</a>
-            <a href="/blog/" {% if nav_active == 'blog' %}class="active"{% endif %}>Blog</a>
-            <a href="/contact/" {% if nav_active == 'contact' %}class="active"{% endif %}>{{ L.contacte }}</a>
+            <a href="{{ L.u_portfolio }}" {% if nav_active == 'projects' %}class="active"{% endif %}>{{ L.portofoliu }}</a>
+            <a href="{{ L.u_blog }}" {% if nav_active == 'blog' %}class="active"{% endif %}>Blog</a>
+            <a href="{{ L.u_contact }}" {% if nav_active == 'contact' %}class="active"{% endif %}>{{ L.contacte }}</a>
         </div>
         <div style="font-size: 0.6rem;">
             {% if lang == 'en' %}
@@ -592,11 +594,11 @@
             <div class="footer-col">
                 {% if lang == 'en' %}<h4>Menu</h4>{% else %}<h4>Meniu</h4>{% endif %}
                 {% if lang == 'en' %}
-                <a href="/">Home</a>
+                <a href="/en/">Home</a>
                 <a href="/arhitectura/">Services</a>
-                <a href="/proiecte/">Portfolio</a>
-                <a href="/blog/">Blog</a>
-                <a href="/contact/">Contacts</a>
+                <a href="/en/projects/">Portfolio</a>
+                <a href="/en/blog/">Blog</a>
+                <a href="/en/contact/">Contacts</a>
                 {% else %}
                 <a href="/">Acasă</a>
                 <a href="/arhitectura/">Servicii</a>
@@ -637,7 +639,7 @@
     <div class="mobile-menu-backdrop" onclick="closeMobileMenu()"></div>
     <div class="mobile-menu" id="mobile-menu">
         <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
-        <a href="/" onclick="closeMobileMenu()">{{ L.acasa }}</a>
+        <a href="{{ L.u_home }}" onclick="closeMobileMenu()">{{ L.acasa }}</a>
         <button class="mobile-sub-toggle" onclick="toggleMobileSub(this)">
             {{ L.servicii }} <span class="chevron">▾</span>
         </button>
@@ -685,9 +687,9 @@
                 </div>
             </a>
         </div>
-        <a href="/proiecte/" onclick="closeMobileMenu()">{{ L.portofoliu }}</a>
-        <a href="/blog/" onclick="closeMobileMenu()">Blog</a>
-        <a href="/contact/" onclick="closeMobileMenu()">{{ L.contacte }}</a>
+        <a href="{{ L.u_portfolio }}" onclick="closeMobileMenu()">{{ L.portofoliu }}</a>
+        <a href="{{ L.u_blog }}" onclick="closeMobileMenu()">Blog</a>
+        <a href="{{ L.u_contact }}" onclick="closeMobileMenu()">{{ L.contacte }}</a>
     </div>
 
     {% block after_main %}{% endblock %}
