@@ -24,15 +24,13 @@ nav_active: home
     transition: var(--transition);
 }
 
-.service-card:nth-child(3n + 1) {
+.matrix-cell:nth-child(3n) {
     border-right: none;
 }
 
 .title-cell {
-    grid-column: 1 / -1;
-    padding: 4rem 3rem;
+    padding: 2.5rem;
     justify-content: center;
-    border-right: none;
 }
 
 .title-cell h1 {
@@ -103,32 +101,27 @@ nav_active: home
     max-width: 280px;
 }
 
-.bottom-shelf {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    border-bottom: 1px solid var(--border);
+.blog-preview-card {
+    padding: 0;
+    justify-content: flex-start;
+    background: var(--surface);
+    color: var(--accent);
+    text-decoration: none;
 }
 
-.shelf-cell {
-    padding: 4rem 3rem;
-    border-right: 1px solid var(--border);
+.blog-preview-card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
 }
 
-.shelf-cell:last-child {
-    border-right: none;
-}
+.blog-preview-content { padding: 1.5rem; }
+.blog-preview-content h3 { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; line-height: 1.15; margin-top: 0.5rem; }
 
-.blog-preview {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-}
-
-.blog-dot {
-    width: 8px;
-    height: 8px;
+.home-contact-card {
+    justify-content: center;
     background: var(--accent);
-    border-radius: 50%;
+    color: var(--bg);
 }
 
 .view-btn {
@@ -153,8 +146,8 @@ nav_active: home
 
 @media (max-width: 1024px) {
     .hero-matrix { grid-template-columns: 1fr 1fr; }
-    .service-card:nth-child(3n + 1) { border-right: 1px solid var(--border); }
-    .service-card:nth-child(2n + 1) { border-right: none; }
+    .matrix-cell:nth-child(3n) { border-right: 1px solid var(--border); }
+    .matrix-cell:nth-child(2n) { border-right: none; }
 }
 @media (max-width: 768px) {
     .hero-matrix { grid-template-columns: 1fr; }
@@ -164,10 +157,6 @@ nav_active: home
     .service-card { padding: 0; }
     .service-card h2 { font-size: 1.5rem; }
     .card-num { top: 1.5rem; left: 1.5rem; }
-    .bottom-shelf { grid-template-columns: 1fr; }
-    .shelf-cell { padding: 2.5rem 1.5rem; border-right: none; border-bottom: 1px solid var(--border); }
-    .shelf-cell:last-child { border-bottom: none; }
-    .blog-preview { flex-direction: column; gap: 1rem; align-items: flex-start; }
 }
 </style>
 
@@ -248,20 +237,17 @@ nav_active: home
             </div>
         </div>
     </a>
-</div>
 
-<div class="bottom-shelf">
-    <div class="shelf-cell">
-        <div class="blog-preview">
-            <div class="blog-dot"></div>
-            <div>
-                <span style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.5;">Ultimul articol din Blog</span>
-                <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-top: 0.5rem; font-weight: 400;">Renașterea brutalistă în designul rezidențial modern</h3>
-            </div>
+    <a href="/blog/brutalism-revival/" class="matrix-cell blog-preview-card">
+        <img src="/images/portfolio-01.jpg" alt="Renașterea brutalistă în designul rezidențial modern" loading="lazy">
+        <div class="blog-preview-content">
+            <span style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.5;">Ultimul articol din Blog</span>
+            <h3>Renașterea brutalistă în designul rezidențial modern</h3>
+            <span class="view-btn" style="display: inline-block; text-decoration: none;">Citește Jurnalul</span>
         </div>
-        <a href="/blog/" class="view-btn" style="display: inline-block; text-decoration: none;">Citește Jurnalul</a>
-    </div>
-    <div class="shelf-cell" style="background: var(--accent); color: var(--bg);">
+    </a>
+
+    <div class="matrix-cell home-contact-card">
         <span style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.7;">Contact</span>
         <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin: 1rem 0 2rem 0; font-weight: 400;">Începe proiectul tău.</h3>
         <p style="font-size: 0.85rem; line-height: 1.5; margin-bottom: 2rem;">Contactează consultanții noștri principali pentru a discuta cerințele tehnice și viziunea arhitecturală.</p>
