@@ -1,5 +1,9 @@
 ---
 layout: project.njk
+servicii:
+  - arhitectura
+  - constructii-case
+  - desen-tehnic
 lang: en
 permalink: /en/projects/spalatorie-auto/
 title: "Car Wash Facility"

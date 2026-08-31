@@ -1,5 +1,9 @@
 ---
 layout: project.njk
+servicii:
+  - arhitectura
+  - constructii-case
+  - desen-tehnic
 permalink: /proiecte/spalatorie-auto/
 title: "Spălătorie Auto"
 description: "Proiect de spațiu comercial pentru spălătorie auto: două boxe de spălat de 7×7 m, zonă de birouri cu cabinet, anvelopă termică și finisaje rezistente la umiditate."

@@ -23,6 +23,20 @@ collections:
       - { label: "Titlu", name: "title", widget: "string" }
       - { label: "Descriere SEO", name: "description", widget: "text" }
       - { label: "Imagine copertă (16:9)", name: "image", widget: "image", hint: "Folosește o fotografie orizontală 16:9, minimum 1920×1080. Cardul din portofoliu o decupează automat." }
+      - label: "Servicii asociate"
+        name: "servicii"
+        widget: "select"
+        multiple: true
+        required: false
+        hint: "Categoriile de servicii în care apare proiectul (grilele de portofoliu de pe paginile de servicii)."
+        options:
+          - { label: "Arhitectură", value: "arhitectura" }
+          - { label: "Proiectare arhitecturală", value: "proiectare-arhitecturala" }
+          - { label: "Construcții case", value: "constructii-case" }
+          - { label: "Design interior", value: "interior-design" }
+          - { label: "Reparații interioare", value: "reparatii" }
+          - { label: "Desen tehnic / Vizualizare", value: "desen-tehnic" }
+          - { label: "Consultanță", value: "consultanta" }
       - label: "Blocuri de conținut"
         name: "blocks"
         widget: "list"

@@ -512,50 +512,8 @@ varianta_oferta: arhitectura
     <h2 class="section-title">Lucrări Realizate</h2>
     <p class="section-sub">O selecție de proiecte care ilustrează diversitatea și calitatea serviciilor noastre de arhitectură.</p>
 
-    <div class="portfolio-grid" style="margin-top: 3rem;">
-        <div class="portfolio-item">
-            <img src="/images/portfolio-01.jpg" alt="Vilă Rezidențială Cluj" loading="lazy">
-            <div class="portfolio-overlay">
-                <h4>Vilă Rezidențială</h4>
-                <span>Cluj-Napoca, 2024</span>
-            </div>
-        </div>
-        <div class="portfolio-item">
-            <img src="/images/portfolio-02.jpg" alt="Complex Comercial" loading="lazy">
-            <div class="portfolio-overlay">
-                <h4>Complex Comercial</h4>
-                <span>Timișoara, 2023</span>
-            </div>
-        </div>
-        <div class="portfolio-item">
-            <img src="/images/portfolio-03.jpg" alt="Ansamblu Rezidențial" loading="lazy">
-            <div class="portfolio-overlay">
-                <h4>Ansamblu Rezidențial</h4>
-                <span>Brașov, 2024</span>
-            </div>
-        </div>
-        <div class="portfolio-item">
-            <img src="/images/portfolio-04.jpg" alt="Restaurare Monument" loading="lazy">
-            <div class="portfolio-overlay">
-                <h4>Restaurare Monument</h4>
-                <span>Sibiu, 2022</span>
-            </div>
-        </div>
-        <div class="portfolio-item">
-            <img src="/images/portfolio-05.jpg" alt="Casă Pasivă" loading="lazy">
-            <div class="portfolio-overlay">
-                <h4>Casă Pasivă Premium</h4>
-                <span>București, 2024</span>
-            </div>
-        </div>
-        <div class="portfolio-item">
-            <img src="/images/portfolio-06.jpg" alt="Hotel Boutique" loading="lazy">
-            <div class="portfolio-overlay">
-                <h4>Hotel Boutique</h4>
-                <span>Constanța, 2023</span>
-            </div>
-        </div>
-    </div>
+    {% set serviciu_key = 'arhitectura' %}
+    {% include "projects-strip.njk" %}
 
     <hr class="section-divider">
 

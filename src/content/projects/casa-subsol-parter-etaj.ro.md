@@ -1,5 +1,9 @@
 ---
 layout: project.njk
+servicii:
+  - proiectare-arhitecturala
+  - arhitectura
+  - constructii-case
 permalink: /proiecte/casa-subsol-parter-etaj/
 title: "Casa cu Subsol, Parter și Etaj"
 description: "Locuință etajată cu garaj dublu integrat, zonă de zi generoasă la parter și zonă de noapte completă la etaj, cu terasă pe acoperiș și pergolă din lemn."

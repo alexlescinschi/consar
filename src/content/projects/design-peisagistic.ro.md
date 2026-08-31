@@ -1,5 +1,9 @@
 ---
 layout: project.njk
+servicii:
+  - arhitectura
+  - proiectare-arhitecturala
+  - desen-tehnic
 permalink: /proiecte/design-peisagistic/
 title: "Design Peisagistic — Curte Modernă"
 description: "Proiect și realizare completă de peisagistică: zonare cu pergolă și BBQ, piscină, gazon rulată, irigații automate, drenaj și iluminat de grădină."

@@ -1,5 +1,8 @@
 ---
 layout: project.njk
+servicii:
+  - constructii-case
+  - reparatii
 lang: en
 permalink: /en/projects/reconstructie-casa/
 title: "House Reconstruction — Vertical Extension"

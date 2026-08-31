@@ -1,5 +1,9 @@
 ---
 layout: project.njk
+servicii:
+  - proiectare-arhitecturala
+  - arhitectura
+  - constructii-case
 permalink: /proiecte/casa-demisol-etaj/
 title: "Casa cu Demisol și Etaj"
 description: "Locuință adaptată unui teren în pantă: demisol cu garaj și spații tehnice, parter dedicat zonei de zi, acoperiș plat."

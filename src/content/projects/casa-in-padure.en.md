@@ -1,5 +1,9 @@
 ---
 layout: project.njk
+servicii:
+  - proiectare-arhitecturala
+  - arhitectura
+  - desen-tehnic
 lang: en
 permalink: /en/projects/casa-in-padure/
 title: "Casa S+P+1 — Forest Integration"

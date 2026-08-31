@@ -1,5 +1,9 @@
 ---
 layout: project.njk
+servicii:
+  - arhitectura
+  - proiectare-arhitecturala
+  - desen-tehnic
 lang: en
 permalink: /en/projects/design-peisagistic/
 title: "Landscape Design — Modern Backyard"

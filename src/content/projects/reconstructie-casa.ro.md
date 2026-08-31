@@ -1,5 +1,8 @@
 ---
 layout: project.njk
+servicii:
+  - constructii-case
+  - reparatii
 permalink: /proiecte/reconstructie-casa/
 title: "Reconstrucție Casă — Suprainălțare"
 description: "Reconstrucție și suprainălțare a unei case existente: etaj nou din blocaje ceramice ușoare, centuri de rigidizare, acoperiș nou din lemn și interioare refăcute integral."

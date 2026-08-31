@@ -1,5 +1,9 @@
 ---
 layout: project.njk
+servicii:
+  - proiectare-arhitecturala
+  - arhitectura
+  - constructii-case
 permalink: /proiecte/casa-spe/
 title: "Casa S+P+E — Eleganță Contemporană"
 description: "Locuință cu beci, parter și etaj, înzestrată cu balcon și terasă cu copertină din sticlă: aprox. 222 m² utili, trei dormitoare la etaj și zona de zi generoasă la parter."

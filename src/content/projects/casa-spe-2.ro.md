@@ -1,5 +1,9 @@
 ---
 layout: project.njk
+servicii:
+  - proiectare-arhitecturala
+  - arhitectura
+  - constructii-case
 permalink: /proiecte/casa-spe-2/
 title: "Casa S+P+E 2 — Volumetrie Contemporană"
 description: "Locuință cu subsol, parter și etaj pe o amprentă compactă de 103 m²: garaj în subsol cu rampă, trei dormitoare la etaj și volumetrie contemporană din alb, antracit și lambriuri de lemn."

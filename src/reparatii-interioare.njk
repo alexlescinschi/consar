@@ -987,28 +987,11 @@ varianta_oferta: reparatii
     <!-- III. PORTOFOLIU -->
     <span class="section-label">Portofoliu</span>
     <h2 class="section-title">Lucrări Realizate</h2>
-    <p class="section-sub">O selecție din interioarele pe care le-am transformat.</p>
+    <p class="section-sub">Lucrări de renovare și reconstrucție realizate de echipa noastră.</p>
 
-    <div class="portfolio-grid">
-        {% set lucrari = [
-            { f: '01', t: 'Apartament — Renovare Completă', s: 'Chișinău, 2024' },
-            { f: '02', t: 'Casă — Reparații la Cheie', s: 'Orhei, 2024' },
-            { f: '03', t: 'Baie — Modernizare Completă', s: 'Chișinău, 2023' },
-            { f: '04', t: 'Bucătărie — Renovare Totală', s: 'Bălți, 2024' },
-            { f: '05', t: 'Birou — Refacere Integrală', s: 'Chișinău, 2023' },
-            { f: '06', t: 'Spațiu Comercial — La Cheie', s: 'Chișinău, 2025' }
-        ] %}
-        {% for l in lucrari %}
-        <div class="portfolio-item">
-            <img src="/images/reparatii/lucrare-{{ l.f }}.jpg" alt="{{ l.t }}" loading="lazy"
-                 onerror="this.onerror=null;this.src='/images/reparatii/ph/lucrare-{{ l.f }}.svg';">
-            <div class="portfolio-overlay">
-                <h4>{{ l.t }}</h4>
-                <span>{{ l.s }}</span>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+    {% set serviciu_key = 'reparatii' %}
+        {% include "projects-strip.njk" %}
+    
 
     <hr class="section-divider">
 

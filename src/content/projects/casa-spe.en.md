@@ -1,5 +1,9 @@
 ---
 layout: project.njk
+servicii:
+  - proiectare-arhitecturala
+  - arhitectura
+  - constructii-case
 lang: en
 permalink: /en/projects/casa-spe/
 title: "S+P+E House — Contemporary Elegance"

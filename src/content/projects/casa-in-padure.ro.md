@@ -1,5 +1,9 @@
 ---
 layout: project.njk
+servicii:
+  - proiectare-arhitecturala
+  - arhitectura
+  - desen-tehnic
 permalink: /proiecte/casa-in-padure/
 title: "Casa S+P+1 — Integrare în Pădure"
 description: "Un proiect definit de fluiditatea spațiilor interioare și orientarea optimă față de punctele cardinale."

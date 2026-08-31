@@ -1,5 +1,9 @@
 ---
 layout: project.njk
+servicii:
+  - proiectare-arhitecturala
+  - arhitectura
+  - constructii-case
 permalink: /proiecte/casa-parter/
 title: "Casa Parter"
 description: "Locuință compactă pe un singur nivel, cu trei dormitoare, pereți din cânepă industrială și o terasă generoasă de 32 m²."
